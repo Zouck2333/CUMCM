@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "evaluation_start": "2025-02-01",
+  "evaluation_end": "2025-12-31",
+  "evaluation_days": 334,
+  "detail_rows": 48096,
+  "purchase_days": 334,
+  "storage_rows": 2004,
+  "emergency_rows": 2125,
+  "rolling_total_cost_yuan": 21531032.891860865,
+  "zero_only_total_cost_yuan": 21618243.11653131,
+  "rolling_emergency_kwh": 1215875.3444151077
+}

@@ -32,6 +32,13 @@ THETA_JANUARY = (4, 7, 1.0, 1.0)
 SIMILAR_POOL_MIN = max(max(K_LOAD_CANDIDATES), max(K_PV_CANDIDATES))
 EPS = 1e-8
 EMERGENCY_EPS = 1e-7
+FORECAST_BIAS_DAYS = 0
+FORECAST_BIAS_DECAY = 0.85
+FORECAST_BIAS_SHRINK_DAYS = 5.0
+LOAD_RISK_QUANTILE = 0.75
+PV_RISK_QUANTILE = 0.25
+RISK_CORRECTION_WEIGHT = 0.0
+VALIDATION_RISK_WEIGHT = 0.35
 
 
 @dataclass(frozen=True)
@@ -160,6 +167,9 @@ def forecast_component(
     dates: list[date],
     actual_load: np.ndarray,
     actual_pv: np.ndarray,
+    component: str,
+    *,
+    apply_bias_correction: bool = True,
 ) -> np.ndarray:
     if target == 0:
         raise ValueError("1月1日应使用附件1冷启动先验")
@@ -171,15 +181,102 @@ def forecast_component(
     raw_weights = np.asarray([rho ** (target - index) for index in selected], dtype=float)
     weights = raw_weights / np.sum(raw_weights)
     prediction = np.sum(values[selected] * weights[:, None], axis=0)
+    if apply_bias_correction:
+        prediction = prediction + historical_forecast_correction(
+            target,
+            values,
+            count,
+            rho,
+            dates,
+            actual_load,
+            actual_pv,
+            component,
+        )
     return np.maximum(0.0, prediction)
 
 
-def normalized_validation_loss(actual: np.ndarray, predicted: np.ndarray) -> float:
+def historical_forecast_correction(
+    target: int,
+    values: np.ndarray,
+    count: int,
+    rho: float,
+    dates: list[date],
+    actual_load: np.ndarray,
+    actual_pv: np.ndarray,
+    component: str,
+) -> np.ndarray:
+    start = max(1, target - FORECAST_BIAS_DAYS)
+    candidates = list(range(start, target))
+    if not candidates:
+        return np.zeros(N_TIME, dtype=float)
+
+    same_type = [
+        index
+        for index in candidates
+        if is_workday(dates[index]) == is_workday(dates[target])
+    ]
+    history = same_type if len(same_type) >= 3 else candidates
+    residuals = []
+    weights = []
+    for index in history:
+        base_prediction = forecast_component(
+            index,
+            values,
+            count,
+            rho,
+            dates,
+            actual_load,
+            actual_pv,
+            component,
+            apply_bias_correction=False,
+        )
+        residuals.append(values[index] - base_prediction)
+        weights.append(FORECAST_BIAS_DECAY ** (target - index))
+
+    residual_matrix = np.vstack(residuals)
+    weight_array = np.asarray(weights, dtype=float)
+    weight_array = weight_array / np.sum(weight_array)
+    bias = np.sum(residual_matrix * weight_array[:, None], axis=0)
+    shrink = len(history) / (len(history) + FORECAST_BIAS_SHRINK_DAYS)
+
+    if component == "load":
+        risk_tail = np.quantile(
+            np.maximum(0.0, residual_matrix),
+            LOAD_RISK_QUANTILE,
+            axis=0,
+            method="linear",
+        )
+        correction = bias + RISK_CORRECTION_WEIGHT * risk_tail
+    elif component == "pv":
+        over_prediction_tail = np.quantile(
+            np.minimum(0.0, residual_matrix),
+            PV_RISK_QUANTILE,
+            axis=0,
+            method="linear",
+        )
+        correction = bias + RISK_CORRECTION_WEIGHT * over_prediction_tail
+    else:
+        raise ValueError(f"未知预测分量: {component}")
+    return shrink * correction
+
+
+def normalized_validation_loss(
+    actual: np.ndarray,
+    predicted: np.ndarray,
+    component: str,
+) -> float:
     errors = actual - predicted
     scale = max(EPS, float(np.mean(np.abs(actual))))
     nmae = float(np.mean(np.abs(errors))) / scale
     nrmse = float(np.sqrt(np.mean(errors * errors))) / scale
-    return nmae + 0.2 * nrmse
+    if component == "load":
+        risk_error = np.maximum(0.0, errors)
+    elif component == "pv":
+        risk_error = np.maximum(0.0, -errors)
+    else:
+        raise ValueError(f"未知预测分量: {component}")
+    risk_penalty = float(np.mean(risk_error)) / scale
+    return nmae + 0.2 * nrmse + VALIDATION_RISK_WEIGHT * risk_penalty
 
 
 def tune_component(
@@ -189,6 +286,7 @@ def tune_component(
     dates: list[date],
     actual_load: np.ndarray,
     actual_pv: np.ndarray,
+    component: str,
 ) -> tuple[int, float, float] | None:
     validation_start = max(1, month_start - VALIDATION_DAYS)
     validation = list(range(validation_start, month_start))
@@ -208,12 +306,13 @@ def tune_component(
                         dates,
                         actual_load,
                         actual_pv,
+                        component,
                     )
                     for target in validation
                 ]
             )
             actual = values[validation]
-            loss = normalized_validation_loss(actual, predictions)
+            loss = normalized_validation_loss(actual, predictions, component)
             candidate = (loss, count, -rho)
             if best is None or candidate < best:
                 best = candidate
@@ -235,6 +334,7 @@ def tune_month(
         dates,
         actual_load,
         actual_pv,
+        "load",
     )
     pv_result = tune_component(
         month_start,
@@ -243,6 +343,7 @@ def tune_month(
         dates,
         actual_load,
         actual_pv,
+        "pv",
     )
     if load_result is None:
         k_load = previous_theta.k_load
@@ -762,6 +863,7 @@ def run_model(
                 dates,
                 actual_load,
                 actual_pv,
+                "load",
             )
             predicted_pv = forecast_component(
                 day_index,
@@ -771,6 +873,7 @@ def run_model(
                 dates,
                 actual_load,
                 actual_pv,
+                "pv",
             )
 
         scenario_days = select_scenario_days(day_index, dates, residual_load)
@@ -952,6 +1055,11 @@ def run_model(
         "reserve_mode": reserve_mode,
         "reserve_quantile_method": quantile_method,
         "objective_mode": objective_mode,
+        "validation_risk_weight": VALIDATION_RISK_WEIGHT,
+        "forecast_bias_days": FORECAST_BIAS_DAYS,
+        "forecast_bias_decay": FORECAST_BIAS_DECAY,
+        "forecast_bias_shrink_days": FORECAST_BIAS_SHRINK_DAYS,
+        "risk_correction_weight": RISK_CORRECTION_WEIGHT,
         "similar_day_pool_minimum": SIMILAR_POOL_MIN,
         "soc_min_kwh": SOC_MIN,
         "soc_max_kwh": SOC_MAX,
