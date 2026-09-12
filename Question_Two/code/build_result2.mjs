@@ -47,8 +47,12 @@ async function savePreview(workbook, sheetName, outputName, range) {
 
 const solution = JSON.parse(await fs.readFile(solutionPath, "utf8"));
 const days = solution.days;
+const timeLabels = solution.time_labels;
 if (!Array.isArray(days) || days.length !== 334) {
   throw new Error(`正式结果应包含334天，实际为${Array.isArray(days) ? days.length : "非数组"}`);
+}
+if (!Array.isArray(timeLabels) || timeLabels.length !== 144) {
+  throw new Error("求解结果必须包含144个物理时间区间标签");
 }
 
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
@@ -61,6 +65,9 @@ const batterySheet = workbook.worksheets.getItem("充放电量");
 const emergencySheet = workbook.worksheets.getItem("紧急购电量");
 
 // 计划购电量：A为日期，B:EO为144个时段，EP/EQ为全天合计。
+// 原模板标题比附件功率时点的右端点口径晚10分钟；在输出文件中校正标题，
+// 使第1列对应0:00-0:10，第144列对应23:50-24:00。
+planSheet.getRange("B1:EO1").write([timeLabels]);
 const planRows = days.map((day) => [
   dateValue(day.date),
   ...day.grid,
@@ -180,4 +187,3 @@ await savePreview(
 const output = await SpreadsheetFile.exportXlsx(workbook);
 await output.save(outputPath);
 console.log(`已生成结果工作簿: ${outputPath}`);
-

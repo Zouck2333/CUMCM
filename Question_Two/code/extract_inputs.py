@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from datetime import date, datetime, time
 from pathlib import Path
 
@@ -11,13 +12,62 @@ from openpyxl import load_workbook
 DELTA_H = 1.0 / 6.0
 
 
+def physical_interval_labels() -> list[str]:
+    labels: list[str] = []
+    for period in range(144):
+        start_minutes = period * 10
+        end_minutes = (period + 1) * 10
+        start = f"{start_minutes // 60}:{start_minutes % 60:02d}"
+        if end_minutes == 24 * 60:
+            end = "0:00+1"
+        else:
+            end = f"{end_minutes // 60}:{end_minutes % 60:02d}"
+        labels.append(f"{start}-{end}")
+    return labels
+
+
+def validate_right_endpoint_times(times: list[str]) -> None:
+    normalized = []
+    for value in times:
+        text = value.strip()
+        if text.count(":") == 2 and text.endswith(":00") and "+1" not in text:
+            text = text[:-3]
+        if text.startswith("0") and len(text) >= 5 and text[1] != ":":
+            text = text[1:]
+        normalized.append(text)
+    expected = [
+        f"{minutes // 60}:{minutes % 60:02d}"
+        for minutes in range(10, 24 * 60, 10)
+    ] + ["0:00+1"]
+    if normalized != expected:
+        mismatch = next(
+            (
+                index
+                for index, (actual, wanted) in enumerate(
+                    zip(normalized, expected, strict=True)
+                )
+                if actual != wanted
+            ),
+            None,
+        )
+        raise ValueError(
+            "附件1时点不符合00:10、00:20、…、23:50、0:00+1的右端点序列"
+            + ("" if mismatch is None else f"（第{mismatch + 1}项为{times[mismatch]!r}）")
+        )
+
+
 def _number(value: object, *, context: str) -> float:
     if value is None:
         raise ValueError(f"缺少数值: {context}")
     try:
-        return float(value)
+        number = float(value)
     except (TypeError, ValueError) as exc:
         raise ValueError(f"无法转换为数值: {context}={value!r}") from exc
+    if not math.isfinite(number):
+        raise ValueError(f"数值不是有限数: {context}={value!r}")
+    if number < 0.0:
+        raise ValueError(f"数值不能为负: {context}={value!r}")
+    return number
 
 
 def _date_text(value: object, *, context: str) -> str:
@@ -76,15 +126,47 @@ def load_attachment1(path: Path) -> dict[str, list[float] | list[str]]:
 
 def load_attachment2(path: Path) -> tuple[list[str], list[list[float]], list[list[float]]]:
     workbook = load_workbook(path, data_only=True, read_only=True)
-    if len(workbook.sheetnames) < 2:
-        raise ValueError("附件2必须包含负载和光伏两个工作表")
+    required_sheets = {"小区负载", "光伏发电实际功率"}
+    if not required_sheets.issubset(workbook.sheetnames):
+        raise ValueError(
+            "附件2必须包含“小区负载”和“光伏发电实际功率”两个工作表"
+        )
 
-    load_sheet = workbook[workbook.sheetnames[0]]
-    pv_sheet = workbook[workbook.sheetnames[1]]
+    load_sheet = workbook["小区负载"]
+    pv_sheet = workbook["光伏发电实际功率"]
     if load_sheet.max_row < 366 or pv_sheet.max_row < 366:
         raise ValueError("附件2必须包含2025年365天数据")
     if load_sheet.max_column < 145 or pv_sheet.max_column < 145:
         raise ValueError("附件2每天必须包含144个时段")
+
+    load_times = [
+        _time_text(value)
+        for value in next(
+            load_sheet.iter_rows(
+                min_row=1,
+                max_row=1,
+                min_col=2,
+                max_col=145,
+                values_only=True,
+            )
+        )
+    ]
+    pv_times = [
+        _time_text(value)
+        for value in next(
+            pv_sheet.iter_rows(
+                min_row=1,
+                max_row=1,
+                min_col=2,
+                max_col=145,
+                values_only=True,
+            )
+        )
+    ]
+    validate_right_endpoint_times(load_times)
+    validate_right_endpoint_times(pv_times)
+    if load_times != pv_times:
+        raise ValueError("附件2的负荷与光伏时点标题不一致")
 
     dates: list[str] = []
     load: list[list[float]] = []
@@ -126,6 +208,12 @@ def load_attachment2(path: Path) -> tuple[list[str], list[list[float]], list[lis
     expected_end = date(2025, 12, 31).isoformat()
     if dates[0] != expected_start or dates[-1] != expected_end:
         raise ValueError(f"附件2日期范围错误: {dates[0]} 至 {dates[-1]}")
+    parsed_dates = [date.fromisoformat(value) for value in dates]
+    if any(
+        (parsed_dates[index + 1] - parsed_dates[index]).days != 1
+        for index in range(len(parsed_dates) - 1)
+    ):
+        raise ValueError("附件2日期必须严格连续且不得重复")
     return dates, load, pv
 
 
@@ -153,12 +241,16 @@ def main() -> None:
     args = parser.parse_args()
 
     attachment1 = load_attachment1(args.attachment1)
+    validate_right_endpoint_times(attachment1["times"])
     dates, load, pv = load_attachment2(args.attachment2)
+    template_time_labels = load_template_headers(args.template)
     payload = {
         "delta_h": DELTA_H,
         "dates": dates,
         "input_times": attachment1["times"],
-        "time_labels": load_template_headers(args.template),
+        "time_labels": physical_interval_labels(),
+        "template_time_labels": template_time_labels,
+        "time_mapping": "right endpoint: input 00:10 represents interval 00:00-00:10",
         "price": attachment1["price"],
         "prior_load": attachment1["prior_load"],
         "prior_pv": attachment1["prior_pv"],

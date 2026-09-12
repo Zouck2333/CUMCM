@@ -12,7 +12,7 @@ from typing import Iterable
 
 import numpy as np
 from scipy.optimize import Bounds, LinearConstraint, milp
-from scipy.sparse import lil_matrix
+from scipy.sparse import csr_matrix, lil_matrix, vstack
 
 
 N_TIME = 144
@@ -29,6 +29,7 @@ K_LOAD_CANDIDATES = (2, 4, 6, 8)
 K_PV_CANDIDATES = (3, 5, 7, 10)
 RHO_CANDIDATES = (0.80, 0.90, 0.95, 1.00)
 THETA_JANUARY = (4, 7, 1.0, 1.0)
+SIMILAR_POOL_MIN = max(max(K_LOAD_CANDIDATES), max(K_PV_CANDIDATES))
 EPS = 1e-8
 EMERGENCY_EPS = 1e-7
 
@@ -55,6 +56,28 @@ class DaySolution:
     mip_gap: float
     node_count: int
     solve_seconds: float
+    throughput_kwh: float
+    peak_grid_kwh: float
+    primary_optimum: float
+    objective_mode: str
+    cost_lock_tolerance: float
+    throughput_lock_tolerance: float
+    tolerance_relaxed: bool
+
+
+def physical_interval_labels() -> list[str]:
+    labels: list[str] = []
+    for period in range(N_TIME):
+        start_minutes = period * 10
+        end_minutes = (period + 1) * 10
+        start = f"{start_minutes // 60}:{start_minutes % 60:02d}"
+        end = (
+            "0:00+1"
+            if end_minutes == 24 * 60
+            else f"{end_minutes // 60}:{end_minutes % 60:02d}"
+        )
+        labels.append(f"{start}-{end}")
+    return labels
 
 
 def is_workday(value: date) -> bool:
@@ -105,7 +128,9 @@ def select_similar_days(
     all_candidates = list(range(1, target))
     target_type = is_workday(dates[target])
     same_type = [index for index in all_candidates if is_workday(dates[index]) == target_type]
-    pool = same_type if len(same_type) >= count else all_candidates
+    # 负载和光伏必须共享同一候选池、标准差与距离排序。候选池是否扩展
+    # 与当前分量的K无关，而以全部候选参数中的最大K作为统一阈值。
+    pool = same_type if len(same_type) >= SIMILAR_POOL_MIN else all_candidates
     if not pool:
         return [target - 1]
 
@@ -164,11 +189,11 @@ def tune_component(
     dates: list[date],
     actual_load: np.ndarray,
     actual_pv: np.ndarray,
-) -> tuple[int, float, float]:
+) -> tuple[int, float, float] | None:
     validation_start = max(1, month_start - VALIDATION_DAYS)
     validation = list(range(validation_start, month_start))
     if len(validation) < 2:
-        return 1, 1.0, float("nan")
+        return None
 
     best: tuple[float, int, float] | None = None
     for count in k_candidates:
@@ -201,8 +226,9 @@ def tune_month(
     dates: list[date],
     actual_load: np.ndarray,
     actual_pv: np.ndarray,
-) -> tuple[Theta, float, float]:
-    k_load, rho_load, load_loss = tune_component(
+    previous_theta: Theta,
+) -> tuple[Theta, float | None, float | None]:
+    load_result = tune_component(
         month_start,
         actual_load,
         K_LOAD_CANDIDATES,
@@ -210,7 +236,7 @@ def tune_month(
         actual_load,
         actual_pv,
     )
-    k_pv, rho_pv, pv_loss = tune_component(
+    pv_result = tune_component(
         month_start,
         actual_pv,
         K_PV_CANDIDATES,
@@ -218,6 +244,18 @@ def tune_month(
         actual_load,
         actual_pv,
     )
+    if load_result is None:
+        k_load = previous_theta.k_load
+        rho_load = previous_theta.rho_load
+        load_loss = None
+    else:
+        k_load, rho_load, load_loss = load_result
+    if pv_result is None:
+        k_pv = previous_theta.k_pv
+        rho_pv = previous_theta.rho_pv
+        pv_loss = None
+    else:
+        k_pv, rho_pv, pv_loss = pv_result
     return Theta(k_load, k_pv, rho_load, rho_pv), load_loss, pv_loss
 
 
@@ -242,14 +280,34 @@ def select_scenario_days(
 def compute_reserve(
     residual_load: list[np.ndarray],
     residual_pv: list[np.ndarray],
+    *,
+    eta_discharge: float,
+    quantile: float,
+    mode: str,
+    quantile_method: str,
 ) -> float:
-    if len(residual_load) < 5:
+    if quantile <= 0.0 or len(residual_load) < 5:
         return 0.0
     requirements = []
     for load_error, pv_error in zip(residual_load, residual_pv, strict=True):
-        positive_net_error = np.maximum(0.0, load_error - pv_error)
-        requirements.append(float(np.max(np.cumsum(positive_net_error))))
-    reserve = float(np.quantile(np.asarray(requirements), 0.9)) / ETA_D
+        net_error = load_error - pv_error
+        if mode == "positive_steps":
+            trajectory = np.cumsum(np.maximum(0.0, net_error))
+        elif mode == "cumulative_net":
+            trajectory = np.cumsum(net_error)
+        else:
+            raise ValueError(f"未知安全储备模式: {mode}")
+        requirements.append(max(0.0, float(np.max(trajectory))))
+    reserve = (
+        float(
+            np.quantile(
+                np.asarray(requirements),
+                quantile,
+                method=quantile_method,
+            )
+        )
+        / eta_discharge
+    )
     return min(SOC_MAX - SOC_MIN, max(0.0, reserve))
 
 
@@ -262,8 +320,11 @@ def solve_day_milp(
     soc_initial: float,
     reserve: float,
     delta_h: float,
+    eta_charge: float,
+    eta_discharge: float,
     mip_gap: float,
     time_limit: float | None,
+    objective_mode: str,
 ) -> DaySolution:
     n_scenarios = scenario_load.shape[0]
     energy_limit = POWER_LIMIT_KW * delta_h
@@ -277,12 +338,13 @@ def solve_day_milp(
     emergency_idx = np.arange(
         emergency_start, emergency_start + n_scenarios * N_TIME
     ).reshape(n_scenarios, N_TIME)
-    n_variables = emergency_start + n_scenarios * N_TIME
+    peak_idx = emergency_start + n_scenarios * N_TIME
+    n_variables = peak_idx + 1
 
-    objective = np.zeros(n_variables)
-    objective[grid_idx] = price
+    primary_objective = np.zeros(n_variables)
+    primary_objective[grid_idx] = price
     for scenario in range(n_scenarios):
-        objective[emergency_idx[scenario]] = 5.0 * price / n_scenarios
+        primary_objective[emergency_idx[scenario]] = 5.0 * price / n_scenarios
 
     lower = np.zeros(n_variables)
     upper = np.full(n_variables, np.inf)
@@ -292,7 +354,14 @@ def solve_day_milp(
     upper[soc_idx] = SOC_MAX
     upper[mode_idx] = 1.0
 
-    n_rows = N_TIME + N_TIME + 2 * N_TIME + 1 + n_scenarios * N_TIME
+    n_rows = (
+        N_TIME
+        + N_TIME
+        + 2 * N_TIME
+        + 1
+        + n_scenarios * N_TIME
+        + N_TIME
+    )
     matrix = lil_matrix((n_rows, n_variables), dtype=float)
     row_lower = np.full(n_rows, -np.inf)
     row_upper = np.full(n_rows, np.inf)
@@ -308,8 +377,8 @@ def solve_day_milp(
 
     for period in range(N_TIME):
         matrix[row, soc_idx[period]] = 1.0
-        matrix[row, charge_idx[period]] = -ETA_C
-        matrix[row, discharge_idx[period]] = 1.0 / ETA_D
+        matrix[row, charge_idx[period]] = -eta_charge
+        matrix[row, discharge_idx[period]] = 1.0 / eta_discharge
         if period == 0:
             rhs = soc_initial
         else:
@@ -342,6 +411,12 @@ def solve_day_milp(
             matrix[row, emergency_idx[scenario, period]] = 1.0
             row_lower[row] = scenario_load[scenario, period] - scenario_pv[scenario, period]
             row += 1
+
+    for period in range(N_TIME):
+        matrix[row, grid_idx[period]] = 1.0
+        matrix[row, peak_idx] = -1.0
+        row_upper[row] = 0.0
+        row += 1
     assert row == n_rows
 
     integrality = np.zeros(n_variables, dtype=np.uint8)
@@ -353,18 +428,129 @@ def solve_day_milp(
     if time_limit is not None:
         options["time_limit"] = time_limit
 
-    started = time.perf_counter()
-    result = milp(
-        c=objective,
-        integrality=integrality,
-        bounds=Bounds(lower, upper),
-        constraints=LinearConstraint(matrix.tocsr(), row_lower, row_upper),
-        options=options,
-    )
-    elapsed = time.perf_counter() - started
-    if result.x is None or result.status != 0:
-        raise RuntimeError(f"MILP求解失败: status={result.status}, {result.message}")
+    base_matrix = matrix.tocsr()
+    bounds = Bounds(lower, upper)
 
+    def run_stage(
+        stage_name: str,
+        stage_objective: np.ndarray,
+        constraint_matrix: csr_matrix,
+        constraint_lower: np.ndarray,
+        constraint_upper: np.ndarray,
+    ):
+        stage_result = milp(
+            c=stage_objective,
+            integrality=integrality,
+            bounds=bounds,
+            constraints=LinearConstraint(
+                constraint_matrix,
+                constraint_lower,
+                constraint_upper,
+            ),
+            options=options,
+        )
+        if stage_result.x is None or stage_result.status != 0:
+            raise RuntimeError(
+                f"MILP{stage_name}求解失败: "
+                f"status={stage_result.status}, {stage_result.message}"
+            )
+        return stage_result
+
+    started = time.perf_counter()
+    primary_result = run_stage(
+        "第一阶段（费用最小）",
+        primary_objective,
+        base_matrix,
+        row_lower,
+        row_upper,
+    )
+    primary_optimum = float(primary_result.fun)
+    result = primary_result
+
+    if objective_mode == "lexicographic":
+        cost_tolerance = max(1e-6, abs(primary_optimum) * 1e-9)
+        tolerance_relaxed = False
+        stage_two_matrix = vstack(
+            [base_matrix, csr_matrix(primary_objective.reshape(1, -1))],
+            format="csr",
+        )
+        stage_two_lower = np.append(row_lower, -np.inf)
+        stage_two_upper = np.append(row_upper, primary_optimum + cost_tolerance)
+        throughput_objective = np.zeros(n_variables)
+        throughput_objective[charge_idx] = 1.0
+        throughput_objective[discharge_idx] = 1.0
+        try:
+            throughput_result = run_stage(
+                "第二阶段（充放电吞吐量最小）",
+                throughput_objective,
+                stage_two_matrix,
+                stage_two_lower,
+                stage_two_upper,
+            )
+        except RuntimeError as exc:
+            if "status=2" not in str(exc):
+                raise
+            tolerance_relaxed = True
+            cost_tolerance = max(1e-4, abs(primary_optimum) * 1e-7)
+            stage_two_upper[-1] = primary_optimum + cost_tolerance
+            throughput_result = run_stage(
+                "第二阶段（数值容差重试）",
+                throughput_objective,
+                stage_two_matrix,
+                stage_two_lower,
+                stage_two_upper,
+            )
+        throughput_optimum = float(throughput_result.fun)
+        throughput_tolerance = max(1e-6, abs(throughput_optimum) * 1e-9)
+
+        stage_three_matrix = vstack(
+            [
+                stage_two_matrix,
+                csr_matrix(throughput_objective.reshape(1, -1)),
+            ],
+            format="csr",
+        )
+        stage_three_lower = np.append(stage_two_lower, -np.inf)
+        stage_three_upper = np.append(
+            stage_two_upper,
+            throughput_optimum + throughput_tolerance,
+        )
+        peak_objective = np.zeros(n_variables)
+        peak_objective[peak_idx] = 1.0
+        try:
+            result = run_stage(
+                "第三阶段（最大购电量最小）",
+                peak_objective,
+                stage_three_matrix,
+                stage_three_lower,
+                stage_three_upper,
+            )
+        except RuntimeError as exc:
+            if "status=2" not in str(exc):
+                raise
+            tolerance_relaxed = True
+            cost_tolerance = max(1e-4, abs(primary_optimum) * 1e-7)
+            throughput_tolerance = max(
+                1e-4,
+                abs(throughput_optimum) * 1e-7,
+            )
+            stage_three_upper[-2] = primary_optimum + cost_tolerance
+            stage_three_upper[-1] = throughput_optimum + throughput_tolerance
+            result = run_stage(
+                "第三阶段（数值容差重试）",
+                peak_objective,
+                stage_three_matrix,
+                stage_three_lower,
+                stage_three_upper,
+            )
+    elif objective_mode != "cost":
+        raise ValueError(f"未知目标模式: {objective_mode}")
+    else:
+        cost_tolerance = 0.0
+        throughput_tolerance = 0.0
+        tolerance_relaxed = False
+
+    elapsed = time.perf_counter() - started
     solution = np.asarray(result.x, dtype=float)
     solution[np.abs(solution) < 1e-8] = 0.0
     grid = np.maximum(0.0, solution[grid_idx])
@@ -377,10 +563,10 @@ def solve_day_milp(
         grid + predicted_pv + discharge - predicted_load - charge,
     )
 
-    gap_value = getattr(result, "mip_gap", 0.0)
+    gap_value = getattr(primary_result, "mip_gap", 0.0)
     if gap_value is None or not np.isfinite(gap_value):
         gap_value = 0.0
-    node_value = getattr(result, "mip_node_count", 0)
+    node_value = getattr(primary_result, "mip_node_count", 0)
     if node_value is None:
         node_value = 0
     return DaySolution(
@@ -390,12 +576,19 @@ def solve_day_milp(
         soc=soc,
         curtailment=curtailment,
         scenario_emergency=scenario_emergency,
-        objective=float(result.fun),
+        objective=float(primary_objective @ solution),
         status=int(result.status),
         message=str(result.message),
         mip_gap=float(gap_value),
         node_count=int(node_value),
         solve_seconds=elapsed,
+        throughput_kwh=float(np.sum(charge) + np.sum(discharge)),
+        peak_grid_kwh=float(np.max(grid)),
+        primary_optimum=primary_optimum,
+        objective_mode=objective_mode,
+        cost_lock_tolerance=cost_tolerance,
+        throughput_lock_tolerance=throughput_tolerance,
+        tolerance_relaxed=tolerance_relaxed,
     )
 
 
@@ -438,6 +631,14 @@ def run_model(
     mip_gap: float,
     time_limit: float | None,
     max_days: int | None,
+    eta_charge: float = ETA_C,
+    eta_discharge: float = ETA_D,
+    reserve_quantile: float = 0.90,
+    reserve_mode: str = "positive_steps",
+    quantile_method: str = "linear",
+    objective_mode: str = "lexicographic",
+    collect_detail: bool = True,
+    collect_formal_days: bool = True,
 ) -> tuple[dict, list[dict[str, object]], list[dict[str, object]]]:
     dates = [date.fromisoformat(value) for value in payload["dates"]]
     price = np.asarray(payload["price"], dtype=float)
@@ -450,8 +651,41 @@ def run_model(
 
     if price.shape != (N_TIME,):
         raise ValueError(f"电价应为144个时段，实际为{price.shape}")
+    if prior_load.shape != (N_TIME,) or prior_pv.shape != (N_TIME,):
+        raise ValueError("前一日负荷和光伏数据均应包含144个时段")
     if actual_load.shape != (365, N_TIME) or actual_pv.shape != (365, N_TIME):
         raise ValueError("附件2应为365天×144时段")
+    if len(dates) != 365 or dates[0] != date(2025, 1, 1) or dates[-1] != date(2025, 12, 31):
+        raise ValueError("日期必须完整覆盖2025-01-01至2025-12-31")
+    if any((dates[index + 1] - dates[index]).days != 1 for index in range(364)):
+        raise ValueError("日期序列必须严格按天连续递增")
+    if time_labels != physical_interval_labels():
+        raise ValueError(
+            "时间标签必须采用右端点口径并依次覆盖0:00-0:10至23:50-0:00+1"
+        )
+    for name, values in (
+        ("电价", price),
+        ("前一日负荷", prior_load),
+        ("前一日光伏", prior_pv),
+        ("实际负荷", actual_load),
+        ("实际光伏", actual_pv),
+    ):
+        if not np.all(np.isfinite(values)):
+            raise ValueError(f"{name}包含非有限数值")
+        if np.any(values < -EPS):
+            raise ValueError(f"{name}包含负值")
+    if not math.isclose(delta_h, 1.0 / 6.0, rel_tol=0.0, abs_tol=1e-12):
+        raise ValueError(f"时间步长应为1/6小时，实际为{delta_h}")
+    if not 0.0 < eta_charge <= 1.0 or not 0.0 < eta_discharge <= 1.0:
+        raise ValueError("充、放电效率必须位于(0, 1]区间")
+    if not 0.0 <= reserve_quantile <= 1.0:
+        raise ValueError("安全储备分位数必须位于[0, 1]区间")
+    if reserve_mode not in {"positive_steps", "cumulative_net"}:
+        raise ValueError(f"未知安全储备模式: {reserve_mode}")
+    if quantile_method not in {"linear", "higher", "lower", "nearest", "midpoint"}:
+        raise ValueError(f"不支持的分位数算法: {quantile_method}")
+    if objective_mode not in {"cost", "lexicographic"}:
+        raise ValueError(f"未知目标模式: {objective_mode}")
 
     limit = len(dates) if max_days is None else min(max_days, len(dates))
     residual_load: list[np.ndarray] = []
@@ -462,6 +696,7 @@ def run_model(
     formal_days: list[dict[str, object]] = []
     detail_rows: list[dict[str, object]] = []
     daily_rows: list[dict[str, object]] = []
+    max_balance_residual = 0.0
     monthly_parameters: list[dict[str, object]] = [
         {
             "month": "2025-01",
@@ -471,6 +706,8 @@ def run_model(
             "rho_pv": current_theta.rho_pv,
             "load_validation_loss": None,
             "pv_validation_loss": None,
+            "validation_start": None,
+            "validation_end": None,
             "warmup": True,
         }
     ]
@@ -480,7 +717,7 @@ def run_model(
         if current_date.month != current_month:
             current_month = current_date.month
             current_theta, load_loss, pv_loss = tune_month(
-                day_index, dates, actual_load, actual_pv
+                day_index, dates, actual_load, actual_pv, current_theta
             )
             monthly_parameters.append(
                 {
@@ -491,6 +728,8 @@ def run_model(
                     "rho_pv": current_theta.rho_pv,
                     "load_validation_loss": load_loss,
                     "pv_validation_loss": pv_loss,
+                    "validation_start": dates[max(1, day_index - VALIDATION_DAYS)].isoformat(),
+                    "validation_end": dates[day_index - 1].isoformat(),
                     "warmup": False,
                 }
             )
@@ -498,7 +737,23 @@ def run_model(
         if day_index == 0:
             predicted_load = prior_load.copy()
             predicted_pv = prior_pv.copy()
+            similar_load_days: list[int] = []
+            similar_pv_days: list[int] = []
         else:
+            similar_load_days = select_similar_days(
+                day_index,
+                current_theta.k_load,
+                dates,
+                actual_load,
+                actual_pv,
+            )
+            similar_pv_days = select_similar_days(
+                day_index,
+                current_theta.k_pv,
+                dates,
+                actual_load,
+                actual_pv,
+            )
             predicted_load = forecast_component(
                 day_index,
                 actual_load,
@@ -530,7 +785,14 @@ def run_model(
             scenario_load = predicted_load[None, :]
             scenario_pv = predicted_pv[None, :]
 
-        reserve = compute_reserve(residual_load, residual_pv)
+        reserve = compute_reserve(
+            residual_load,
+            residual_pv,
+            eta_discharge=eta_discharge,
+            quantile=reserve_quantile,
+            mode=reserve_mode,
+            quantile_method=quantile_method,
+        )
         solved = solve_day_milp(
             price,
             predicted_load,
@@ -540,8 +802,11 @@ def run_model(
             soc_initial,
             reserve,
             delta_h,
+            eta_charge,
+            eta_discharge,
             mip_gap,
             time_limit,
+            objective_mode,
         )
 
         actual_shortfall = (
@@ -557,6 +822,19 @@ def run_model(
         emergency_cost = 5.0 * price * actual_emergency
         actual_total_cost = float(np.sum(plan_cost) + np.sum(emergency_cost))
         soc_before = np.concatenate(([soc_initial], solved.soc[:-1]))
+        balance_residual = (
+            solved.grid
+            + actual_pv[day_index]
+            + solved.discharge
+            + actual_emergency
+            - actual_load[day_index]
+            - solved.charge
+            - actual_surplus
+        )
+        max_balance_residual = max(
+            max_balance_residual,
+            float(np.max(np.abs(balance_residual))),
+        )
 
         load_error = actual_load[day_index] - predicted_load
         pv_error = actual_pv[day_index] - predicted_pv
@@ -573,6 +851,18 @@ def run_model(
                 "k_pv": current_theta.k_pv,
                 "rho_pv": current_theta.rho_pv,
                 "scenario_count": scenario_load.shape[0],
+                "similar_load_dates": ";".join(
+                    dates[index].isoformat() for index in similar_load_days
+                ),
+                "similar_pv_dates": ";".join(
+                    dates[index].isoformat() for index in similar_pv_days
+                ),
+                "scenario_source_dates": ";".join(
+                    dates[index].isoformat() for index in scenario_days
+                ),
+                "reserve_latest_source_date": dates[day_index - 1].isoformat()
+                if day_index > 0
+                else "",
                 "reserve_kwh": reserve,
                 "soc_start_kwh": soc_initial,
                 "soc_end_kwh": float(solved.soc[-1]),
@@ -587,6 +877,13 @@ def run_model(
                 "emergency_cost_yuan": float(np.sum(emergency_cost)),
                 "actual_total_cost_yuan": actual_total_cost,
                 "solver_objective_yuan": solved.objective,
+                "primary_optimum_yuan": solved.primary_optimum,
+                "storage_throughput_kwh": solved.throughput_kwh,
+                "peak_grid_kwh": solved.peak_grid_kwh,
+                "objective_mode": solved.objective_mode,
+                "cost_lock_tolerance": solved.cost_lock_tolerance,
+                "throughput_lock_tolerance": solved.throughput_lock_tolerance,
+                "lexicographic_tolerance_relaxed": solved.tolerance_relaxed,
                 "solver_seconds": solved.solve_seconds,
                 "mip_gap": solved.mip_gap,
                 "mip_node_count": solved.node_count,
@@ -594,7 +891,7 @@ def run_model(
             }
         )
 
-        if is_formal:
+        if is_formal and collect_formal_days:
             intervals = merge_emergency_intervals(actual_emergency, time_labels)
             formal_days.append(
                 {
@@ -609,6 +906,7 @@ def run_model(
                     "emergency_intervals": intervals,
                 }
             )
+        if is_formal and collect_detail:
             for period in range(N_TIME):
                 detail_rows.append(
                     {
@@ -646,40 +944,31 @@ def run_model(
     diagnostics = {
         "model": "rolling forecast + residual scenarios + daily MILP",
         "days_solved": limit,
-        "formal_days": len(formal_days),
+        "formal_days": len(formal_daily),
         "formal_start": FORMAL_START.isoformat(),
-        "eta_charge": ETA_C,
-        "eta_discharge": ETA_D,
+        "eta_charge": eta_charge,
+        "eta_discharge": eta_discharge,
+        "reserve_quantile": reserve_quantile,
+        "reserve_mode": reserve_mode,
+        "reserve_quantile_method": quantile_method,
+        "objective_mode": objective_mode,
+        "similar_day_pool_minimum": SIMILAR_POOL_MIN,
         "soc_min_kwh": SOC_MIN,
         "soc_max_kwh": SOC_MAX,
         "scenario_max": SCENARIO_MAX,
         "week_type_rule": "Monday through Friday are workdays; weekends are non-workdays",
+        "time_mapping": "right endpoint; period 1 is 0:00-0:10 and period 144 is 23:50-24:00",
         "monthly_parameters": monthly_parameters,
         "formal_total_grid_kwh": float(sum(row["planned_grid_kwh"] for row in formal_daily)),
         "formal_total_emergency_kwh": float(sum(row["actual_emergency_kwh"] for row in formal_daily)),
         "formal_plan_cost_yuan": float(sum(row["planned_cost_yuan"] for row in formal_daily)),
         "formal_emergency_cost_yuan": float(sum(row["emergency_cost_yuan"] for row in formal_daily)),
         "formal_total_cost_yuan": float(sum(row["actual_total_cost_yuan"] for row in formal_daily)),
-        "max_balance_residual_kwh": float(
-            max(
-                (
-                    abs(
-                        float(row["planned_grid_kwh"])
-                        + float(row["actual_pv_kwh"])
-                        + float(row["planned_discharge_kwh"])
-                        + float(row["actual_emergency_kwh"])
-                        - float(row["actual_load_kwh"])
-                        - float(row["planned_charge_kwh"])
-                        - float(row["actual_surplus_kwh"])
-                    )
-                    for row in detail_rows
-                ),
-                default=0.0,
-            )
-        ),
+        "max_balance_residual_kwh": max_balance_residual,
     }
     solution_payload = {
         "diagnostics": diagnostics,
+        "time_labels": time_labels,
         "days": formal_days,
     }
     return solution_payload, daily_rows, detail_rows
@@ -694,6 +983,24 @@ def main() -> None:
     parser.add_argument("--mip-gap", type=float, default=1e-6)
     parser.add_argument("--time-limit", type=float, default=30.0)
     parser.add_argument("--max-days", type=int, default=None)
+    parser.add_argument("--eta-charge", type=float, default=ETA_C)
+    parser.add_argument("--eta-discharge", type=float, default=ETA_D)
+    parser.add_argument("--reserve-quantile", type=float, default=0.90)
+    parser.add_argument(
+        "--reserve-mode",
+        choices=("positive_steps", "cumulative_net"),
+        default="positive_steps",
+    )
+    parser.add_argument(
+        "--quantile-method",
+        choices=("linear", "higher", "lower", "nearest", "midpoint"),
+        default="linear",
+    )
+    parser.add_argument(
+        "--objective-mode",
+        choices=("cost", "lexicographic"),
+        default="lexicographic",
+    )
     args = parser.parse_args()
 
     payload = json.loads(args.input.read_text(encoding="utf-8"))
@@ -702,6 +1009,12 @@ def main() -> None:
         mip_gap=args.mip_gap,
         time_limit=args.time_limit,
         max_days=args.max_days,
+        eta_charge=args.eta_charge,
+        eta_discharge=args.eta_discharge,
+        reserve_quantile=args.reserve_quantile,
+        reserve_mode=args.reserve_mode,
+        quantile_method=args.quantile_method,
+        objective_mode=args.objective_mode,
     )
 
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
