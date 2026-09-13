@@ -1,0 +1,33 @@
+{
+  "status": "complete",
+  "final_visible_folders": [
+    "C题",
+    "Question_Four_optimized",
+    "Question_One",
+    "Question_Three_optimized",
+    "Question_Two_updated"
+  ],
+  "hidden_git_retained": true,
+  "removed_old_folders": [
+    "Question_One (original)",
+    "Question_Two (original)",
+    "Question_Three (original)",
+    "Question_Three_cheaper",
+    "Question_Four (original)"
+  ],
+  "staging_folder_removed": true,
+  "original_old_regular_files": 8291,
+  "original_old_regular_file_bytes": 1043237277,
+  "external_shared_runtime_preserved": true,
+  "retained_files_verified": 332,
+  "original_public_files_verified": 10,
+  "protected_reference_experiment_fixture_comparison_files_unchanged": 63,
+  "manifest_entries_verified": 238,
+  "checks": {
+    "question_one": "LP, cost MILP and optional lexicographic MILP recomputed; constraints pass",
+    "question_two": "independent annual workbook and solution verification passed; package manifest passed",
+    "question_three": "independent annual verification passed after removal of old directories",
+    "question_four": "17 tests passed; independent annual trajectory/workbook verification passed after removal of old directories"
+  },
+  "naming_note": "Question_One renamed successfully; the other three current version folders retain their suffixes because Windows denied renaming despite closing previews. Runtime paths match their actual folder names."
+}

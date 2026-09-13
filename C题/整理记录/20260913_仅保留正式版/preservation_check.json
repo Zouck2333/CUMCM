@@ -1,0 +1,290 @@
+{
+  "status": "PASS",
+  "retained_files_checked": 332,
+  "unchanged_files": 316,
+  "intentional_path_documentation_manifest_changes": [
+    "Question_One/model_One.md",
+    "Question_One/README.md",
+    "Question_Two_updated/PACKAGE_MANIFEST.json",
+    "Question_Two_updated/README.md",
+    "Question_Three_optimized/MANIFEST.json",
+    "Question_Three_optimized/README.md",
+    "Question_Four_optimized/MANIFEST.json",
+    "Question_Four_optimized/README.md",
+    "Question_Four_optimized/run.py",
+    "Question_Four_optimized/code/forecast_audit.py",
+    "Question_Four_optimized/code/verify_optimized.py",
+    "Question_Four_optimized/docs/运行环境.md",
+    "Question_Four_optimized/paper_tables/code/build_tables.mjs",
+    "Question_Four_optimized/tests/test_forecasting.py",
+    "Question_Four_optimized/tests/test_model.py",
+    "Question_Four_optimized/tests/test_verification_portability.py"
+  ],
+  "missing_files": [],
+  "unexpected_changes": [],
+  "original_public_files_checked": 10,
+  "public_failures": [],
+  "package_manifest_failures": [],
+  "protected_comparison_files_checked": 63,
+  "protected_files": [
+    {
+      "path": "Question_One/run_sensitivity.ps1",
+      "unchanged": true
+    },
+    {
+      "path": "Question_One/sensitivity_analysis.py",
+      "unchanged": true
+    },
+    {
+      "path": "Question_One/output/sensitivity/sensitivity_results.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_One/output/sensitivity/sensitivity_results.xlsx",
+      "unchanged": true
+    },
+    {
+      "path": "Question_One/output/sensitivity/sensitivity_summary.md",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/code/perfect_information_benchmark.py",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/output/optimization_comparison.md",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/output/benchmarks/perfect_information_benchmark.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/output/benchmarks/perfect_information_daily.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/output/benchmarks/perfect_information_detail.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/output/benchmarks/perfect_information_report.md",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Two_updated/reference/previous_fixed_summary.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Three_optimized/comparison_four_day/checkpoint_rolling.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Three_optimized/logs/comparison_run.log",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Three_optimized/output_optimized/optimization_comparison.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Three_optimized/output_optimized/strategy_comparison.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Three_optimized/tests/fixtures/milp_stage_reference.py",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/forecast_audit.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/forecast_replay.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/checkpoint_4-2.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/checkpoint_4-3.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/detail_4-2.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/detail_4-3.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/summary_4-2.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/summary_4-3.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/adaptive_price/verification_report.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/checkpoint_4-2.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/checkpoint_4-3.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/detail_4-2.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/detail_4-3.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/summary_4-2.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/summary_4-3.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/baseline/verification_report.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/checkpoint_4-2.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/checkpoint_4-3.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/detail_4-2.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/detail_4-3.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/summary_4-2.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/summary_4-3.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/load_only/verification_report.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/checkpoint_4-2.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/checkpoint_4-3.jsonl",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/detail_4-2.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/detail_4-3.csv",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/summary_4-2.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/summary_4-3.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/experiments/terminal_value/verification_report.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/output/optimization_comparison.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/output/figures/cost_comparison.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/model_Four_baseline.md",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/source_hashes.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/stage_solver_before_precision_fix.py",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/summary_4-2.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/summary_4-3.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_4-2_previews/充放电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_4-2_previews/紧急购电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_4-2_previews/计划购电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_previews/充放电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_previews/紧急购电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_previews/计划购电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/reference/template_previews/调整购电量.png",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/tests/fixtures/negative_bound_stage.json",
+      "unchanged": true
+    },
+    {
+      "path": "Question_Four_optimized/tests/fixtures/stage_solver_baseline.py",
+      "unchanged": true
+    }
+  ],
+  "final_folder_names": [
+    "Question_One",
+    "Question_Two_updated",
+    "Question_Three_optimized",
+    "Question_Four_optimized",
+    "C题"
+  ]
+}

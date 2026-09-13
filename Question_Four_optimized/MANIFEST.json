@@ -1,7 +1,17 @@
 {
   "description": "Fourth-question optimized model, outputs, comparisons and verification",
-  "file_count": 104,
+  "file_count": 107,
   "files": [
+    {
+      "path": "README.md",
+      "bytes": 5765,
+      "sha256": "0f8d8ef7f149cc56efb30f50db29df6bf25f156249497c1843203a228528336c"
+    },
+    {
+      "path": "WORK_PLAN.md",
+      "bytes": 1295,
+      "sha256": "5be99b361270640c9f6a9f262bc578b5a851846e78e455534bf842fb64cff218"
+    },
     {
       "path": "archive/adaptive_price_before_precision_fix/checkpoint_4-2.jsonl",
       "bytes": 6637542,
@@ -43,6 +53,16 @@
       "sha256": "a0168237e317e81b06b18a78951841b709724fd4642123945582cc4932ffcb14"
     },
     {
+      "path": "checks/legacy_independence/README.md",
+      "bytes": 1388,
+      "sha256": "175988a40a73dc9aaa58b4bb7ea2bd07f8805f308eaf6f98849ac2dd46562ffd"
+    },
+    {
+      "path": "checks/legacy_independence/verification_report.json",
+      "bytes": 1853,
+      "sha256": "2182ddc17cc1bf492b66189f33830f5a661ab7d4693031939403f2f06c8f418c"
+    },
+    {
       "path": "checks/smoke/checkpoint_4-2.jsonl",
       "bytes": 28041,
       "sha256": "2a07bb41db71192660bfe3b96d1c4b3f35acdecd7fa3c19a027d65f604e4b325"
@@ -64,8 +84,8 @@
     },
     {
       "path": "code/build_report.py",
-      "bytes": 9587,
-      "sha256": "71ee9fde8c4442d1c1e437cabfd05abf2c3a2cd96a75529d9bf57b6bf2cbb569"
+      "bytes": 9675,
+      "sha256": "91de3d530d1ed9d2ed64ffa60e343eae53f63e53ab5b1474abc0cffbafd26e6e"
     },
     {
       "path": "code/demo.py",
@@ -74,8 +94,8 @@
     },
     {
       "path": "code/forecast_audit.py",
-      "bytes": 3505,
-      "sha256": "9e62021cb01bdb73598ce8a9ccbeae9ec0117c01f78cb99797965c1a0724b72b"
+      "bytes": 3508,
+      "sha256": "88876b074489f4ba71cbe8e929cf0cc651584cf6b9f4fa886d431071b9bc792b"
     },
     {
       "path": "code/forecasting.py",
@@ -119,8 +139,8 @@
     },
     {
       "path": "code/verify_optimized.py",
-      "bytes": 7287,
-      "sha256": "9d87120555da1bb7e341108467d33624f9bc41857fc64f24f09f9aa98315117a"
+      "bytes": 9032,
+      "sha256": "c4e6ca41a45e5c7bd5a8e0e5d61d7e0f69e3d6efc080009be2b0bb901355d6af"
     },
     {
       "path": "code/verify_outputs.py",
@@ -134,8 +154,8 @@
     },
     {
       "path": "docs/运行环境.md",
-      "bytes": 1725,
-      "sha256": "5719884fb0a976051bbf09ae0b810f20d6227e9b9dcf6b0007a652784916dd99"
+      "bytes": 1743,
+      "sha256": "8c88a8d1bf0275cb20c24eef678501afe12863e92a7f9792dc1e20aa8cca3e23"
     },
     {
       "path": "experiments/adaptive_price/checkpoint_4-2.jsonl",
@@ -329,8 +349,8 @@
     },
     {
       "path": "output/optimization_report.md",
-      "bytes": 6849,
-      "sha256": "b0d7571914596bcbd8a20610aa9c98599585cd302a619ed257a871884c844581"
+      "bytes": 6936,
+      "sha256": "d58cf07837b53df851dca2366c0e40971c4b90df725c1677b1b20aa3037c4c77"
     },
     {
       "path": "output/paper_selected_dates.csv",
@@ -423,11 +443,6 @@
       "sha256": "79d34b8133aac9bf1ff0d063af1e40e5c0b884f86024e4c31eb9a32bdb3c1e33"
     },
     {
-      "path": "README.md",
-      "bytes": 4342,
-      "sha256": "d5daff32df5262e3d6ae6ffe7fc135d0bc35abb8a6b7bbbf5654c8e8fb560f9a"
-    },
-    {
       "path": "reference/model_Four_baseline.md",
       "bytes": 22827,
       "sha256": "e999b185f00724b54aafb4c5827b36f16d442b3d38da486bd6c4fd60f670b4ef"
@@ -494,8 +509,8 @@
     },
     {
       "path": "run.py",
-      "bytes": 1758,
-      "sha256": "3314156b5321965f15890a838c64cd8b60bceebf82db10f60432ee6a0256c94a"
+      "bytes": 1795,
+      "sha256": "e615c1bf954eb07b3df5ee31aa55f584073b3e54a5e4c4d2231cc44f723bae4f"
     },
     {
       "path": "tests/fixtures/negative_bound_stage.json",
@@ -509,18 +524,19 @@
     },
     {
       "path": "tests/test_forecasting.py",
-      "bytes": 7028,
-      "sha256": "9177814c77bc62acd6780b4fe6af6e31dcc017a9e81c59bd039fa910aa2ca087"
+      "bytes": 7159,
+      "sha256": "2536c108978aa9b9b952f62e420ba2fcaf55cbbe4a0987839fdee455c27fd50c"
     },
     {
       "path": "tests/test_model.py",
-      "bytes": 6609,
-      "sha256": "0e181a271228d313c3ae728d5e76dcb1be453d98a11383bed13a19f4d07a411e"
+      "bytes": 6767,
+      "sha256": "169130a004714ecc4050e9e77dfc04f2f0a100b20c5803a5929b354f3bd3e679"
     },
     {
-      "path": "WORK_PLAN.md",
-      "bytes": 1295,
-      "sha256": "5be99b361270640c9f6a9f262bc578b5a851846e78e455534bf842fb64cff218"
+      "path": "tests/test_verification_portability.py",
+      "bytes": 1812,
+      "sha256": "ddddedd8f4e701d38ba7f214478680b340a2f4f3c511edcd98502433f67ed9a3"
     }
-  ]
+  ],
+  "cleanup_note": "Old sibling work directories removed separately; retained internal reference, experiments, test fixtures and comparison results. Current package folder name is unchanged."
 }

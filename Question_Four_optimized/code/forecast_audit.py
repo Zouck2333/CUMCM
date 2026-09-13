@@ -12,7 +12,7 @@ from .forecasting import PRICE_CANDIDATES, choose_price_candidate
 
 def main():
     root = Path(__file__).resolve().parents[2]
-    output = root / 'Question_Four_optimized' / 'experiments'
+    output = Path(__file__).resolve().parents[1] / 'experiments'
     output.mkdir(parents=True, exist_ok=True)
     inputs = load_inputs(root)
     legacy=HistoryModel(ModelConfig(load_mode='legacy',price_mode='legacy'))

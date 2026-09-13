@@ -2,6 +2,8 @@
 
 正式结果和对照结论见 [优化报告](output/optimization_report.md)，数学模型见 [model_Four.md](model_Four.md)。两种策略都从 2025 年 1 月 1 日 6000 kWh 独立计算，正式评价期为 2—12 月，共 334 天。
 
+本目录 `Question_Four_optimized` 保存正式优化版，因 Windows 占用暂保留原名。`reference`、`experiments`、测试参考文件、正式输出与对照结果保留。历史报告中的原目录名仅表示生成时的来源；当前运行命令以本README为准。
+
 ## 主要文件
 
 - `output/result4-2.xlsx`：每日 0:00 一次计划的正式结果。
@@ -12,7 +14,7 @@
 - `output/verification_report.json`：独立核验结果。
 - `configuration.json`：两种正式策略的明确配置。
 - `experiments/`：原预测、仅负荷改进、负荷电价改进及终端价值实验。
-- `reference/`：原模型和结果摘要、原文件哈希、求解器修正前版本。
+- `reference/`：原模型和结果摘要、历史原文件哈希、求解器修正前版本；应保留以支持对照，默认核验不读取旧目录。
 - `archive/`：数值精度修正前中止的实验记录，不能作为完整结果使用。
 
 ## 复现正式结果
@@ -23,6 +25,16 @@
 python -B Question_Four_optimized/run.py
 python -B -m Question_Four_optimized.code.verify_optimized
 ```
+
+独立核验默认检查两种策略的全年轨迹、能量平衡、SOC、容量与功率、充放电互斥、费用、CSV 和工作簿，不要求旧 `Question_Four` 目录存在。报告将历史源文件比对记为 `original_source_verification.status=not_requested`，不会把未执行的比对标成通过。
+
+如需额外确认某份旧版归档仍与原始快照相同，可显式指定其目录：
+
+```powershell
+python -B -m Question_Four_optimized.code.verify_optimized --original-source-dir C:/Archives/Question_Four_original
+```
+
+该参数接受自行保存的旧版归档目录，上面的路径只是示例。当前 `Question_Four_optimized` 是正式优化版，不能用作旧版归档参数。核验保留原哈希记录，只在给定目录下按相对路径寻找旧文件；显式要求比对时，缺失或哈希不符仍会报错。使用 `--report-file` 可另存本次报告，例如 `--report-file Question_Four_optimized/checks/verification_after_cleanup.json`。
 
 也可先测试：
 
@@ -35,7 +47,7 @@ python -B Question_Four_optimized/run.py --max-days 2 --no-workbook --output-dir
 
 正式记录沿用已通过全年独立校验的终端价值实验。该实验求解时尚未加入“仅在原程序本会报错的负流量出现时才触发”的高精度补救分支。365 天全部成功，因此补救分支不改变这些既有轨迹。`output/checkpoint_compatibility.json` 明确保留原生成指纹、当前兼容指纹和完整断点内容哈希，不改写原记录来源；复用时再次检查全年物理约束。任何算法、配置、输入或断点内容变化都会使此特定兼容关系失效。
 
-输入默认取同级 `C题/附件` 中的附件 2、3、4 和附件 5 模板。本目录不写入原 `Question_Four`。数值部分需要 NumPy、SciPy；工作簿只读部分需要 openpyxl。XLSX 通过 Codex 捆绑的 Node.js 与 `@oai/artifact-tool` 生成，导出时创建临时依赖链接。没有该运行时的环境仍可使用 `--no-workbook` 生成数值结果与 CSV。
+输入默认取同级 `C题/附件` 中的附件 2、3、4 和附件 5 模板。运行不依赖整理前的旧版工作目录。数值部分需要 NumPy、SciPy；工作簿只读部分需要 openpyxl。XLSX 通过 Codex 捆绑的 Node.js 与 `@oai/artifact-tool` 生成，导出时创建临时依赖链接。没有该运行时的环境仍可使用 `--no-workbook` 生成数值结果与 CSV。
 
 ## 独立实验
 

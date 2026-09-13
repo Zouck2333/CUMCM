@@ -1,0 +1,22 @@
+{
+  "actual_names": {
+    "Question_One_optimized": "Question_One",
+    "Question_Two_updated": "Question_Two_updated",
+    "Question_Three_optimized": "Question_Three_optimized",
+    "Question_Four_optimized": "Question_Four_optimized"
+  },
+  "reason": "Windows denied renaming the last three directories even after previews were closed. Their existing names are retained, and runtime paths match those names.",
+  "changed_files": [
+    "Question_Two_updated/README.md",
+    "Question_Three_optimized/README.md",
+    "Question_Three_optimized/README.md",
+    "Question_Four_optimized/README.md",
+    "Question_Four_optimized\\run.py",
+    "Question_Four_optimized\\tests\\test_model.py",
+    "Question_Four_optimized\\tests\\test_forecasting.py",
+    "Question_Four_optimized\\tests\\test_verification_portability.py",
+    "Question_Four_optimized\\README.md",
+    "Question_Four_optimized\\docs\\运行环境.md",
+    "Question_Four_optimized\\paper_tables\\code\\build_tables.mjs"
+  ]
+}

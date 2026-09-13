@@ -1,0 +1,50 @@
+{
+  "directory_handles_inspected": 68,
+  "workspace_directory_handles": [
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two_updated\\output\\paper_tables"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four_optimized\\output"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four_optimized\\paper_tables"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Three_optimized\\outputs\\20260912_selected_date_tables_01a09536"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four_optimized\\paper_tables"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Three_optimized\\outputs\\20260912_selected_date_tables_01a09536"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four_optimized\\paper_tables"
+    },
+    {
+      "pid": 5720,
+      "process": "codex.exe",
+      "path": "\\\\?\\C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four_optimized\\paper_tables"
+    }
+  ]
+}

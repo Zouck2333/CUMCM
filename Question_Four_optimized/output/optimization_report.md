@@ -83,4 +83,4 @@
 ## 验证与复现
 
 见 verification_report.json：365 天 SOC 递推、容量、功率、充放电互斥、实际缺口、费用分项、正式期 48096 条 CSV 记录及两份工作簿逐单元格一致性。tests 包含四个决策时点的未来信息屏蔽、历史残差重建和原整数模型等价性测试。
-运行入口为包根目录 run.py；配置为 configuration.json；预测回放与四组对照保留在 experiments 中。原 Question_Four 的源文件和结果哈希单独核验。
+运行入口为包根目录 run.py；配置为 configuration.json；预测回放与四组对照保留在 experiments 中。默认结果核验不依赖旧 Question_Four；原文件哈希留作历史记录，只有显式指定 --original-source-dir 时才比对旧文件。

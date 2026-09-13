@@ -1,0 +1,29 @@
+input: C:\Users\31293\Desktop\CUMCM\C题\附件\附件1.xlsx
+input_exists: True
+LP cost
+  objective_value: 35126.948589290
+  total_cost: 35126.948589290
+  throughput: 37540.605698354
+  peak_kw: 8458.827300000
+  balance_error: 2.273736754432e-13
+  soc_error: 9.094947017729e-13
+  simultaneous_periods: 0
+  power_violations: 0
+MILP cost
+  objective_value: 35126.948589290
+  total_cost: 35126.948589290
+  throughput: 37540.605698354
+  peak_kw: 8458.827300000
+  balance_error: 2.273736754432e-13
+  soc_error: 9.094947017729e-13
+  simultaneous_periods: 0
+  power_violations: 0
+MILP lexicographic
+  objective_value: 8458.814806002
+  total_cost: 35126.948624417
+  throughput: 37540.604944304
+  peak_kw: 8458.814806002
+  balance_error: 2.273736754432e-13
+  soc_error: 9.094947017729e-13
+  simultaneous_periods: 0
+  power_violations: 0

@@ -2,6 +2,8 @@
 
 本文件夹集中保存更新后的模型、代码、原始输入、正式结果、对照结果与核验资料。通过本目录的`run.py`运行时，输入和输出都位于本文件夹，可整体复制到其他位置；运行环境依赖见下文。
 
+本目录 `Question_Three_optimized` 保存正式优化版。测试参考文件、`comparison_four_day` 和双策略比较结果完整保留。目录因 Windows 占用暂保留原名。
+
 ## 先看哪些文件
 
 | 内容 | 位置 |
@@ -56,7 +58,7 @@ python -B code/run_question_three.py --base-dir inputs --output-dir output_recom
 - 模型文档中的旧文件夹名称属于求解时记录的历史来源，原位置的使用说明另存于`docs/README_before_packaging.md`。本包的运行方法与文件位置以当前README为准。
 - 正式结果位于`output_optimized/`；`inputs/附件5/result3.xlsx`是原始空白模板。
 - 工作簿旁的`result3.xlsx.inspect.ndjson`与`previews/`为导出和视觉核验资料，均随正式结果保留。
-- 原来的`Question_Three`、`Question_Three_cheaper`文件夹仍保留，本包通过复制整理形成。
+- 整理前的旧版 `Question_Three`、`Question_Three_cheaper` 工作目录已另行清理；当前正式版本位于 `Question_Three_optimized`。历史对照所需数据和参考求解器均在本包内。
 
 ## 运行环境
 

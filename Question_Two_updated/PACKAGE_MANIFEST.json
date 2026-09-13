@@ -334,8 +334,8 @@
       "sha256": "23721a9167c5564d910b75b67c4321d980083dc49bae0d12a3f2ceb0690608bb"
     },
     "README.md": {
-      "bytes": 4046,
-      "sha256": "a7b4d2a05447732e13d3e2b38bc17d0a10ee1e998cf2ec9d7216b81fc4a6a72a"
+      "bytes": 4324,
+      "sha256": "a0efd1e2289a83c09c42b758f6fc467ccb3c5d10dbeb83f0c7cc45b16731888d"
     },
     "reference/previous_fixed_summary.json": {
       "bytes": 656,
@@ -351,5 +351,6 @@
     }
   },
   "updated_at": "2026-09-12T13:52:34.322815+00:00",
-  "last_change": "Added editable paper tables 1, 2 and 3 for four requested dates; solver, model and result2.xlsx unchanged."
+  "last_change": "Added editable paper tables 1, 2 and 3 for four requested dates; solver, model and result2.xlsx unchanged.",
+  "cleanup_note": "Old sibling work directories removed separately; retained internal reference, experiments, test fixtures and comparison results. Current package folder name is unchanged."
 }

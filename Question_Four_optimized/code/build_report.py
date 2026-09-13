@@ -80,7 +80,7 @@ def main():
             '原固定轨迹价格压力测试模块保留，但没有将其称为鲁棒重优化。本轮电价预测是因果点预测，CVaR 情景仍为负荷与光伏残差。','',
             '## 验证与复现','',
             '见 verification_report.json：365 天 SOC 递推、容量、功率、充放电互斥、实际缺口、费用分项、正式期 48096 条 CSV 记录及两份工作簿逐单元格一致性。tests 包含四个决策时点的未来信息屏蔽、历史残差重建和原整数模型等价性测试。',
-            '运行入口为包根目录 run.py；配置为 configuration.json；预测回放与四组对照保留在 experiments 中。原 Question_Four 的源文件和结果哈希单独核验。']
+            '运行入口为包根目录 run.py；配置为 configuration.json；预测回放与四组对照保留在 experiments 中。默认结果核验不依赖旧 Question_Four；原文件哈希留作历史记录，只有显式指定 --original-source-dir 时才比对旧文件。']
     (output/'optimization_report.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     (output/'optimization_comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
     paper=['# 第四问论文指定日期结果','','| 策略 | 日期 | 初始购电 | 最终正常购电 | 紧急购电 | 计划费 | 调整费 | 紧急费 | 总费用 |','|---|---|---:|---:|---:|---:|---:|---:|---:|']

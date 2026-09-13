@@ -5,7 +5,7 @@ import argparse
 import csv
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import numpy as np
 
 from .input_data import load_inputs
@@ -95,21 +95,53 @@ def verify_directory(directory: Path, inputs) -> dict:
     return report
 
 
+def verify_original_sources(manifest_path: Path, source_dir: Path) -> dict:
+    """Optional historical comparison, rebased to an explicitly supplied copy."""
+    source_dir = source_dir.resolve()
+    source = json.loads(manifest_path.read_text(encoding='utf-8-sig'))
+    for row in source:
+        recorded = PureWindowsPath(row['Path'])
+        original_root = next(
+            (parent for parent in recorded.parents if parent.name == 'Question_Four'),
+            None,
+        )
+        if original_root is None:
+            raise ValueError(f"Unrecognized historical source path: {row['Path']}")
+        relative = recorded.relative_to(original_root)
+        path = source_dir.joinpath(*relative.parts)
+        if not path.is_file():
+            raise FileNotFoundError(f"Historical source file is missing: {path}")
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual_hash.lower() != row['Hash'].lower():
+            raise AssertionError(f"Historical source hash mismatch: {path}")
+    return {'status': 'passed', 'source_dir': str(source_dir), 'checked_files': len(source)}
+
+
 def main():
     root=Path(__file__).resolve().parents[2]
-    package=root/'Question_Four_optimized'
+    package=Path(__file__).resolve().parents[1]
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir',type=Path,default=package/'output')
     parser.add_argument('--no-workbook',action='store_true')
+    parser.add_argument('--original-source-dir', type=Path,
+                        help='Optional old Question_Four directory to compare with archived hashes; not needed for result verification')
+    parser.add_argument('--report-file', type=Path,
+                        help='Write the verification report here instead of replacing output-dir/verification_report.json')
     args=parser.parse_args()
     inputs=load_inputs(root)
     report={'trajectories':verify_directory(args.output_dir,inputs)}
-    source=json.loads((package/'reference/source_hashes.json').read_text(encoding='utf-8-sig'))
-    for row in source:
-        assert hashlib.sha256(Path(row['Path']).read_bytes()).hexdigest().upper()==row['Hash'],row['Path']
-    report['original_question_four_unchanged']=True
+    if args.original_source_dir is None:
+        report['original_source_verification'] = {
+            'status': 'not_requested',
+            'reason': 'Historical source comparison is optional; no old directory was read.',
+        }
+    else:
+        report['original_source_verification'] = verify_original_sources(
+            package/'reference/source_hashes.json', args.original_source_dir,
+        )
     if not args.no_workbook: report['workbooks']=verify_workbooks(args.output_dir)
-    path=args.output_dir/'verification_report.json'
+    path=args.report_file if args.report_file is not None else args.output_dir/'verification_report.json'
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False,indent=2))
 

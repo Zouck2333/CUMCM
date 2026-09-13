@@ -2,7 +2,7 @@
   "package": "Question_Three_optimized",
   "created_at": "2026-09-12T20:00:02.820136+08:00",
   "file_count_excluding_manifest": 45,
-  "total_bytes_excluding_manifest": 95267959,
+  "total_bytes_excluding_manifest": 95268320,
   "files": [
     {
       "path": "code/build_optimization_report.py",
@@ -201,8 +201,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4356,
-      "sha256": "3bd1c312034dcd7ecf52936035a9e901e220bfc83acf2a65c8d18d7073d00fef"
+      "bytes": 4717,
+      "sha256": "be67d4e96db01675ad26b844e81f52b127c036a5e66d51dc599d8bc37ccfc0e8"
     },
     {
       "path": "requirements.txt",
@@ -229,5 +229,6 @@
       "bytes": 6239,
       "sha256": "acd7b13c573f9c4a87e58fdf7eedfb66da0bb0fc5745fae3d98fe5a8ef7080c3"
     }
-  ]
+  ],
+  "cleanup_note": "Old sibling work directories removed separately; retained internal reference, experiments, test fixtures and comparison results. Current package folder name is unchanged."
 }
