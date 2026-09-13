@@ -1,0 +1,76 @@
+{
+  "parameter_mode": "causal_monthly",
+  "same_input_values": true,
+  "same_physical_parameters": true,
+  "same_formal_initial_soc": true,
+  "formal_initial_soc_kwh": 10800.0,
+  "formal_days": 334,
+  "periods": 48096,
+  "baseline_summary": "reference/previous_fixed_summary.json",
+  "tuning_protocol_sha256": "8f7da6fce3333a367b97832b12d0aa405282fe55eed16ad3ab96db2b684cb954",
+  "parameter_updates": 11,
+  "changes": {
+    "formal_plan_cost_yuan": {
+      "before": 13920707.107833922,
+      "after": 13779832.090966314,
+      "change_yuan": -140875.01686760783
+    },
+    "formal_emergency_cost_yuan": {
+      "before": 845675.7488207424,
+      "after": 926155.2538303771,
+      "change_yuan": 80479.50500963477
+    },
+    "formal_total_cost_yuan": {
+      "before": 14766382.856654665,
+      "after": 14705987.344796691,
+      "change_yuan": -60395.51185797341
+    }
+  },
+  "targets": {
+    "total_cost": {
+      "limit_yuan": 15000000.0,
+      "actual_yuan": 14705987.344796691,
+      "passed": true
+    },
+    "emergency_cost": {
+      "limit_yuan": 1000000.0,
+      "actual_yuan": 926155.2538303771,
+      "passed": true
+    }
+  },
+  "verification_status": "PASS",
+  "initial_and_later_tuning_boundary_tests_passed": true,
+  "actual_data_transformation": "unit conversion only; no imputation or smoothing",
+  "path_base": "package root",
+  "sha256": {
+    "data/附件1.xlsx": "66b87134f5ecccd68184d3539bb1293ef039f9e0fdd955a589b9bfa7f227c377",
+    "data/附件2.xlsx": "2e95fd446bfafa0d8c59577b5c2e2ea8b3f1def20dde54a3062556f4da9b4c72",
+    "data/result2_template.xlsx": "1c26494cfc6d754e0bd9bff7e13e1126a73d2d2da6c5336eb251d89b9a1a1a47",
+    "reference/previous_fixed_summary.json": "7c2ed21ff6b33bfcefdf1ba9adf2fbaac76981f0b51e045aa896d0aacb6f1478",
+    "output/input_data.json": "f7b09e68a005454a4ff34603d7fc1e2e4b9a99e59fd574ffab27f34b51f9ba70",
+    "output/question_two_solution.json": "22bce3403459533fdcee0caa556c485fa5803081dc3dbd08519da0e6f656cc6e",
+    "output/question_two_daily.csv": "70c3b29f82480f8a22c13c5899a4764688a312c94a7bfd54df6c18f02a38f4a3",
+    "output/question_two_detail.csv": "6df19ac6b9126385b3d28f4d384dcbd3937e47f57b23fc5e7d44b9f46e4e2edf",
+    "output/result2.xlsx": "f86a5e1da1fe694d6fe665382d660a42a8036c6e46fce3a509d16e14b7976363",
+    "output/tuning_protocol.json": "7ed7b094055f30c622b70f3ff33864ac02681dcf5ab38ef297019416c9ecb378",
+    "code/build_causal_summary.py": "0cce290ba44de8284e71177e416aa8efd72addfeef72d1b5d1819f91cfadf6e5",
+    "code/build_result_summary.py": "71421b68d1632f55ecacb6ae0e5f26208771e3f17338268b418f35aebfde5e7e",
+    "code/causal_policy.py": "22b290ac2a3b67dbb33f34b8a46649d7470fec759dd77b362c8934d92db59f9b",
+    "code/extract_inputs.py": "6aff6a2116cada62160d86bc38535d1eb71a7aa517f8189004304822e7d41ecb",
+    "code/forecast_calendar.py": "a2f20d9874cc837c36a94da219aeee6961b894019e03cb6eb1782836e8ee0564",
+    "code/generate_paper_tables.py": "707361cd34f2596e1f6a778823e64303b4c6ead6de7228fba94a2f586a23f0bf",
+    "code/perfect_information_benchmark.py": "4c99f8909ffe76b6b7da014a9006c0e6c0dbe26e4d03c8099030c811cef11e90",
+    "code/solve_question_two.py": "5e508243f3d917382a2a893dbdd562fdafac67b5f34f16112507fb43be8eae24",
+    "code/test_calendar_forecast.py": "e2b248eb4d7a57a12896114642259803481f9b12c332fdf89c0f80fdb9bb0777",
+    "code/test_causal_policy.py": "9463d4f4f7c14a642630cdb40c6e9c9ad30101afc1fabf1b346d8e6965ed6dae",
+    "code/test_information_boundary.py": "8e2387f7b209af8807309a5d83eeeaddc757986ead169ebafa169470d2e515a3",
+    "code/test_risk_calibration.py": "9475b195cb73a51299a943055d5cb8f73deaf5e01f0b239c5c60409f806145bb",
+    "code/verify_analysis_outputs.py": "f46a66026abeb24cccd66f46ec880f344aa10b78278913c564f519cb205fa2b1",
+    "code/verify_causal_policy.py": "c03decc84a6f80211c6dab58f91ce25a92b1c323fe97cd910eb55d10d2a9b57b",
+    "code/verify_package.py": "a21889aff76aa3c003a9a97a4776e434b555c49f3528d3cb30a686bd820a28d8",
+    "code/verify_question_two.py": "11fbe20f1823db3b8ede8cb83ff52c823b074a6088f01f8e961c064e5f5ec8a3",
+    "code/build_result2.mjs": "13b2aa87ce786e75d745da3ef1461c3d68fa0346c42e325cf91cb082dd79a765",
+    "docs/model_Two.md": "444df4a8c623c14eb6eeeb932fbd1159cb5d139e46ba903366d6c25b412d06ed",
+    "run_question_two.ps1": "8e0e8536bd2872df45f799af96a6190024df7a977a1d115be0831712bd9c6bf4"
+  }
+}

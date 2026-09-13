@@ -25,6 +25,10 @@ def main() -> None:
     args = parser.parse_args()
 
     diagnostics = json.loads(args.solution.read_text(encoding="utf-8"))["diagnostics"]
+    if diagnostics.get("parameter_mode") == "causal_monthly":
+        from build_causal_summary import build_summary
+        build_summary(args.output.parent)
+        return
     daily = read_csv(args.daily)
     verification = json.loads(args.verification.read_text(encoding="utf-8"))
     paper = read_csv(args.paper_summary)
@@ -40,6 +44,10 @@ def main() -> None:
         "",
         "评价期为2025年2月1日至12月31日，共334天、48,096个10分钟时段；1月仅用于预热和形成2月1日初始SOC。",
         "",
+        f"购电策略：{diagnostics.get('purchase_strategy', 'legacy_scenarios')}；历史窗口{diagnostics.get('risk_window_days', '—')}天，邻近时段半径{diagnostics.get('risk_radius_periods', '—')}个10分钟，购电分位数{diagnostics.get('purchase_quantile', '—')}；日末储备分位数{diagnostics['reserve_quantile']}。",
+        f"预测方法：{diagnostics.get('forecast_method', 'similar_day')}；负荷窗口{diagnostics.get('load_window_days', '—')}天、趋势阶数{diagnostics.get('load_trend_degree', '—')}；光伏窗口{diagnostics.get('pv_window_days', '—')}天；残差分组{diagnostics.get('risk_grouping', 'legacy')}。",
+        "模型结构与参数基于现有2025年样本开发；逐日拟合只用历史数据，本结果不构成未知年份独立样本保证。",
+        "",
         "| 指标 | 结果 |",
         "|---|---:|",
         f"| 计划购电量 | {diagnostics['formal_total_grid_kwh']:,.4f} kWh |",
@@ -47,6 +55,8 @@ def main() -> None:
         f"| 计划购电费用 | {diagnostics['formal_plan_cost_yuan']:,.2f} 元 |",
         f"| 紧急购电费用 | {diagnostics['formal_emergency_cost_yuan']:,.2f} 元 |",
         f"| 实际总费用 | {diagnostics['formal_total_cost_yuan']:,.2f} 元 |",
+        f"| 总费用低于1500万元 | {'通过' if diagnostics['formal_total_cost_yuan'] < 15000000 else '未达到'} |",
+        f"| 紧急费用低于100万元 | {'通过' if diagnostics['formal_emergency_cost_yuan'] < 1000000 else '未达到'} |",
         f"| 最大MILP相对间隙 | {max_gap:.3e} |",
         f"| 最大单日三级求解时间 | {max_seconds:.3f} 秒 |",
         "",
@@ -68,7 +78,7 @@ def main() -> None:
             "",
             "## 灵敏度分析",
             "",
-            "五组方案均使用三级词典序求解；费用差额以90%分位数、逐时正误差累积、单程效率0.90的主方案为基准。",
+            "五组方案均使用当前购电风险策略和三级词典序求解；费用差额以表内90%储备、逐时正误差累积、单程效率0.90的对照方案为基准。实际正式结果参数见上文。",
             "",
             "| 方案 | 实际总费用/元 | 费用差额/元 | 紧急购电量/kWh | 平均储备/kWh | 封顶天数 |",
             "|---|---:|---:|---:|---:|---:|",
@@ -86,7 +96,7 @@ def main() -> None:
     lines.extend(
         [
             "",
-            "75%分位数方案在本年度样本中的费用和紧急购电量均低于90%主方案，且储备封顶显著减少；它是后续调整主方案的首选候选。往返效率口径带来的费用变化最大，论文必须明确单程效率还是往返效率。",
+            "储备方案的费用与紧急购电量以本次实测表格为准；效率解释对照属于物理参数口径变化，不作为算法节费成果。",
             "",
             "## 完美信息基准",
             "",

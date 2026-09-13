@@ -38,6 +38,10 @@ def main() -> None:
     input_path = root / "input_data.json"
     main = json.loads(main_path.read_text(encoding="utf-8"))
     diagnostics = main["diagnostics"]
+    if diagnostics.get("parameter_mode") == "causal_monthly":
+        from build_causal_summary import verify_analysis
+        verify_analysis(root,args.report)
+        return
     verification = json.loads(
         (root / "verification_report.json").read_text(encoding="utf-8")
     )
@@ -76,15 +80,17 @@ def main() -> None:
             "formal_average_reserve_kwh",
         )
     )
-    main_comparison = next(
-        row for row in comparisons if row["case"] == "q090_eta_090"
-    )
-    checks["comparison_main_matches_solution"] = math.isclose(
-        float(main_comparison["formal_total_cost_yuan"]),
-        float(diagnostics["formal_total_cost_yuan"]),
-        rel_tol=0.0,
-        abs_tol=1e-6,
-    )
+    matching = [row for row in comparisons if all(
+        row.get(key) == diagnostics.get(key) for key in
+        ("reserve_quantile", "reserve_mode", "eta_charge", "eta_discharge",
+         "purchase_strategy", "risk_window_days", "risk_radius_periods", "purchase_quantile",
+         "forecast_method", "load_window_days", "load_trend_degree", "pv_window_days", "risk_grouping"))]
+    checks["comparison_main_matches_solution"] = len(matching) == 1 and math.isclose(
+        float(matching[0]["formal_total_cost_yuan"]),
+        float(diagnostics["formal_total_cost_yuan"]), rel_tol=0.0, abs_tol=1e-6)
+    checks["comparison_risk_policy_matches"] = all(all(row.get(key) == diagnostics.get(key) for key in
+        ("purchase_strategy", "risk_window_days", "risk_radius_periods", "purchase_quantile",
+         "forecast_method", "load_window_days", "load_trend_degree", "pv_window_days", "risk_grouping")) for row in comparisons)
     checks["benchmark_ordering_passed"] = (
         benchmark["ordering_check"].get("passed") is True
     )

@@ -1,0 +1,600 @@
+{
+  "scope": "Fixed battery schedule; causal day-ahead purchase-buffer ablation; not a reoptimized MILP or official result workbook",
+  "inputs_sha256": {
+    "Question_Two\\output\\optimized_2025\\question_two_solution.json": "150f467cc4be65d480759bba61bb58b3963ef1db10affef2921b616d4d0339b6",
+    "Question_Two\\output\\input_data.json": "f7b09e68a005454a4ff34603d7fc1e2e4b9a99e59fd574ffab27f34b51f9ba70",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\code\\analyze_risk_calibration.py": "658685f384423282d3c63dec7114ff78054fd1d19bd355dff19954a3e5794208",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\code\\solve_question_two.py": "c15e6492143ddb63347e0e1e4b624ce2673b195bd8ac0ebefb9831f5764d9fd3"
+  },
+  "configurations": [
+    {
+      "window_days": 28,
+      "radius_periods": 0,
+      "quantile": 0.8
+    },
+    {
+      "window_days": 28,
+      "radius_periods": 3,
+      "quantile": 0.8
+    },
+    {
+      "window_days": 56,
+      "radius_periods": 3,
+      "quantile": 0.8
+    },
+    {
+      "window_days": 28,
+      "radius_periods": 3,
+      "quantile": 0.85
+    }
+  ],
+  "quantile_method": "inverted_cdf",
+  "checks": {
+    "battery_soc_power_exclusivity_and_continuity": "PASS",
+    "nonnegative_grid_and_point_forecast_balance": "PASS",
+    "calibration_future_perturbation_tests": 16,
+    "forecast_future_perturbation_tests_with_recorded_monthly_parameters": 4,
+    "recorded_monthly_validation_date_boundary": "PASS",
+    "baseline_cost_reproduction_and_actual_balance": "PASS"
+  },
+  "results": [
+    {
+      "case": "baseline",
+      "planned_cost_yuan": 13668223.096285295,
+      "emergency_cost_yuan": 2022843.8943026077,
+      "total_cost_yuan": 15691066.990587905,
+      "emergency_kwh": 525349.8024660214,
+      "surplus_kwh": 3603233.739334571,
+      "emergency_periods": 14439,
+      "total_cost_change_yuan": 0.0,
+      "emergency_cost_change_yuan": 0.0
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "planned_cost_yuan": 14123714.34293303,
+      "emergency_cost_yuan": 1381364.968433965,
+      "total_cost_yuan": 15505079.311366994,
+      "emergency_kwh": 353717.73912213923,
+      "surplus_kwh": 4025158.8044511317,
+      "emergency_periods": 9442,
+      "total_cost_change_yuan": -185987.67922091112,
+      "emergency_cost_change_yuan": -641478.9258686427
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "planned_cost_yuan": 14167059.278938223,
+      "emergency_cost_yuan": 1282888.8142906325,
+      "total_cost_yuan": 15449948.093228856,
+      "emergency_kwh": 326617.7684336668,
+      "surplus_kwh": 4056436.329096082,
+      "emergency_periods": 8738,
+      "total_cost_change_yuan": -241118.89735904895,
+      "emergency_cost_change_yuan": -739955.0800119753
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "planned_cost_yuan": 14333457.904559277,
+      "emergency_cost_yuan": 1228745.4725835866,
+      "total_cost_yuan": 15562203.377142865,
+      "emergency_kwh": 312674.34606689017,
+      "surplus_kwh": 4243219.613870569,
+      "emergency_periods": 8168,
+      "total_cost_change_yuan": -128863.61344503984,
+      "emergency_cost_change_yuan": -794098.4217190212
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "planned_cost_yuan": 14486790.023793839,
+      "emergency_cost_yuan": 1035900.4223849926,
+      "total_cost_yuan": 15522690.446178833,
+      "emergency_kwh": 259780.20665431727,
+      "surplus_kwh": 4414049.215979307,
+      "emergency_periods": 6986,
+      "total_cost_change_yuan": -168376.54440907203,
+      "emergency_cost_change_yuan": -986943.4719176152
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "planned_cost_yuan": 14046748.842525203,
+      "emergency_cost_yuan": 1432261.0388307092,
+      "total_cost_yuan": 15479009.881355915,
+      "emergency_kwh": 363660.361461728,
+      "surplus_kwh": 3947977.0311976643,
+      "emergency_periods": 9482,
+      "total_cost_change_yuan": -212057.10923198983,
+      "emergency_cost_change_yuan": -590582.8554718986
+    }
+  ],
+  "monthly_results": [
+    {
+      "case": "baseline",
+      "month": "2025-02",
+      "total_cost_yuan": 1626371.910036471,
+      "emergency_cost_yuan": 254506.23376664016
+    },
+    {
+      "case": "baseline",
+      "month": "2025-03",
+      "total_cost_yuan": 1320934.215177125,
+      "emergency_cost_yuan": 117009.10253470387
+    },
+    {
+      "case": "baseline",
+      "month": "2025-04",
+      "total_cost_yuan": 1048669.8067181655,
+      "emergency_cost_yuan": 126509.94020428305
+    },
+    {
+      "case": "baseline",
+      "month": "2025-05",
+      "total_cost_yuan": 1168819.0555170982,
+      "emergency_cost_yuan": 243844.8635785325
+    },
+    {
+      "case": "baseline",
+      "month": "2025-06",
+      "total_cost_yuan": 1688115.2047995476,
+      "emergency_cost_yuan": 406026.82461289555
+    },
+    {
+      "case": "baseline",
+      "month": "2025-07",
+      "total_cost_yuan": 1796749.7734566182,
+      "emergency_cost_yuan": 309786.25599774823
+    },
+    {
+      "case": "baseline",
+      "month": "2025-08",
+      "total_cost_yuan": 1417230.4054471178,
+      "emergency_cost_yuan": 127662.94373306601
+    },
+    {
+      "case": "baseline",
+      "month": "2025-09",
+      "total_cost_yuan": 1279091.395474679,
+      "emergency_cost_yuan": 134497.70422140032
+    },
+    {
+      "case": "baseline",
+      "month": "2025-10",
+      "total_cost_yuan": 1222983.4154025353,
+      "emergency_cost_yuan": 77956.35550674763
+    },
+    {
+      "case": "baseline",
+      "month": "2025-11",
+      "total_cost_yuan": 1357944.60245831,
+      "emergency_cost_yuan": 115695.10124415725
+    },
+    {
+      "case": "baseline",
+      "month": "2025-12",
+      "total_cost_yuan": 1764157.2061002364,
+      "emergency_cost_yuan": 109348.56890243303
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-02",
+      "total_cost_yuan": 1619818.8002724033,
+      "emergency_cost_yuan": 115870.60989518787
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-03",
+      "total_cost_yuan": 1311239.181771685,
+      "emergency_cost_yuan": 94843.97667477628
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-04",
+      "total_cost_yuan": 1035747.265015772,
+      "emergency_cost_yuan": 96366.05374408243
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-05",
+      "total_cost_yuan": 1119564.5551041404,
+      "emergency_cost_yuan": 147941.97589088188
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-06",
+      "total_cost_yuan": 1649661.518787797,
+      "emergency_cost_yuan": 287583.2696778739
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-07",
+      "total_cost_yuan": 1747088.835681654,
+      "emergency_cost_yuan": 202533.81359764875
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-08",
+      "total_cost_yuan": 1416698.5027603058,
+      "emergency_cost_yuan": 106893.24241228926
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-09",
+      "total_cost_yuan": 1278945.7749773061,
+      "emergency_cost_yuan": 116003.0753715958
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-10",
+      "total_cost_yuan": 1230604.5488876987,
+      "emergency_cost_yuan": 66076.5836420926
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-11",
+      "total_cost_yuan": 1342112.3200809555,
+      "emergency_cost_yuan": 76299.56555726526
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "month": "2025-12",
+      "total_cost_yuan": 1753598.0080272765,
+      "emergency_cost_yuan": 70952.80197027103
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-02",
+      "total_cost_yuan": 1618518.0359502095,
+      "emergency_cost_yuan": 110219.43481750207
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-03",
+      "total_cost_yuan": 1305019.6890639344,
+      "emergency_cost_yuan": 89080.7678820239
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-04",
+      "total_cost_yuan": 1030913.0608325178,
+      "emergency_cost_yuan": 89250.84195836204
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-05",
+      "total_cost_yuan": 1112105.5374499527,
+      "emergency_cost_yuan": 137080.25760378735
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-06",
+      "total_cost_yuan": 1646261.4901390548,
+      "emergency_cost_yuan": 280208.8090298586
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-07",
+      "total_cost_yuan": 1741978.1699842254,
+      "emergency_cost_yuan": 189066.68291601873
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-08",
+      "total_cost_yuan": 1409502.216481649,
+      "emergency_cost_yuan": 95830.62673308805
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-09",
+      "total_cost_yuan": 1271913.5209540236,
+      "emergency_cost_yuan": 105660.4866624779
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-10",
+      "total_cost_yuan": 1226961.5174271162,
+      "emergency_cost_yuan": 58793.067560765725
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-11",
+      "total_cost_yuan": 1338121.558861618,
+      "emergency_cost_yuan": 66910.09739369122
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "month": "2025-12",
+      "total_cost_yuan": 1748653.2960845542,
+      "emergency_cost_yuan": 60787.74173305683
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-02",
+      "total_cost_yuan": 1660620.5963095713,
+      "emergency_cost_yuan": 73765.79239082558
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-03",
+      "total_cost_yuan": 1358560.2234169084,
+      "emergency_cost_yuan": 54218.675895215354
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-04",
+      "total_cost_yuan": 1030591.1161352487,
+      "emergency_cost_yuan": 90729.62578546979
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-05",
+      "total_cost_yuan": 1116750.7105836945,
+      "emergency_cost_yuan": 169398.02038026328
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-06",
+      "total_cost_yuan": 1644500.899797776,
+      "emergency_cost_yuan": 311714.1722591246
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-07",
+      "total_cost_yuan": 1745614.3237280336,
+      "emergency_cost_yuan": 182650.50546897453
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-08",
+      "total_cost_yuan": 1417018.8960280383,
+      "emergency_cost_yuan": 65698.89060763658
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-09",
+      "total_cost_yuan": 1273919.170447745,
+      "emergency_cost_yuan": 112538.87841439042
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-10",
+      "total_cost_yuan": 1222902.6999463753,
+      "emergency_cost_yuan": 48592.36535780941
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-11",
+      "total_cost_yuan": 1337834.535484677,
+      "emergency_cost_yuan": 67897.2619483225
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "month": "2025-12",
+      "total_cost_yuan": 1753890.205264796,
+      "emergency_cost_yuan": 51541.2840755545
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-02",
+      "total_cost_yuan": 1643937.4104136678,
+      "emergency_cost_yuan": 95475.24630768824
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-03",
+      "total_cost_yuan": 1309477.5046163322,
+      "emergency_cost_yuan": 66632.03420318091
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-04",
+      "total_cost_yuan": 1030595.0429563513,
+      "emergency_cost_yuan": 71374.39989746809
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-05",
+      "total_cost_yuan": 1112869.736178527,
+      "emergency_cost_yuan": 112622.1108063896
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-06",
+      "total_cost_yuan": 1654678.830267473,
+      "emergency_cost_yuan": 244854.6190976273
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-07",
+      "total_cost_yuan": 1751702.1557659218,
+      "emergency_cost_yuan": 146233.77220093444
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-08",
+      "total_cost_yuan": 1414796.3880754518,
+      "emergency_cost_yuan": 73642.5508980003
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-09",
+      "total_cost_yuan": 1272796.113104312,
+      "emergency_cost_yuan": 83425.65739605199
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-10",
+      "total_cost_yuan": 1234938.2187870606,
+      "emergency_cost_yuan": 46236.200925143916
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-11",
+      "total_cost_yuan": 1339420.9772776775,
+      "emergency_cost_yuan": 49583.61115690341
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "month": "2025-12",
+      "total_cost_yuan": 1757478.0687360568,
+      "emergency_cost_yuan": 45820.21949560456
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-02",
+      "total_cost_yuan": 1626371.910036471,
+      "emergency_cost_yuan": 254506.23376664016
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-03",
+      "total_cost_yuan": 1305019.6890639344,
+      "emergency_cost_yuan": 89080.7678820239
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-04",
+      "total_cost_yuan": 1030913.0608325178,
+      "emergency_cost_yuan": 89250.84195836204
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-05",
+      "total_cost_yuan": 1116750.7105836945,
+      "emergency_cost_yuan": 169398.02038026328
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-06",
+      "total_cost_yuan": 1646261.4901390548,
+      "emergency_cost_yuan": 280208.8090298586
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-07",
+      "total_cost_yuan": 1745614.3237280336,
+      "emergency_cost_yuan": 182650.50546897453
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-08",
+      "total_cost_yuan": 1409502.216481649,
+      "emergency_cost_yuan": 95830.62673308805
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-09",
+      "total_cost_yuan": 1271913.5209540236,
+      "emergency_cost_yuan": 105660.4866624779
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-10",
+      "total_cost_yuan": 1234938.2187870606,
+      "emergency_cost_yuan": 46236.200925143916
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-11",
+      "total_cost_yuan": 1337834.535484677,
+      "emergency_cost_yuan": 67897.2619483225
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "month": "2025-12",
+      "total_cost_yuan": 1753890.205264796,
+      "emergency_cost_yuan": 51541.2840755545
+    }
+  ],
+  "monthly_selections": [
+    {
+      "month": "2025-03",
+      "case": "w28_r3_q0.80",
+      "validation_start": "2025-02-01",
+      "validation_end": "2025-02-28"
+    },
+    {
+      "month": "2025-04",
+      "case": "w28_r3_q0.80",
+      "validation_start": "2025-03-04",
+      "validation_end": "2025-03-31"
+    },
+    {
+      "month": "2025-05",
+      "case": "w56_r3_q0.80",
+      "validation_start": "2025-04-03",
+      "validation_end": "2025-04-30"
+    },
+    {
+      "month": "2025-06",
+      "case": "w28_r3_q0.80",
+      "validation_start": "2025-05-04",
+      "validation_end": "2025-05-31"
+    },
+    {
+      "month": "2025-07",
+      "case": "w56_r3_q0.80",
+      "validation_start": "2025-06-03",
+      "validation_end": "2025-06-30"
+    },
+    {
+      "month": "2025-08",
+      "case": "w28_r3_q0.80",
+      "validation_start": "2025-07-04",
+      "validation_end": "2025-07-31"
+    },
+    {
+      "month": "2025-09",
+      "case": "w28_r3_q0.80",
+      "validation_start": "2025-08-04",
+      "validation_end": "2025-08-31"
+    },
+    {
+      "month": "2025-10",
+      "case": "w28_r3_q0.85",
+      "validation_start": "2025-09-03",
+      "validation_end": "2025-09-30"
+    },
+    {
+      "month": "2025-11",
+      "case": "w56_r3_q0.80",
+      "validation_start": "2025-10-04",
+      "validation_end": "2025-10-31"
+    },
+    {
+      "month": "2025-12",
+      "case": "w56_r3_q0.80",
+      "validation_start": "2025-11-03",
+      "validation_end": "2025-11-30"
+    }
+  ],
+  "baseline_emergency_by_4h": [
+    {
+      "hours": "00:00-04:00",
+      "emergency_cost_yuan": 201795.81921825692,
+      "emergency_kwh": 93458.22463299842
+    },
+    {
+      "hours": "04:00-08:00",
+      "emergency_cost_yuan": 212808.16589487542,
+      "emergency_kwh": 65959.62270145411
+    },
+    {
+      "hours": "08:00-12:00",
+      "emergency_cost_yuan": 291149.8459961115,
+      "emergency_kwh": 71960.72074640475
+    },
+    {
+      "hours": "12:00-16:00",
+      "emergency_cost_yuan": 293834.0261385128,
+      "emergency_kwh": 78318.03857665908
+    },
+    {
+      "hours": "16:00-20:00",
+      "emergency_cost_yuan": 579178.0318558391,
+      "emergency_kwh": 99729.42339233644
+    },
+    {
+      "hours": "20:00-24:00",
+      "emergency_cost_yuan": 444078.0051990118,
+      "emergency_kwh": 115923.77241616865
+    }
+  ]
+}

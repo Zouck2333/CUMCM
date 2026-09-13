@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "strategies": {
+    "4-2": {
+      "case": "terminal_value",
+      "model_config": {
+        "mip_gap": 1e-06,
+        "time_limit": null,
+        "cvar_alpha": 0.9,
+        "risk_weight": 0.1,
+        "distance_weight": 0.1,
+        "reserve_quantile": null,
+        "terminal_value_weight": 1.0,
+        "objective_mode": "lexicographic",
+        "load_mode": "calendar",
+        "price_mode": "adaptive"
+      }
+    },
+    "4-3": {
+      "case": "terminal_value",
+      "model_config": {
+        "mip_gap": 1e-06,
+        "time_limit": null,
+        "cvar_alpha": 0.9,
+        "risk_weight": 0.1,
+        "distance_weight": 0.1,
+        "reserve_quantile": null,
+        "terminal_value_weight": 1.0,
+        "objective_mode": "lexicographic",
+        "load_mode": "calendar",
+        "price_mode": "adaptive"
+      }
+    }
+  },
+  "selection_basis": "The terminal-value candidate had the lowest complete formal-period and full-year cost among tested policies for both strategies. Actual settlement never subtracts terminal credit. This is same-year model development, not independent-year validation."
+}

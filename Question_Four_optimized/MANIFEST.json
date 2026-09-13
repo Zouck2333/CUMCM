@@ -1,0 +1,526 @@
+{
+  "description": "Fourth-question optimized model, outputs, comparisons and verification",
+  "file_count": 104,
+  "files": [
+    {
+      "path": "archive/adaptive_price_before_precision_fix/checkpoint_4-2.jsonl",
+      "bytes": 6637542,
+      "sha256": "008d85dabc2ea9f179d5362a13c9cbe342171f391190000bd2b31d9332b5c724"
+    },
+    {
+      "path": "archive/adaptive_price_before_precision_fix/checkpoint_4-3.jsonl",
+      "bytes": 6652452,
+      "sha256": "4aac99d579199c278ae3750b01f936ab7ce9fc89d42408d6f946391d573b8ba4"
+    },
+    {
+      "path": "archive/adaptive_price_before_precision_fix/detail_4-2.csv",
+      "bytes": 9469181,
+      "sha256": "a16587c2b3469348acf2c42c9de5f052c7033e2af569795aa2764dc77c8abec3"
+    },
+    {
+      "path": "archive/adaptive_price_before_precision_fix/summary_4-2.json",
+      "bytes": 6368,
+      "sha256": "363cb294bbea1e91dd74e50fac5092b1548011ec22616eaa61d01e8a9c34f442"
+    },
+    {
+      "path": "archive/load_only_before_precision_fix/checkpoint_4-2.jsonl",
+      "bytes": 6636617,
+      "sha256": "d0ecb1a47147044a4b05ce9db9218fd86853c70c874da57755dd252538293fa8"
+    },
+    {
+      "path": "archive/load_only_before_precision_fix/checkpoint_4-3.jsonl",
+      "bytes": 3695980,
+      "sha256": "c77233b9b8797d64a482c0a976b6bceab8ea2d6324e36382ac12eff27faddd47"
+    },
+    {
+      "path": "archive/load_only_before_precision_fix/detail_4-2.csv",
+      "bytes": 9471657,
+      "sha256": "be73e52ec45f336ce92e18bcf7c12bda7e3232be2ec44258f2ebffdc87028bd8"
+    },
+    {
+      "path": "archive/load_only_before_precision_fix/summary_4-2.json",
+      "bytes": 6387,
+      "sha256": "a0168237e317e81b06b18a78951841b709724fd4642123945582cc4932ffcb14"
+    },
+    {
+      "path": "checks/smoke/checkpoint_4-2.jsonl",
+      "bytes": 28041,
+      "sha256": "2a07bb41db71192660bfe3b96d1c4b3f35acdecd7fa3c19a027d65f604e4b325"
+    },
+    {
+      "path": "checks/smoke/checkpoint_4-3.jsonl",
+      "bytes": 36053,
+      "sha256": "ba60b9a143f368fb67d48278ec8f73ca28b6891dd14f35ee461819edee8cec25"
+    },
+    {
+      "path": "code/__init__.py",
+      "bytes": 68,
+      "sha256": "2ef83bf85bcd20374bdee492586da797d842edc3d0f0c74e2a8a564fe562b21c"
+    },
+    {
+      "path": "code/build_figures.py",
+      "bytes": 2129,
+      "sha256": "2b5770c03e98bffb9db67478cd33d8093feabb9d07b3e47b325fa97c4bee3f44"
+    },
+    {
+      "path": "code/build_report.py",
+      "bytes": 9587,
+      "sha256": "71ee9fde8c4442d1c1e437cabfd05abf2c3a2cd96a75529d9bf57b6bf2cbb569"
+    },
+    {
+      "path": "code/demo.py",
+      "bytes": 1065,
+      "sha256": "385cf01f9c56f14d92b0d62d4c05f5aca76b7642c1d58199550b56d367fc92f7"
+    },
+    {
+      "path": "code/forecast_audit.py",
+      "bytes": 3505,
+      "sha256": "9e62021cb01bdb73598ce8a9ccbeae9ec0117c01f78cb99797965c1a0724b72b"
+    },
+    {
+      "path": "code/forecasting.py",
+      "bytes": 3969,
+      "sha256": "3c08b146618458a81727edb5029f05f52e5a6aa7b184848fa331e4ba785b2816"
+    },
+    {
+      "path": "code/input_data.py",
+      "bytes": 7209,
+      "sha256": "848db8068de49210cfa66764e08bf7e2a9e586f08292032fb4e5f040c0d9a1a2"
+    },
+    {
+      "path": "code/model.py",
+      "bytes": 21512,
+      "sha256": "17b1312ee3bddf695ee679019edef578a541b0726fd00d7d7f0a6ca571e01ba4"
+    },
+    {
+      "path": "code/output_xlsx.mjs",
+      "bytes": 8046,
+      "sha256": "cbf432d69863b0908c83050c498b8acee2532b3db1f064c3f4e9ff5c484bbb1a"
+    },
+    {
+      "path": "code/price_stress.py",
+      "bytes": 5763,
+      "sha256": "e0e20440f0a6ea5eccfbccb11b6a2d92f820b9f7cfaaa8b00405a840116bd8da"
+    },
+    {
+      "path": "code/render_workbooks.py",
+      "bytes": 2796,
+      "sha256": "e4de5dc7537b2d988e27b09cc60777d67886db707fa1a50ae0e14ef8a720178f"
+    },
+    {
+      "path": "code/run_question_four.py",
+      "bytes": 17309,
+      "sha256": "046aace2822ec9257ba3f5b6a5729a31423cc801bd3de0c6d3f3a5eddf4b3e15"
+    },
+    {
+      "path": "code/stage_solver.py",
+      "bytes": 23356,
+      "sha256": "72ea7ea86a71c1953359ae2ba155f36890814b9b5700d999b239c8bbd0a10f20"
+    },
+    {
+      "path": "code/verify_optimized.py",
+      "bytes": 7287,
+      "sha256": "9d87120555da1bb7e341108467d33624f9bc41857fc64f24f09f9aa98315117a"
+    },
+    {
+      "path": "code/verify_outputs.py",
+      "bytes": 6751,
+      "sha256": "c2bed6e117a73c9f253124a97778cc9bea13d8021384e3f21ad4e9a192f53e89"
+    },
+    {
+      "path": "configuration.json",
+      "bytes": 1161,
+      "sha256": "b37e20d6f783d203372c823769582bcd64e8281fbb78547ca78d18c93e462914"
+    },
+    {
+      "path": "docs/运行环境.md",
+      "bytes": 1725,
+      "sha256": "5719884fb0a976051bbf09ae0b810f20d6227e9b9dcf6b0007a652784916dd99"
+    },
+    {
+      "path": "experiments/adaptive_price/checkpoint_4-2.jsonl",
+      "bytes": 6637564,
+      "sha256": "cd7b6a7a87a60b8a2174d7cc960a2c2c5af1dd05167a58bd7f9583b3ecd3d490"
+    },
+    {
+      "path": "experiments/adaptive_price/checkpoint_4-3.jsonl",
+      "bytes": 7299216,
+      "sha256": "9c5275e67eed225cb8e6bbd42b5643f5c12baf81f1b128c8416aad9607beb198"
+    },
+    {
+      "path": "experiments/adaptive_price/detail_4-2.csv",
+      "bytes": 9469181,
+      "sha256": "a16587c2b3469348acf2c42c9de5f052c7033e2af569795aa2764dc77c8abec3"
+    },
+    {
+      "path": "experiments/adaptive_price/detail_4-3.csv",
+      "bytes": 9922344,
+      "sha256": "d0d41d8d676b53ac4b6bb41e517f3c955466b04afc7482e317e07aab399faaf5"
+    },
+    {
+      "path": "experiments/adaptive_price/summary_4-2.json",
+      "bytes": 6368,
+      "sha256": "461d453be1ad31f0f1d998c5fbf42c08202f5a7b353bfe4c54ed3d6585955036"
+    },
+    {
+      "path": "experiments/adaptive_price/summary_4-3.json",
+      "bytes": 6643,
+      "sha256": "c95e9897b68464a283eae1f9dda95cadf599b428408c1b38c917d5ebc20a05cd"
+    },
+    {
+      "path": "experiments/adaptive_price/verification_report.json",
+      "bytes": 1564,
+      "sha256": "bf12eabefb239c6c2a8a47e7618be40cf621816e72cd58ef69c0904d76a6c8a6"
+    },
+    {
+      "path": "experiments/baseline/checkpoint_4-2.jsonl",
+      "bytes": 6770907,
+      "sha256": "af5f218276945f406cb570081b4e315f22df5d69145aa84beb07819677c38ea5"
+    },
+    {
+      "path": "experiments/baseline/checkpoint_4-3.jsonl",
+      "bytes": 7284745,
+      "sha256": "6ca6ea4e920ca75a0358d36a22cbc0779fd585df4b45f57568e3b168d1ac9af6"
+    },
+    {
+      "path": "experiments/baseline/detail_4-2.csv",
+      "bytes": 9735647,
+      "sha256": "936dc135135d0abf6fdc63e8389a3aa03bac72587bc633f767bc90d3268b2cbf"
+    },
+    {
+      "path": "experiments/baseline/detail_4-3.csv",
+      "bytes": 10028962,
+      "sha256": "9c9450d16eda1d3ef51aaa6f6b1525c8e047409e0ce287371501d422b7eb1593"
+    },
+    {
+      "path": "experiments/baseline/summary_4-2.json",
+      "bytes": 6351,
+      "sha256": "290c26fbffcbd035e09438b39102fd4e8a44738716cd13a0dab3f5b208c6dd5d"
+    },
+    {
+      "path": "experiments/baseline/summary_4-3.json",
+      "bytes": 6623,
+      "sha256": "2f6d1e828f02b20d71e5d19044dab816eb778ea58d342756534914e429d9f771"
+    },
+    {
+      "path": "experiments/baseline/verification_report.json",
+      "bytes": 1570,
+      "sha256": "521a75c5b85e0d44b8d3f61372f5abc01de7022d3ff071386c875559140bf64f"
+    },
+    {
+      "path": "experiments/forecast_audit.json",
+      "bytes": 885,
+      "sha256": "4186a0f17e6253d4b25987a3b6e88d3edef6938d04c2e91eb25a501bbedfc408"
+    },
+    {
+      "path": "experiments/forecast_replay.csv",
+      "bytes": 318017,
+      "sha256": "0d6d05b32ae76ccba42f9beba73dbce8c05124bea8e1d530a876661c1f58115c"
+    },
+    {
+      "path": "experiments/load_only/checkpoint_4-2.jsonl",
+      "bytes": 6636641,
+      "sha256": "202c7e39d2717fe558effb6df601f9e857b56f87435892f70fd5b86966eadd8d"
+    },
+    {
+      "path": "experiments/load_only/checkpoint_4-3.jsonl",
+      "bytes": 7300921,
+      "sha256": "ea34c2a85342e971d6b5269d203f5d160131aad519269e38ed48a3e41dedcf05"
+    },
+    {
+      "path": "experiments/load_only/detail_4-2.csv",
+      "bytes": 9471657,
+      "sha256": "be73e52ec45f336ce92e18bcf7c12bda7e3232be2ec44258f2ebffdc87028bd8"
+    },
+    {
+      "path": "experiments/load_only/detail_4-3.csv",
+      "bytes": 9939823,
+      "sha256": "65733e3ad194f89ef42f94856e27372739e8161703631fbf2f6a6073b563c680"
+    },
+    {
+      "path": "experiments/load_only/summary_4-2.json",
+      "bytes": 6387,
+      "sha256": "5395dbbe13b21ad31826a62cd31d4d67a92ad8469c227b447d6856fbb022fe60"
+    },
+    {
+      "path": "experiments/load_only/summary_4-3.json",
+      "bytes": 6627,
+      "sha256": "a32d142c2a61cfdd1fc07a8affd7a16d2563a32b514de89c3dafad03e742137c"
+    },
+    {
+      "path": "experiments/load_only/verification_report.json",
+      "bytes": 1563,
+      "sha256": "b2c5e922b0a895102ecb06cd23deb97753b50aa2d414cf48ae66ac96da58cd59"
+    },
+    {
+      "path": "experiments/terminal_value/checkpoint_4-2.jsonl",
+      "bytes": 6642451,
+      "sha256": "929124dc96e123106ed5a262988102161886e9a7174bf1938c3007b3b5c8507e"
+    },
+    {
+      "path": "experiments/terminal_value/checkpoint_4-3.jsonl",
+      "bytes": 7312892,
+      "sha256": "b353d681e15243ece420525bffc0d660c37554eee89186bdd678f36a85c6228c"
+    },
+    {
+      "path": "experiments/terminal_value/detail_4-2.csv",
+      "bytes": 9473576,
+      "sha256": "e3ded8bde32551c2dbc71e7178e7109424718aeab9a2548d41f40ef94c739b1a"
+    },
+    {
+      "path": "experiments/terminal_value/detail_4-3.csv",
+      "bytes": 9944288,
+      "sha256": "2962afcd85abc6611776c575f47716b28e695e6d0e5c5598e4032d6cb634aac8"
+    },
+    {
+      "path": "experiments/terminal_value/summary_4-2.json",
+      "bytes": 6397,
+      "sha256": "ba308e63bc39951ab0f6da3f31873e72207d968e40bcbdc515cb9df03dc0c270"
+    },
+    {
+      "path": "experiments/terminal_value/summary_4-3.json",
+      "bytes": 6640,
+      "sha256": "059bda82d5d46581538d7a358f0aa1d51e2267438fe306188b039843a4158444"
+    },
+    {
+      "path": "experiments/terminal_value/verification_report.json",
+      "bytes": 1570,
+      "sha256": "6bb0512dcc99e405cbed3b0d27b9f153e82436a7d42a0c3a6d0c9b9a7c136b38"
+    },
+    {
+      "path": "model_Four.md",
+      "bytes": 10465,
+      "sha256": "7e2de67040e55ab2a6e72536f682f7aa369065601663f718def669d3394f2356"
+    },
+    {
+      "path": "output/checkpoint_4-2.jsonl",
+      "bytes": 6642451,
+      "sha256": "929124dc96e123106ed5a262988102161886e9a7174bf1938c3007b3b5c8507e"
+    },
+    {
+      "path": "output/checkpoint_4-3.jsonl",
+      "bytes": 7312892,
+      "sha256": "b353d681e15243ece420525bffc0d660c37554eee89186bdd678f36a85c6228c"
+    },
+    {
+      "path": "output/checkpoint_compatibility.json",
+      "bytes": 1387,
+      "sha256": "af6f7aaced779f38272ba422252f6cb3452d2f7a613803abc60dfe2619c693e6"
+    },
+    {
+      "path": "output/detail_4-2.csv",
+      "bytes": 9473576,
+      "sha256": "e3ded8bde32551c2dbc71e7178e7109424718aeab9a2548d41f40ef94c739b1a"
+    },
+    {
+      "path": "output/detail_4-3.csv",
+      "bytes": 9944288,
+      "sha256": "2962afcd85abc6611776c575f47716b28e695e6d0e5c5598e4032d6cb634aac8"
+    },
+    {
+      "path": "output/figures/cost_comparison.png",
+      "bytes": 77044,
+      "sha256": "a0715f5c30e9ef42a0b8d47472c45a741a80ee611fdbf3a0815ee5ce55050673"
+    },
+    {
+      "path": "output/optimization_comparison.json",
+      "bytes": 63606,
+      "sha256": "408fe6b33e2a8b8963d7623cbb7298a193eabee07f815c09f5135b6185673f84"
+    },
+    {
+      "path": "output/optimization_report.md",
+      "bytes": 6849,
+      "sha256": "b0d7571914596bcbd8a20610aa9c98599585cd302a619ed257a871884c844581"
+    },
+    {
+      "path": "output/paper_selected_dates.csv",
+      "bytes": 1202,
+      "sha256": "256bb5f4f354f553c55cc07973c6d8033f033fc01bf4b31c1127984da0c82019"
+    },
+    {
+      "path": "output/paper_selected_dates.md",
+      "bytes": 1122,
+      "sha256": "63ca1d1706971c1aecc9388d7d558d9fd3f59e4071b2a5e7872a6e907f2d4d2d"
+    },
+    {
+      "path": "output/previews/4-2/充放电量.png",
+      "bytes": 60219,
+      "sha256": "4a7e22390e2175ca5867466174bf2c93d3c8daa6e803983589affa282df41e2a"
+    },
+    {
+      "path": "output/previews/4-2/紧急购电量.png",
+      "bytes": 30091,
+      "sha256": "2ec4bfbb18588b46c090ec7b292d6cb028cbaf2b80f25a3b8efd359b0ebad555"
+    },
+    {
+      "path": "output/previews/4-2/计划购电量.png",
+      "bytes": 45956,
+      "sha256": "e5b3de99c5dce13a344abb7cebf44e3b49114bda381715ac56d57a1167a3dcd1"
+    },
+    {
+      "path": "output/previews/4-3/充放电量.png",
+      "bytes": 62550,
+      "sha256": "e6d8b3fad69ae260fc6fba83931fffd73e2e1f75b60019d2589d2abea939507f"
+    },
+    {
+      "path": "output/previews/4-3/紧急购电量.png",
+      "bytes": 29612,
+      "sha256": "c598766e028546003da360ddaeb2adedc388cb00f7c5570ebfb5eca78087320c"
+    },
+    {
+      "path": "output/previews/4-3/计划购电量.png",
+      "bytes": 44041,
+      "sha256": "a39127525f13bf1870756a157840a534bbff84058a940d01d43fcfc3bb5b58eb"
+    },
+    {
+      "path": "output/previews/4-3/调整购电量.png",
+      "bytes": 44041,
+      "sha256": "a39127525f13bf1870756a157840a534bbff84058a940d01d43fcfc3bb5b58eb"
+    },
+    {
+      "path": "output/render_verification.json",
+      "bytes": 764,
+      "sha256": "cc173af82e7ab2507ba4c83170099f66e509e9a77f25603145c6ddda43ecea95"
+    },
+    {
+      "path": "output/result4-2.xlsx",
+      "bytes": 714892,
+      "sha256": "4daa77ddb7ed6d760a88ce3bc74552b9233fb5e77b449e656eba5b5fd40950c4"
+    },
+    {
+      "path": "output/result4-2.xlsx.inspect.ndjson",
+      "bytes": 31526827,
+      "sha256": "3a2ff3be365f6fd47e3f1719240a0fdf44d386af1ff6732948987a471dd5f05c"
+    },
+    {
+      "path": "output/result4-3.xlsx",
+      "bytes": 1238442,
+      "sha256": "b5ae4a6fe364945549b421f7f558ba3da3ed808655b4af3b0834a4d5d1816a1a"
+    },
+    {
+      "path": "output/result4-3.xlsx.inspect.ndjson",
+      "bytes": 51786509,
+      "sha256": "c05be81f7aad6e413a0f7c2db18663a270a8dcf0f599e008f2570483959bbef9"
+    },
+    {
+      "path": "output/summary_4-2.json",
+      "bytes": 6501,
+      "sha256": "c9ee55098630f77cf667d654b0a590a8c24d5889866e444314b3ab10e1c9608b"
+    },
+    {
+      "path": "output/summary_4-3.json",
+      "bytes": 6744,
+      "sha256": "59774f8fb855f238b0dff30539d9f72431142809bdbb1651ed2bec429bc17925"
+    },
+    {
+      "path": "output/tests.log",
+      "bytes": 2124,
+      "sha256": "5229a9e149516ce8242c57712bafab0af9ba47d52ecc12c614de9d16b998243d"
+    },
+    {
+      "path": "output/verification_report.json",
+      "bytes": 2207,
+      "sha256": "79d34b8133aac9bf1ff0d063af1e40e5c0b884f86024e4c31eb9a32bdb3c1e33"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4342,
+      "sha256": "d5daff32df5262e3d6ae6ffe7fc135d0bc35abb8a6b7bbbf5654c8e8fb560f9a"
+    },
+    {
+      "path": "reference/model_Four_baseline.md",
+      "bytes": 22827,
+      "sha256": "e999b185f00724b54aafb4c5827b36f16d442b3d38da486bd6c4fd60f670b4ef"
+    },
+    {
+      "path": "reference/source_hashes.json",
+      "bytes": 3727,
+      "sha256": "6bf1336d4e0a6e0d2ed96cd3c3cf580c28b9d8b0b573be97b1be5ce628558a3a"
+    },
+    {
+      "path": "reference/stage_solver_before_precision_fix.py",
+      "bytes": 20931,
+      "sha256": "13752241c9ad3bbe6909a8155677ca93d45387cbf13813817865da49c2fa9877"
+    },
+    {
+      "path": "reference/summary_4-2.json",
+      "bytes": 5742,
+      "sha256": "22a8d56fa4f3c51e2d726aa4699ea3b36df2d9ef1f3624de9e1b2835f88a3511"
+    },
+    {
+      "path": "reference/summary_4-3.json",
+      "bytes": 6013,
+      "sha256": "93c25ab8c8ee5a383974544ca1bb9c22297b131006f3a8df3910643a5b3578aa"
+    },
+    {
+      "path": "reference/template_4-2_previews/充放电量.png",
+      "bytes": 33331,
+      "sha256": "6953a83e709a952d71e14c9fb55fc1aed2b43dab0853b6bccd6cf602648fa5a7"
+    },
+    {
+      "path": "reference/template_4-2_previews/紧急购电量.png",
+      "bytes": 14212,
+      "sha256": "ea51051c187cc728883083e9f245af2068aaeaac50b4d2731382108639d27253"
+    },
+    {
+      "path": "reference/template_4-2_previews/计划购电量.png",
+      "bytes": 17138,
+      "sha256": "74f66a010f964782884d160ce1a26a9052437353aff023632d29d287d04a6cc1"
+    },
+    {
+      "path": "reference/template_previews/充放电量.png",
+      "bytes": 34659,
+      "sha256": "6f720c5d083a41808dffab3b6f1a97bf1271edbc8ae2ba8d4720a6b9bba875c3"
+    },
+    {
+      "path": "reference/template_previews/紧急购电量.png",
+      "bytes": 14208,
+      "sha256": "9a18625f7eed3e707885296561fdabf1a5636fdad8662af387a2053aaca350af"
+    },
+    {
+      "path": "reference/template_previews/计划购电量.png",
+      "bytes": 17138,
+      "sha256": "74f66a010f964782884d160ce1a26a9052437353aff023632d29d287d04a6cc1"
+    },
+    {
+      "path": "reference/template_previews/调整购电量.png",
+      "bytes": 17138,
+      "sha256": "74f66a010f964782884d160ce1a26a9052437353aff023632d29d287d04a6cc1"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 54,
+      "sha256": "49a83d3592786042ef0132b42860c1d74cac8d8e7d3c14f6dbb64f95293ab3dd"
+    },
+    {
+      "path": "run.py",
+      "bytes": 1758,
+      "sha256": "3314156b5321965f15890a838c64cd8b60bceebf82db10f60432ee6a0256c94a"
+    },
+    {
+      "path": "tests/fixtures/negative_bound_stage.json",
+      "bytes": 11481,
+      "sha256": "853324a5f16b21246e7bacf2aa91097cbeab8b86de2dcecfa8a4f7391b5e7b14"
+    },
+    {
+      "path": "tests/fixtures/stage_solver_baseline.py",
+      "bytes": 20954,
+      "sha256": "c39896c19a0693cec2201a010a7e195255ffdbfdaa20b27d47123c68671e00fe"
+    },
+    {
+      "path": "tests/test_forecasting.py",
+      "bytes": 7028,
+      "sha256": "9177814c77bc62acd6780b4fe6af6e31dcc017a9e81c59bd039fa910aa2ca087"
+    },
+    {
+      "path": "tests/test_model.py",
+      "bytes": 6609,
+      "sha256": "0e181a271228d313c3ae728d5e76dcb1be453d98a11383bed13a19f4d07a411e"
+    },
+    {
+      "path": "WORK_PLAN.md",
+      "bytes": 1295,
+      "sha256": "5be99b361270640c9f6a9f262bc578b5a851846e78e455534bf842fb64cff218"
+    }
+  ]
+}

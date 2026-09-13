@@ -1,0 +1,95 @@
+# 更新版文件索引
+
+当前入口为 `run_question_two.ps1`，当前模型为 `docs/model_Two.md`，正式结果为 `output/result2.xlsx`。目录结构和运行说明见 `README.md`。
+
+按图片排版的9张论文表格见 `output/paper_tables/第二问_指定日期表1表2表3.docx`，数据及排版核对记录见 `checks/paper_tables_qa/`。
+
+`checks/entry_smoke_32` 是新入口的32天复现记录；`checks/model_code_consistency_review.json` 是当前文档与代码核对记录。`reference` 仅含报告所需历史费用摘要，没有旧版程序。
+
+| 相对路径 | 文件大小/字节 |
+|---|---:|
+| `checks/entry_smoke_32/input_data.json` | 1,533,909 |
+| `checks/entry_smoke_32/question_two_daily.csv` | 23,106 |
+| `checks/entry_smoke_32/question_two_detail.csv` | 31,787 |
+| `checks/entry_smoke_32/question_two_solution.json` | 571,424 |
+| `checks/entry_smoke_32/tuning_protocol.json` | 1,704 |
+| `checks/entry_smoke_32.log` | 943 |
+| `checks/model_code_consistency_review.json` | 1,556 |
+| `checks/package_verification.json` | 935 |
+| `checks/paper_tables_qa/build_tables.py` | 14,491 |
+| `checks/paper_tables_qa/data_verification.json` | 9,035 |
+| `checks/paper_tables_qa/packaged_renderer.log` | 1,184 |
+| `checks/paper_tables_qa/render/page-1.png` | 158,515 |
+| `checks/paper_tables_qa/render/page-2.png` | 153,439 |
+| `checks/paper_tables_qa/render/page-3.png` | 160,284 |
+| `checks/paper_tables_qa/render/page-4.png` | 157,827 |
+| `checks/paper_tables_qa/render/page-5.png` | 173,082 |
+| `checks/paper_tables_qa/render/paper_tables.pdf` | 248,369 |
+| `checks/paper_tables_qa/visual_verification.json` | 1,215 |
+| `checks/unit_tests.log` | 114 |
+| `checks/verification.log` | 10,871 |
+| `code/build_causal_summary.py` | 11,392 |
+| `code/build_result2.mjs` | 6,628 |
+| `code/build_result_summary.py` | 481 |
+| `code/causal_policy.py` | 10,202 |
+| `code/extract_inputs.py` | 9,123 |
+| `code/forecast_calendar.py` | 2,089 |
+| `code/generate_paper_tables.py` | 9,216 |
+| `code/perfect_information_benchmark.py` | 31,759 |
+| `code/solve_question_two.py` | 55,036 |
+| `code/test_calendar_forecast.py` | 1,846 |
+| `code/test_causal_policy.py` | 2,353 |
+| `code/test_information_boundary.py` | 8,385 |
+| `code/test_risk_calibration.py` | 2,513 |
+| `code/verify_analysis_outputs.py` | 584 |
+| `code/verify_causal_policy.py` | 15,269 |
+| `code/verify_package.py` | 1,020 |
+| `code/verify_question_two.py` | 62,774 |
+| `data/result2_template.xlsx` | 18,397 |
+| `data/附件1.xlsx` | 16,003 |
+| `data/附件2.xlsx` | 907,128 |
+| `docs/model_Two.md` | 12,090 |
+| `docs/运行环境.md` | 1,833 |
+| `docs/题目原文.pdf` | 354,389 |
+| `output/analysis_verification.json` | 816 |
+| `output/benchmarks/perfect_information_benchmark.json` | 4,362 |
+| `output/benchmarks/perfect_information_daily.csv` | 95,876 |
+| `output/benchmarks/perfect_information_detail.csv` | 13,493,722 |
+| `output/benchmarks/perfect_information_report.md` | 1,680 |
+| `output/causal_tuning_report.md` | 1,299 |
+| `output/information_boundary_test.json` | 2,095 |
+| `output/information_boundary_test_later.json` | 2,096 |
+| `output/input_data.json` | 1,533,909 |
+| `output/optimization_comparison.md` | 710 |
+| `output/paper_tables/paper_2025-03-20_144_periods.csv` | 11,992 |
+| `output/paper_tables/paper_2025-03-20_battery_4h.csv` | 306 |
+| `output/paper_tables/paper_2025-03-20_emergency_intervals.csv` | 557 |
+| `output/paper_tables/paper_2025-06-21_144_periods.csv` | 11,545 |
+| `output/paper_tables/paper_2025-06-21_battery_4h.csv` | 265 |
+| `output/paper_tables/paper_2025-06-21_emergency_intervals.csv` | 162 |
+| `output/paper_tables/paper_2025-09-23_144_periods.csv` | 12,156 |
+| `output/paper_tables/paper_2025-09-23_battery_4h.csv` | 305 |
+| `output/paper_tables/paper_2025-09-23_emergency_intervals.csv` | 474 |
+| `output/paper_tables/paper_2025-12-21_144_periods.csv` | 10,916 |
+| `output/paper_tables/paper_2025-12-21_battery_4h.csv` | 305 |
+| `output/paper_tables/paper_2025-12-21_emergency_intervals.csv` | 227 |
+| `output/paper_tables/paper_selected_dates.md` | 4,024 |
+| `output/paper_tables/paper_selected_dates_summary.csv` | 699 |
+| `output/paper_tables/paper_tables_1_2_3_data.json` | 10,650 |
+| `output/paper_tables/第二问_指定日期表1表2表3.docx` | 42,892 |
+| `output/policy_updates_summary.csv` | 1,410 |
+| `output/previews/充放电量_preview.png` | 37,995 |
+| `output/previews/紧急购电量_preview.png` | 23,964 |
+| `output/previews/计划购电量_preview.png` | 49,229 |
+| `output/processing_manifest.json` | 4,399 |
+| `output/question_two_daily.csv` | 581,216 |
+| `output/question_two_detail.csv` | 10,916,192 |
+| `output/question_two_solution.json` | 8,965,473 |
+| `output/result2.xlsx` | 652,685 |
+| `output/result_summary.md` | 2,525 |
+| `output/tuning_protocol.json` | 1,704 |
+| `output/verification_report.json` | 10,869 |
+| `README.md` | 4,046 |
+| `reference/previous_fixed_summary.json` | 656 |
+| `requirements.txt` | 37 |
+| `run_question_two.ps1` | 6,181 |

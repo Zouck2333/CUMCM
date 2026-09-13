@@ -1,0 +1,75 @@
+{
+  "trajectories": {
+    "4-2": {
+      "days": 365,
+      "formal_days": 334,
+      "checked_csv_rows": 48096,
+      "maximum_errors": {
+        "soc_recurrence_kwh": 8.731149137020111e-11,
+        "soc_continuity_kwh": 0.0,
+        "emergency_kwh": 0.0,
+        "settlement_yuan": 0.0,
+        "nominal_balance_kwh": 1.864961518549535e-10,
+        "csv_difference": 0.0
+      },
+      "totals": {
+        "plan_cost_yuan": 14628910.406141955,
+        "adjustment_cost_yuan": 0.0,
+        "emergency_cost_yuan": 2311857.2603109186,
+        "total_cost_yuan": 16940767.66645287,
+        "initial_purchase_kwh": 22466127.117357012,
+        "final_purchase_kwh": 22466127.117357012,
+        "emergency_kwh": 595191.2249926992
+      }
+    },
+    "4-3": {
+      "days": 365,
+      "formal_days": 334,
+      "checked_csv_rows": 48096,
+      "maximum_errors": {
+        "soc_recurrence_kwh": 5.2997393140685745e-09,
+        "soc_continuity_kwh": 0.0,
+        "emergency_kwh": 0.0,
+        "settlement_yuan": 0.0,
+        "nominal_balance_kwh": 5.142055670148693e-10,
+        "csv_difference": 0.0
+      },
+      "totals": {
+        "plan_cost_yuan": 14589676.795477733,
+        "adjustment_cost_yuan": 569234.7913564496,
+        "emergency_cost_yuan": 1543525.6767091763,
+        "total_cost_yuan": 16702437.263543352,
+        "initial_purchase_kwh": 22378956.16931892,
+        "final_purchase_kwh": 22867665.693377774,
+        "emergency_kwh": 412049.81983431027
+      }
+    }
+  },
+  "original_question_four_unchanged": true,
+  "workbooks": {
+    "4-2": {
+      "days": 334,
+      "emergency_rows": 4920
+    },
+    "4-3": {
+      "days": 334,
+      "emergency_rows": 5205
+    }
+  },
+  "unit_tests": {
+    "count": 14,
+    "passed": true,
+    "log": "tests.log"
+  },
+  "visual_review": {
+    "worksheet_previews": 7,
+    "cost_figure": 1,
+    "passed": true,
+    "render_process_details": "render_verification.json"
+  },
+  "checkpoint_provenance": {
+    "original_generation_fingerprints_preserved": true,
+    "frozen_solver_fingerprints_independently_reproduced": true,
+    "compatibility_manifest": "checkpoint_compatibility.json"
+  }
+}

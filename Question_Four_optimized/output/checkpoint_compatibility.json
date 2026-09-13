@@ -1,0 +1,16 @@
+{
+  "4-2": {
+    "original_run_fingerprint": "49c97deae529a2d88a2590f3294624d8ccaaad3c5f20a43958e73a143554a292",
+    "current_run_fingerprint": "c4a09fb9185309840bece2f6f6c2926195c8455541c4764145887e59100fcd2e",
+    "checkpoint_sha256": "929124dc96e123106ed5a262988102161886e9a7174bf1938c3007b3b5c8507e",
+    "verified_by": "experiments/terminal_value/verification_report.json",
+    "reason": "Only solver change is a high-precision fallback triggered when old code would reject a negative flow. Every stage in this complete run was accepted and independently verified; previously accepted trajectories are unchanged. Original generation fingerprints are retained in every record."
+  },
+  "4-3": {
+    "original_run_fingerprint": "80d0c87bb403c25f57580012cf2d0af54c2fd37e42489fff63f49b7d8c1f46df",
+    "current_run_fingerprint": "efeab3012670b3e470351c137f2ca24c4df9266fba9ea95d9a74d6f92e9f14eb",
+    "checkpoint_sha256": "b353d681e15243ece420525bffc0d660c37554eee89186bdd678f36a85c6228c",
+    "verified_by": "experiments/terminal_value/verification_report.json",
+    "reason": "Only solver change is a high-precision fallback triggered when old code would reject a negative flow. Every stage in this complete run was accepted and independently verified; previously accepted trajectories are unchanged. Original generation fingerprints are retained in every record."
+  }
+}

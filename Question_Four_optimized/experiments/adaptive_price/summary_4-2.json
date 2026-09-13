@@ -1,0 +1,177 @@
+{
+  "strategy": "4-2",
+  "evaluation_start": "2025-02-01",
+  "evaluation_end": "2025-12-31",
+  "evaluation_days": 334,
+  "units": {
+    "energy": "kWh",
+    "cost": "yuan"
+  },
+  "totals": {
+    "plan_cost_yuan": 14647254.953588,
+    "adjustment_cost_yuan": 0.0,
+    "emergency_cost_yuan": 2311422.6248549917,
+    "total_cost_yuan": 16958677.578443,
+    "initial_purchase_kwh": 22471827.533399615,
+    "final_purchase_kwh": 22471827.533399615,
+    "emergency_kwh": 595156.5899034233
+  },
+  "monthly": {
+    "2025-02": {
+      "plan_cost_yuan": 1388454.2263853352,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 147662.4083305019,
+      "total_cost_yuan": 1536116.6347158374,
+      "initial_purchase_kwh": 2116066.2688832763,
+      "final_purchase_kwh": 2116066.2688832763,
+      "emergency_kwh": 38032.3887197427
+    },
+    "2025-03": {
+      "plan_cost_yuan": 1154072.81655901,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 199421.43814739032,
+      "total_cost_yuan": 1353494.2547064,
+      "initial_purchase_kwh": 1918271.03106879,
+      "final_purchase_kwh": 1918271.03106879,
+      "emergency_kwh": 51193.00914318921
+    },
+    "2025-04": {
+      "plan_cost_yuan": 950665.2523919132,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 158323.54245705137,
+      "total_cost_yuan": 1108988.7948489648,
+      "initial_purchase_kwh": 1639215.0984156174,
+      "final_purchase_kwh": 1639215.0984156174,
+      "emergency_kwh": 46371.09537736667
+    },
+    "2025-05": {
+      "plan_cost_yuan": 958463.3783420986,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 178800.36981517493,
+      "total_cost_yuan": 1137263.7481572733,
+      "initial_purchase_kwh": 1627553.6144758796,
+      "final_purchase_kwh": 1627553.6144758796,
+      "emergency_kwh": 50812.53079337603
+    },
+    "2025-06": {
+      "plan_cost_yuan": 1432028.969635852,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 226916.194807097,
+      "total_cost_yuan": 1658945.164442949,
+      "initial_purchase_kwh": 2151468.7761420086,
+      "final_purchase_kwh": 2151468.7761420086,
+      "emergency_kwh": 59113.582030559155
+    },
+    "2025-07": {
+      "plan_cost_yuan": 1694825.5793472289,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 363347.7328072136,
+      "total_cost_yuan": 2058173.3121544428,
+      "initial_purchase_kwh": 2356377.008994698,
+      "final_purchase_kwh": 2356377.008994698,
+      "emergency_kwh": 88146.49162935035
+    },
+    "2025-08": {
+      "plan_cost_yuan": 1430011.6274086987,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 243301.88427731025,
+      "total_cost_yuan": 1673313.5116860091,
+      "initial_purchase_kwh": 2055772.7573875855,
+      "final_purchase_kwh": 2055772.7573875855,
+      "emergency_kwh": 59406.423751970964
+    },
+    "2025-09": {
+      "plan_cost_yuan": 1130251.325748117,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 291993.6940489471,
+      "total_cost_yuan": 1422245.0197970637,
+      "initial_purchase_kwh": 1819476.8622246,
+      "final_purchase_kwh": 1819476.8622246,
+      "emergency_kwh": 75769.96895764097
+    },
+    "2025-10": {
+      "plan_cost_yuan": 1179186.8941280886,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 175652.0182923833,
+      "total_cost_yuan": 1354838.912420472,
+      "initial_purchase_kwh": 1947022.9104145134,
+      "final_purchase_kwh": 1947022.9104145134,
+      "emergency_kwh": 43668.050291801585
+    },
+    "2025-11": {
+      "plan_cost_yuan": 1384868.52178107,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 134599.3840716249,
+      "total_cost_yuan": 1519467.9058526948,
+      "initial_purchase_kwh": 2137857.843713379,
+      "final_purchase_kwh": 2137857.843713379,
+      "emergency_kwh": 36215.14158254441
+    },
+    "2025-12": {
+      "plan_cost_yuan": 1944426.3618605952,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 191403.95780029873,
+      "total_cost_yuan": 2135830.319660894,
+      "initial_purchase_kwh": 2702745.3616792522,
+      "final_purchase_kwh": 2702745.3616792522,
+      "emergency_kwh": 46427.907625881795
+    }
+  },
+  "selected_dates": {
+    "2025-03-20": {
+      "plan_cost_yuan": 47225.28999316936,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 9903.702398888283,
+      "total_cost_yuan": 57128.99239205764,
+      "initial_purchase_kwh": 74094.9190162892,
+      "final_purchase_kwh": 74094.9190162892,
+      "emergency_kwh": 2346.9075549350855
+    },
+    "2025-06-21": {
+      "plan_cost_yuan": 17242.52226673669,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 5842.101787846315,
+      "total_cost_yuan": 23084.624054583008,
+      "initial_purchase_kwh": 34931.063771310546,
+      "final_purchase_kwh": 34931.063771310546,
+      "emergency_kwh": 1921.768759879765
+    },
+    "2025-09-23": {
+      "plan_cost_yuan": 51716.538075014665,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 4692.350403505546,
+      "total_cost_yuan": 56408.88847852021,
+      "initial_purchase_kwh": 77598.28317202383,
+      "final_purchase_kwh": 77598.28317202383,
+      "emergency_kwh": 1050.9453689169752
+    },
+    "2025-12-21": {
+      "plan_cost_yuan": 76414.55035546061,
+      "adjustment_cost_yuan": 0.0,
+      "emergency_cost_yuan": 5243.477561200731,
+      "total_cost_yuan": 81658.02791666135,
+      "initial_purchase_kwh": 99390.89911087182,
+      "final_purchase_kwh": 99390.89911087182,
+      "emergency_kwh": 1246.8807275489094
+    }
+  },
+  "forecast_price_mae_unknown_slots": 0.04347999423716759,
+  "config": {
+    "mip_gap": 1e-06,
+    "time_limit": null,
+    "cvar_alpha": 0.9,
+    "risk_weight": 0.1,
+    "distance_weight": 0.1,
+    "reserve_quantile": null,
+    "terminal_value_weight": 0.0,
+    "objective_mode": "lexicographic",
+    "load_mode": "calendar",
+    "price_mode": "adaptive"
+  },
+  "annual_total_cost_yuan": 19783860.485559758,
+  "formal_start_soc_kwh": 1200.0,
+  "year_end_soc_kwh": 1200.0,
+  "load_forecast_mae_kw": 163.10471895829843,
+  "daily_cost_cvar_90_yuan": 84447.0722599546,
+  "run_fingerprint": "40ec629962e77bed3423271e8e0525724f1869efb5db52f1885aefdb6bf8a1ca"
+}

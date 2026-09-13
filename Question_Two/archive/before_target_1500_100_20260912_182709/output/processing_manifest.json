@@ -1,0 +1,55 @@
+{
+  "baseline_directory": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\archive\\before_risk_calibration_20260912_175610\\output",
+  "same_input_values": true,
+  "same_physical_parameters": true,
+  "same_formal_initial_soc": true,
+  "formal_initial_soc_kwh": 10800.0,
+  "formal_days": 334,
+  "periods": 48096,
+  "input_shape": [
+    365,
+    144
+  ],
+  "kw_to_kwh_factor": 0.16666666666666666,
+  "input_validation": "named sheets, continuous dates, 144 right endpoints, finite nonnegative values",
+  "actual_data_transformation": "unit conversion only; no imputation or smoothing",
+  "verification_status": "PASS",
+  "information_boundary_passed": true,
+  "changes": {
+    "formal_plan_cost_yuan": {
+      "before": 13659564.319712268,
+      "after": 13946230.330919402,
+      "saved": -286666.01120713353,
+      "reduction_percent": -2.0986468125739752
+    },
+    "formal_emergency_cost_yuan": {
+      "before": 2036720.7254932506,
+      "after": 1519146.2231079047,
+      "saved": 517574.502385346,
+      "reduction_percent": 25.412148848242335
+    },
+    "formal_total_cost_yuan": {
+      "before": 15696285.045205519,
+      "after": 15465376.554027306,
+      "saved": 230908.4911782127,
+      "reduction_percent": 1.4711028151769225
+    },
+    "formal_total_emergency_kwh": {
+      "before": 528863.1902281628,
+      "after": 379417.8371616542,
+      "saved": 149445.3530665086,
+      "reduction_percent": 28.257847365409322
+    }
+  },
+  "sha256": {
+    "C:\\Users\\31293\\Desktop\\CUMCM\\C题\\附件\\附件1.xlsx": "66b87134f5ecccd68184d3539bb1293ef039f9e0fdd955a589b9bfa7f227c377",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\C题\\附件\\附件2.xlsx": "2e95fd446bfafa0d8c59577b5c2e2ea8b3f1def20dde54a3062556f4da9b4c72",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\C题\\附件\\附件5\\result2.xlsx": "1c26494cfc6d754e0bd9bff7e13e1126a73d2d2da6c5336eb251d89b9a1a1a47",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\output\\input_data.json": "f7b09e68a005454a4ff34603d7fc1e2e4b9a99e59fd574ffab27f34b51f9ba70",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\archive\\before_risk_calibration_20260912_175610\\output\\question_two_solution.json": "c1056bf892065fb19bf2a3ccb6b97e889a244ab600f5e138e158d84d59e69883",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\output\\question_two_solution.json": "76fc449a3a1e289cf34998342ef38ab957f851fb7fcbd8146e643f20d519b611",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\output\\question_two_daily.csv": "9fbcc4b7b333f5cdceac4863cc37740234178c8fad2b92f8f394fe5cc9c79681",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\output\\question_two_detail.csv": "4443e3d8f7ef339d1c135486f099ebc86ed95d91fc7ae4c3070882d4c05be59a",
+    "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Two\\output\\result2.xlsx": "5e7b5a28b596dd4def0e20ddb572c2ae0fe9bfb30958d1668e81f445c6eb48c9"
+  }
+}

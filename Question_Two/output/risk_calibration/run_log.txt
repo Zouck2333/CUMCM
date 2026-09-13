@@ -1,0 +1,110 @@
+{
+  "results": [
+    {
+      "case": "baseline",
+      "planned_cost_yuan": 13668223.096285295,
+      "emergency_cost_yuan": 2022843.8943026077,
+      "total_cost_yuan": 15691066.990587905,
+      "emergency_kwh": 525349.8024660214,
+      "surplus_kwh": 3603233.739334571,
+      "emergency_periods": 14439,
+      "total_cost_change_yuan": 0.0,
+      "emergency_cost_change_yuan": 0.0
+    },
+    {
+      "case": "w28_r0_q0.80",
+      "planned_cost_yuan": 14123714.34293303,
+      "emergency_cost_yuan": 1381364.968433965,
+      "total_cost_yuan": 15505079.311366994,
+      "emergency_kwh": 353717.73912213923,
+      "surplus_kwh": 4025158.8044511317,
+      "emergency_periods": 9442,
+      "total_cost_change_yuan": -185987.67922091112,
+      "emergency_cost_change_yuan": -641478.9258686427
+    },
+    {
+      "case": "w28_r3_q0.80",
+      "planned_cost_yuan": 14167059.278938223,
+      "emergency_cost_yuan": 1282888.8142906325,
+      "total_cost_yuan": 15449948.093228856,
+      "emergency_kwh": 326617.7684336668,
+      "surplus_kwh": 4056436.329096082,
+      "emergency_periods": 8738,
+      "total_cost_change_yuan": -241118.89735904895,
+      "emergency_cost_change_yuan": -739955.0800119753
+    },
+    {
+      "case": "w56_r3_q0.80",
+      "planned_cost_yuan": 14333457.904559277,
+      "emergency_cost_yuan": 1228745.4725835866,
+      "total_cost_yuan": 15562203.377142865,
+      "emergency_kwh": 312674.34606689017,
+      "surplus_kwh": 4243219.613870569,
+      "emergency_periods": 8168,
+      "total_cost_change_yuan": -128863.61344503984,
+      "emergency_cost_change_yuan": -794098.4217190212
+    },
+    {
+      "case": "w28_r3_q0.85",
+      "planned_cost_yuan": 14486790.023793839,
+      "emergency_cost_yuan": 1035900.4223849926,
+      "total_cost_yuan": 15522690.446178833,
+      "emergency_kwh": 259780.20665431727,
+      "surplus_kwh": 4414049.215979307,
+      "emergency_periods": 6986,
+      "total_cost_change_yuan": -168376.54440907203,
+      "emergency_cost_change_yuan": -986943.4719176152
+    },
+    {
+      "case": "monthly_past_cost_selection",
+      "planned_cost_yuan": 14046748.842525203,
+      "emergency_cost_yuan": 1432261.0388307092,
+      "total_cost_yuan": 15479009.881355915,
+      "emergency_kwh": 363660.361461728,
+      "surplus_kwh": 3947977.0311976643,
+      "emergency_periods": 9482,
+      "total_cost_change_yuan": -212057.10923198983,
+      "emergency_cost_change_yuan": -590582.8554718986
+    }
+  ],
+  "checks": {
+    "battery_soc_power_exclusivity_and_continuity": "PASS",
+    "nonnegative_grid_and_point_forecast_balance": "PASS",
+    "calibration_future_perturbation_tests": 16,
+    "forecast_future_perturbation_tests_with_recorded_monthly_parameters": 4,
+    "recorded_monthly_validation_date_boundary": "PASS",
+    "baseline_cost_reproduction_and_actual_balance": "PASS"
+  },
+  "by_4h": [
+    {
+      "hours": "00:00-04:00",
+      "emergency_cost_yuan": 201795.81921825692,
+      "emergency_kwh": 93458.22463299842
+    },
+    {
+      "hours": "04:00-08:00",
+      "emergency_cost_yuan": 212808.16589487542,
+      "emergency_kwh": 65959.62270145411
+    },
+    {
+      "hours": "08:00-12:00",
+      "emergency_cost_yuan": 291149.8459961115,
+      "emergency_kwh": 71960.72074640475
+    },
+    {
+      "hours": "12:00-16:00",
+      "emergency_cost_yuan": 293834.0261385128,
+      "emergency_kwh": 78318.03857665908
+    },
+    {
+      "hours": "16:00-20:00",
+      "emergency_cost_yuan": 579178.0318558391,
+      "emergency_kwh": 99729.42339233644
+    },
+    {
+      "hours": "20:00-24:00",
+      "emergency_cost_yuan": 444078.0051990118,
+      "emergency_kwh": 115923.77241616865
+    }
+  ]
+}

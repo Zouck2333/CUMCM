@@ -1,172 +1,61 @@
 # C题第二问程序说明
 
-本目录把 `docs/model_Two.md` 的滚动预测、联合历史残差情景和日前随机情景MILP转化为可重复运行的程序。程序严格按日期前推：第 \(d\) 天的预测、月度调参、情景和安全储备只使用日期早于 \(d\) 的数据；1月只用于预热，正式评价及 `result2.xlsx` 覆盖2025年2月1日至12月31日。
+当前正式模型已重写至 `docs/model_Two.md`。默认程序采用 `causal_monthly`：2月1日只用1月历史数据选择初始参数，之后每个月初只用截至前一天的数据选择参数，月内每天重新拟合预测并联合优化购电和储能。正式结果为 `output/result2.xlsx`。
 
-目录已按用途整理：根目录放运行入口，`code` 放全部程序，`docs` 放模型与审查资料，`output` 放当前正式结果，`archive` 放历史版本。每个文件的作用和使用状态见 [`FILE_INDEX.md`](FILE_INDEX.md)。
+## 信息边界与模型
 
-```text
-Question_Two/
-├─ README.md、FILE_INDEX.md、requirements.txt、run_question_two.ps1
-├─ code/       程序文件
-├─ docs/       模型与审查文档
-├─ output/     当前正式结果
-├─ archive/    历史结果与旧缓存
-└─ node_modules/  工作簿生成所需的运行依赖联接
-```
+- 原始功率转换为10分钟电量，检查365×144维度、连续日期和右端点时刻，不填补或平滑实测值。
+- 1月使用预设的相似日预测与情景调度积累历史。正式评价期为2月1日至12月31日，共334天。
+- 正式期通过历史验证选择负荷窗口及趋势阶数、光伏窗口、风险残差窗口、时段半径、购电分位数和储备分位数。
+- 候选集与评分规则保存于 `tuning_protocol.json`，不按正式期全年结算结果再回选参数。调参函数只接收截至前一天的实际数据数组。
+- 当前月参数下的历史候选预测也按日重建，每个历史日只拟合更早数据；它们用于风险校准和候选验证，不改写已经执行的计划。
+- 日前购电、充电、放电全部先确定，当天实测只进入事后结算和后续历史库。紧急费用按正常电价的5倍计。
+- 单程充、放电效率均为0.9，功率上限5000kW，SOC为1200—10800kWh，1月1日初始SOC为6000kWh。富余无收益，计划购电全额付费。
+- 新流程的参数选择遵守历史截止；由于候选模型设计受到此前研究启发，本次2025年回算不是外部未知数据的独立验证。
 
-## 主模型口径
+## 运行
 
-- 功率乘以 \(1/6\) 小时后转为每10分钟电量，统一使用kWh。
-- 工作日定义为周一至周五，周末为非工作日。
-- 负载和光伏共享相似日候选池、特征标准差和距离排序。同类型历史日达到10天时只使用同类型日期，否则扩展到全部可用历史日；随后分别取负载和光伏所需的前 \(K\) 个日期。
-- 月初使用最近14个可用日期滚动验证。有效验证日期少于2天时沿用上月参数；验证损失并列时先取较小的 \(K\)，再取较大的 \(\rho\)。
-- 正式主方案使用0.90分位数、NumPy `linear` 分位数方法、逐时正净负荷误差累积安全储备，以及 \(\eta_c=\eta_d=0.90\)。
-- 每日正式求解依次最小化主费用、储能吞吐量和正常购电峰值。后两级受前级最优值加数值容差约束，不会实质改变第一阶段费用最优性。
-- 词典序锁定默认使用严格容差；若HiGHS仅以 `status=2` 报告数值不可行，程序只对该日按预设上限放宽容差并重试，同时记录重试标志。
-- 日前正常购电、充电和放电计划在读取当天实际负载及光伏前确定，并在实际结算阶段固定不变；预测不足由5倍电价的紧急购电补足。
-
-## 时间口径
-
-附件1的时刻是10分钟区间的右端点：`00:10` 对应物理区间 `0:00-0:10`，第24项对应 `3:50-4:00`，`0:00+1` 对应 `23:50-24:00`。因此每连续24项恰好构成一个四小时区间。
-
-题目给定模板的计划购电量标题比物理序列晚10分钟。生成程序沿用模板的工作表和单元格结构，同时把144个标题修正为 `0:00-0:10` 至 `23:50-0:00+1`。逐时CSV、紧急购电区间和核验程序均采用同一物理标签。
-
-## 文件
-
-- `docs/model_Two.md`：第二问数学模型及信息边界。
-- `docs/model_code_consistency_review.md`：模型与代码一致性审查及修正记录。
-- `code/extract_inputs.py`：只读附件1、附件2和结果模板，检查右端点时序并把功率换算为电量。
-- `code/solve_question_two.py`：滚动预测、月度参数选择、残差情景、安全储备、每日三级词典序MILP、实际结算和SOC更新。
-- `code/build_result2.mjs`：按物理时段顺序写入并修正题目模板的时段标题。
-- `code/verify_question_two.py`：对输入、结构化结果和最终工作簿执行独立核验。
-- `code/test_information_boundary.py`：扰动目标日实际数据，检查日前计划的信息边界。
-- `code/generate_paper_tables.py`：自动提取题目指定四天的论文表格。
-- `code/run_model_comparisons.py`：批量比较安全储备分位数、储备算法和效率口径。
-- `code/assemble_comparison_report.py`：合并并行或断点完成的分组对照结果。
-- `code/perfect_information_benchmark.py`：计算匹配约束的完美信息MILP与放松后的LP下界。
-- `code/build_result_summary.py`：汇总主结果、指定日期、灵敏度和完美信息基准。
-- `code/verify_analysis_outputs.py`：核对五组对照、基准物理检查、成本序关系和输入文件哈希。
-- `run_question_two.ps1`：主流程的一键运行入口。
-
-## 运行环境
-
-Python需要 `numpy`、`scipy` 和 `openpyxl`，结果工作簿由 `@oai/artifact-tool` 生成。可先安装Python依赖：
-
-```powershell
-pip install -r .\Question_Two\requirements.txt
-```
-
-## 正式运行
-
-在项目根目录执行：
+在项目根目录执行完整流程：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1
 ```
 
-默认一键流程依次执行输入提取、全年滚动主求解、结果工作簿生成、独立核验、四个指定日期论文表、信息边界扰动测试、五组灵敏度对照，以及两个完美信息基准。任何计算或核验失败都会终止流程；若Node只在工作簿保存后的退出阶段异常，流程会继续执行独立核验，并仅在工作簿逐项通过后接受结果。
+完整流程包括原始输入提取、历史滚动调参和全年求解、工作簿生成、独立核验、指定日期表格、2月1日及6月1日的选参扰动测试、完美信息基准与报告一致性核验。固定参数版本的五组灵敏度结果不参与当前参数选择。
 
-可调整MILP相对间隙和每日求解时间上限：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1 -MipGap 1e-5 -TimeLimit 60
-```
-
-调试时可只求解前若干天。少于365天时不会覆盖正式 `result2.xlsx`：
+查看首个调参节点的调试运行：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1 -MaxDays 32
 ```
 
-正式主方案默认采用 `lexicographic` 目标模式。一键脚本可直接配置：
+调试文件写入 `output/debug_32`，不覆盖正式结果。仅需重新求解与生成工作簿时，可以使用 `-SkipBoundaryTest -SkipBenchmarks`，但这不会生成一套新的完整核验汇总。
+
+历史滚动模式可以配置 `-EmergencyBudgetYuan 1000000`、求解容差和时间上限。购电分位数、负荷窗口、储备分位数等固定参数选项只对 `-ParameterMode fixed` 生效；历史模式由候选集和过去数据选择这些参数。
+
+复现此前固定参数开发回测时，显式使用：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1 `
-  -EtaCharge 0.9 -EtaDischarge 0.9 `
-  -ReserveQuantile 0.9 -ReserveMode positive_steps `
-  -QuantileMethod linear -ObjectiveMode lexicographic
+powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1 -ParameterMode fixed
 ```
 
-如只需重新生成主结果和核验文件，可跳过三个耗时或独立的分析步骤：
+此命令会替换正式输出，原开发回测与旧说明保存在 `archive`。不要把固定参数开发回测误认为历史滚动调参结果。
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\Question_Two\run_question_two.ps1 `
-  -SkipBoundaryTest -SkipComparisons -SkipBenchmarks
-```
+## 程序与输出
 
-`code/solve_question_two.py` 对应提供以下命令行参数，便于脱离一键脚本单独实验：
+| 文件 | 作用 |
+|---|---|
+| `code/solve_question_two.py` | 逐日历史信息管理、调用调参、联合MILP和实际结算 |
+| `code/causal_policy.py` | 固定候选集、历史预测评分、风险预算评分和连续SOC储备验证 |
+| `code/forecast_calendar.py` | 星期效应和局部趋势预测 |
+| `code/verify_causal_policy.py` | 独立重算候选分数、参数选择、历史来源与验证调度 |
+| `code/verify_question_two.py` | 输入、正式物理约束、费用及JSON/CSV/Excel映射核验 |
+| `code/test_information_boundary.py` | 扰动当天及未来数据，重新调参并比较全部候选记录与当天计划 |
+| `code/build_result2.mjs` | 通过artifact-tool填写原结果模板并生成预览 |
+| `code/build_causal_summary.py` | 历史滚动选参报告、结果摘要和版本对照 |
 
-```text
---eta-charge FLOAT
---eta-discharge FLOAT
---reserve-quantile FLOAT
---reserve-mode positive_steps|cumulative_net
---quantile-method linear|higher|lower|nearest|midpoint
---objective-mode cost|lexicographic
-```
+正式结果位于 `output`：`result2.xlsx`、`question_two_solution.json`、`question_two_daily.csv`、`question_two_detail.csv`。完整的月度候选评分与储备验证调度保存在JSON的 `policy_updates` 中。
 
-其中 `positive_steps` 是正式方案的逐时正误差累积口径，`cumulative_net` 是允许正负误差在时间上抵消的对照口径。
+优先阅读 `result_summary.md`、`causal_tuning_report.md`、`policy_updates_summary.csv`。`verification_report.json` 和 `analysis_verification.json` 应为PASS，两份 `information_boundary_test*.json` 应为passed=true。`processing_manifest.json` 保存原始附件、结果、代码与模型正文的哈希。
 
-完美信息基准会从主结果的 diagnostics 自动读取充、放电效率，因此自定义效率的一键运行也会建立相同效率口径的匹配MILP与LP下界。
-
-## 自动核验和论文表格
-
-主流程通过 `code/verify_question_two.py` 复核日期和时段连续性、有限值与非负性、储能功率和互斥、SOC边界/递推/跨日衔接/日末储备、预测与实际供需平衡、紧急购电与富余电量互斥、逐时至全年费用，以及JSON、CSV、Excel之间的映射。存在历史来源及三级目标字段时，还会核验信息边界、情景数、吞吐量、峰值和目标模式。
-
-`code/test_information_boundary.py` 另以2025年2月4日为目标日，扰动该日的实际负载和光伏，核对预测来源、储备、购电、充放电、SOC及三级目标均保持不变，同时确认事后结算结果会随实际数据改变。测试报告写入 `information_boundary_test.json`。
-
-可单独生成四个题目指定日期的论文表格：
-
-```powershell
-python .\Question_Two\code\generate_paper_tables.py `
-  --solution .\Question_Two\output\question_two_solution.json `
-  --detail .\Question_Two\output\question_two_detail.csv `
-  --output-dir .\Question_Two\output\paper_tables
-```
-
-默认提取2025年3月20日、6月21日、9月23日和12月21日，结果写入 `Question_Two/output/paper_tables`。
-
-## 批量灵敏度分析
-
-主结果生成后运行：
-
-```powershell
-python .\Question_Two\code\run_model_comparisons.py `
-  --input .\Question_Two\output\input_data.json `
-  --output-dir .\Question_Two\output\comparisons
-```
-
-脚本依次比较无储备、0.75分位数、0.90分位数、\(\sqrt{0.9}\) 单程效率解释，以及0.90分位数的累计净误差储备。正式对照默认与主模型一样使用三级词典序模式，使各方案的事后结算结果不受第一阶段多重最优解影响；调试时可显式传入 `--objective-mode cost` 缩短运行时间。
-
-## 完美信息基准
-
-滚动主方案完成后运行：
-
-```powershell
-python .\Question_Two\code\perfect_information_benchmark.py
-```
-
-匹配MILP使用正式评价期的实际负载和光伏，保留主方案2月1日初始SOC、效率、容量、功率、互斥和逐日安全储备；LP下界进一步取消每日储备并放松互斥。脚本核验 `LP下界 ≤ 匹配MILP ≤ 滚动实际费用`，并计算两个相对差距。基准只作事后评价，其结果不会回填滚动计划。
-
-## 输出
-
-主结果保存在 `Question_Two/output`：
-
-- `result2.xlsx`：按题目结构填写的正式结果，覆盖334个正式评价日。
-- `question_two_solution.json`：工作簿生成所需的结构化结果、模型参数和汇总诊断。
-- `question_two_daily.csv`：365天的预测误差、SOC、场景数、储备、费用、三级目标指标和求解状态，其中1月标记为预热期。
-- `question_two_detail.csv`：2月至12月共 \(334\times144\) 行逐时结果。
-- `verification_report.json`：自动核验报告。
-- `information_boundary_test.json`：目标日实际数据扰动测试报告。
-- `previews`：结果工作表的渲染预览图。
-- `paper_tables/paper_selected_dates.md`、汇总CSV及逐日明细CSV：题目指定日期的论文表格。
-- `comparisons/comparison_results.csv`、`.json`、`.md`：安全储备与效率对照结果。
-- `benchmarks/perfect_information_benchmark.json`、`perfect_information_report.md`、逐日CSV和逐时CSV：完美信息基准结果。
-- `result_summary.md`：主结果、灵敏度分析、基准与核验的最终汇总。
-- `analysis_verification.json`：附加分析的最终一致性核验报告。
-
-修改前的主结果保存在 `Question_Two/archive/output_baseline_pre_fix`，只用于比较公共候选池、月度回退和三级目标修正造成的变化，不作为当前正式结论。
-
-## 结果解释
-
-`result2.xlsx` 是正式提交表；CSV和JSON用于复核、论文统计与复现实验。四个指定日期的表格应由 `code/generate_paper_tables.py` 从当前结构化结果自动提取，避免手工抄录造成版本不一致。
+Python求解需要NumPy与SciPy；只读Excel核验需要openpyxl。工作簿由 `@oai/artifact-tool` 生成。运行入口自动定位本机的求解Python、捆绑Python和Node环境。依赖联接 `node_modules` 只用于工作簿生成，不应修改其内容。

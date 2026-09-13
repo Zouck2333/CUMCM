@@ -1,0 +1,133 @@
+{
+  "period": "2025-02-01 to 2025-12-31",
+  "formal": {
+    "four_day": {
+      "plan_cost": 14405968.410141395,
+      "adjustment_cost": 2914950.5297678267,
+      "emergency_cost": 4231035.771816635,
+      "total_cost": 21551954.711725857,
+      "emergency_kwh": 1206316.9415780453,
+      "initial_soc": 10800.0,
+      "final_soc": 1200.0
+    },
+    "calendar_rolling": {
+      "plan_cost": 13746567.4864393,
+      "adjustment_cost": 720501.5508851218,
+      "emergency_cost": 1483149.7845800985,
+      "total_cost": 15950218.821904521,
+      "emergency_kwh": 410351.01605016825,
+      "initial_soc": 1200.0,
+      "final_soc": 1351.4264211833736
+    },
+    "calendar_zero_only": {
+      "plan_cost": 13782356.19782498,
+      "adjustment_cost": 0.0,
+      "emergency_cost": 2264357.39312687,
+      "total_cost": 16046713.590951849,
+      "emergency_kwh": 604955.4845870619,
+      "initial_soc": 1200.0,
+      "final_soc": 1200.0
+    }
+  },
+  "full_year": {
+    "four_day": {
+      "plan_cost": 16279390.608950201,
+      "adjustment_cost": 3281419.2764052143,
+      "emergency_cost": 4825630.593636565,
+      "total_cost": 24386440.47899198,
+      "emergency_kwh": 1373637.4598792274,
+      "initial_soc": 6000.0,
+      "final_soc": 1200.0
+    },
+    "calendar_rolling": {
+      "plan_cost": 15592117.846563263,
+      "adjustment_cost": 862019.5254109933,
+      "emergency_cost": 1795906.0600012816,
+      "total_cost": 18250043.431975536,
+      "emergency_kwh": 499250.1899156616,
+      "initial_soc": 6000.0,
+      "final_soc": 1351.4264211833736
+    },
+    "calendar_zero_only": {
+      "plan_cost": 15636037.878919639,
+      "adjustment_cost": 0.0,
+      "emergency_cost": 2788293.3276066924,
+      "total_cost": 18424331.20652633,
+      "emergency_kwh": 738706.9859745571,
+      "initial_soc": 6000.0,
+      "final_soc": 1200.0
+    }
+  },
+  "monthly": [
+    {
+      "month": "2025-02",
+      "before": 1991028.7496094315,
+      "after": 1469055.0980880784,
+      "saving": 521973.65152135305
+    },
+    {
+      "month": "2025-03",
+      "before": 1899259.276076533,
+      "after": 1381418.4750797136,
+      "saving": 517840.8009968193
+    },
+    {
+      "month": "2025-04",
+      "before": 1572472.595738681,
+      "after": 1116984.963257427,
+      "saving": 455487.63248125394
+    },
+    {
+      "month": "2025-05",
+      "before": 1703784.4330608135,
+      "after": 1148756.7946776936,
+      "saving": 555027.6383831198
+    },
+    {
+      "month": "2025-06",
+      "before": 2007412.5761057204,
+      "after": 1545635.6771727777,
+      "saving": 461776.89893294265
+    },
+    {
+      "month": "2025-07",
+      "before": 2158062.7970185797,
+      "after": 1749661.2121275458,
+      "saving": 408401.5848910338
+    },
+    {
+      "month": "2025-08",
+      "before": 2031612.328928056,
+      "after": 1501040.6606891858,
+      "saving": 530571.6682388701
+    },
+    {
+      "month": "2025-09",
+      "before": 1762318.2399037806,
+      "after": 1340768.6249732533,
+      "saving": 421549.6149305273
+    },
+    {
+      "month": "2025-10",
+      "before": 1910092.4093521696,
+      "after": 1333486.7409214568,
+      "saving": 576605.6684307128
+    },
+    {
+      "month": "2025-11",
+      "before": 2066278.4952034429,
+      "after": 1454634.9470118415,
+      "saving": 611643.5481916014
+    },
+    {
+      "month": "2025-12",
+      "before": 2449632.8107286487,
+      "after": 1908775.6279055476,
+      "saving": 540857.1828231011
+    }
+  ],
+  "saving_yuan": 5601735.889821336,
+  "saving_fraction": 0.25991776452525567,
+  "source_fingerprint": "6273fd7b7390ed151138645c84fcd53d6f912bb4d33f2a61627a2c9e1e872862",
+  "matched_comparison_validation": "passed"
+}

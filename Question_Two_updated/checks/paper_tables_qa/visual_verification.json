@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "page_count": 5,
+  "tables": 9,
+  "data_checks_passed": 87,
+  "all_pages_visually_reviewed": true,
+  "render_engine": "Microsoft Word ExportAsFixedFormat + bundled Poppler",
+  "packaged_renderer_fallback_reason": "Bundled render_docx.py reported missing soffice.exe; actual DOCX was rendered using Word in read-only mode.",
+  "visual_checks": [
+    "all nine tables editable",
+    "merged headers match references",
+    "all black table borders visible",
+    "no title decoration",
+    "no clipped digits or wrapped time labels",
+    "all 41 emergency intervals present",
+    "five pages with no split tables"
+  ],
+  "document_sha256": "d3ed3efd73464269aa6365cf356dced8f22317ba03455f83c7351b7c110fde8a",
+  "reviewed_page_images": {
+    "page-1.png": "f3c950573112c661af071f6a15d8fb940fe549508ad53d5679160d76ca69395e",
+    "page-2.png": "3752009eca8936e6e04da332f1befca7618388a987c9e6d13022ee0efc8ed7e6",
+    "page-3.png": "fa91130b8e5883e9705532d75b8ca08bc496a8bc002936e62bc13323aaa3fe8e",
+    "page-4.png": "b4c6536f522ad0d5c4a63372440e5ed70687f2f202d7641970c44fdda52f9d8c",
+    "page-5.png": "de7454a7f597c96959f52d604d93343b3bbd9e56547ead786200db55b5d0c504"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "reviewed_at": "2026-09-12T13:22:49.204664+00:00",
+  "scope": "Current run_question_two.ps1 causal_monthly configuration",
+  "status": "CONSISTENT_AFTER_DOCUMENTATION_CORRECTION",
+  "review_method": "Manual comparison of model equations and workflow with current source; SHA256 confirmation of unchanged code and numerical outputs.",
+  "reviewed_areas": [
+    "input conversion and time mapping",
+    "January warm-up and SOC continuity",
+    "past-only monthly selection",
+    "forecast equations and validation scores",
+    "replayed residuals and risk budget selection",
+    "reserve quantile and continuous SOC validation",
+    "MILP constraints and lexicographic objective",
+    "actual emergency settlement and formal-period totals",
+    "independent verification and future perturbation tests",
+    "packaged entry-point options"
+  ],
+  "correction": "Removed stale instruction to pass -ParameterMode fixed to the packaged entry point; added model-to-code mapping table.",
+  "code_and_numerical_outputs_unchanged": true,
+  "unchanged_files_verified": 24,
+  "model_sha256": "444df4a8c623c14eb6eeeb932fbd1159cb5d139e46ba903366d6c25b412d06ed",
+  "previous_model_sha256": "8e32777fe81d9e05fa7c12957c0e58009cb46542622c8e037cf918e669c3f8d7",
+  "existing_result_verification_status": "PASS",
+  "existing_result_verification_checks": 68,
+  "new_full_year_solve": false,
+  "note": "checks/package_verification.json records the original assembly checks; its model byte-equality check predates this documentation-only revision."
+}

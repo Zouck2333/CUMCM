@@ -1,0 +1,37 @@
+{
+  "test": "current-day actual-data perturbation must not change day-ahead plan",
+  "target_date": "2025-02-04",
+  "target_index_zero_based": 34,
+  "perturbation": {
+    "actual_load": "1.7 * original + 123 kWh per period",
+    "actual_pv": "0.1 * original"
+  },
+  "maximum_plan_difference": 0.0,
+  "array_differences": {
+    "grid": 0.0,
+    "charge": 0.0,
+    "discharge": 0.0
+  },
+  "scalar_differences": {
+    "reserve_kwh": 0.0,
+    "soc_start_kwh": 0.0,
+    "soc_end_kwh": 0.0,
+    "planned_grid_kwh": 0.0,
+    "planned_cost_yuan": 0.0,
+    "solver_objective_yuan": 0.0,
+    "primary_optimum_yuan": 0.0,
+    "storage_throughput_kwh": 0.0,
+    "peak_grid_kwh": 0.0
+  },
+  "source_fields_equal": {
+    "similar_load_dates": true,
+    "similar_pv_dates": true,
+    "scenario_source_dates": true,
+    "reserve_latest_source_date": true,
+    "objective_mode": true
+  },
+  "actual_settlement_cost_change_yuan": 510638.3676163369,
+  "absolute_tolerance": 1e-05,
+  "passed": true,
+  "interpretation": "测试日实际负荷和光伏只改变事后结算，不改变该日0:00形成的预测、历史来源、安全储备或日前调度。"
+}

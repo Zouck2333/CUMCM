@@ -1,0 +1,16 @@
+[verify] C:\Users\31293\Desktop\CUMCM\Question_Three_optimized
+{
+  "status": "passed",
+  "evaluation_start": "2025-02-01",
+  "evaluation_end": "2025-12-31",
+  "evaluation_days": 334,
+  "detail_rows": 48096,
+  "forecast_replay": "passed: independently reconstructed all 1825 issued forecasts",
+  "decision_fingerprint_sha256": "6273fd7b7390ed151138645c84fcd53d6f912bb4d33f2a61627a2c9e1e872862",
+  "purchase_days": 334,
+  "storage_rows": 2004,
+  "emergency_rows": 5157,
+  "rolling_total_cost_yuan": 15950218.821904521,
+  "zero_only_total_cost_yuan": 16046713.590951849,
+  "rolling_emergency_kwh": 410351.01605016825
+}

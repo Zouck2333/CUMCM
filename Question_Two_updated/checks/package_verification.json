@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "checks": {
+    "smoke_input_byte_identical": true,
+    "smoke_first_formal_day_equal": true,
+    "smoke_first_policy_record_equal": true,
+    "smoke_first_policy_january_only": true,
+    "model_text_byte_identical": true,
+    "official_result_bytes_identical": true,
+    "core_and_validation_code_byte_identical": true,
+    "python_syntax": true,
+    "independent_mathematical_verification": true,
+    "analysis_verification": true,
+    "processing_hashes_match": true,
+    "no_historical_directories": true
+  },
+  "independent_check_count": 68,
+  "unit_tests_passed": 10,
+  "full_year_resolved_during_packaging": false,
+  "smoke_days_resolved": 32,
+  "boundary_tests": "Existing verified reports preserved; unchanged solver, tuning code, inputs and official results checked by SHA256.",
+  "formal_total_cost_yuan": 14705987.344796691,
+  "formal_emergency_cost_yuan": 926155.2538303771
+}

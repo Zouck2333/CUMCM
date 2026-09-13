@@ -1,0 +1,842 @@
+{
+  "numeric_checks": 136,
+  "failed_checks": [],
+  "checks": [
+    {
+      "label": "Q1 total cost",
+      "paper": "35126.948589",
+      "saved": 35126.94858928963,
+      "pass": true
+    },
+    {
+      "label": "Q1 grid kWh",
+      "paper": "59482.698998",
+      "saved": 59482.69899835391,
+      "pass": true
+    },
+    {
+      "label": "Q1 peak kW",
+      "paper": "8458.8273",
+      "saved": 8458.827299999999,
+      "pass": true
+    },
+    {
+      "label": "Q2 total cost",
+      "paper": "14705987.34",
+      "saved": 14705987.344796691,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 planned_grid_kwh",
+      "paper": "67850.0765",
+      "saved": 67850.07650258549,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 actual_emergency_kwh",
+      "paper": "1101.6539",
+      "saved": 1101.6539351204187,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 planned_cost_yuan",
+      "paper": "40962.30",
+      "saved": 40962.3039461363,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 emergency_cost_yuan",
+      "paper": "4282.32",
+      "saved": 4282.318188049531,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 actual_total_cost_yuan",
+      "paper": "45244.62",
+      "saved": 45244.62213418583,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 soc_start_kwh",
+      "paper": "4134.8602",
+      "saved": 4134.860234972832,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-03-20 soc_end_kwh",
+      "paper": "4090.9391",
+      "saved": 4090.9390743777717,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 planned_grid_kwh",
+      "paper": "38400.6131",
+      "saved": 38400.613067389524,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 actual_emergency_kwh",
+      "paper": "76.5481",
+      "saved": 76.54813178601688,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 planned_cost_yuan",
+      "paper": "22427.56",
+      "saved": 22427.555749437666,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 emergency_cost_yuan",
+      "paper": "337.22",
+      "saved": 337.21524669432574,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 actual_total_cost_yuan",
+      "paper": "22764.77",
+      "saved": 22764.770996131992,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 soc_start_kwh",
+      "paper": "5161.6276",
+      "saved": 5161.627597933877,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-06-21 soc_end_kwh",
+      "paper": "5158.1410",
+      "saved": 5158.141027011953,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 planned_grid_kwh",
+      "paper": "72607.6067",
+      "saved": 72607.6067347034,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 actual_emergency_kwh",
+      "paper": "711.6375",
+      "saved": 711.6374696432039,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 planned_cost_yuan",
+      "paper": "45088.65",
+      "saved": 45088.65119128197,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 emergency_cost_yuan",
+      "paper": "3149.73",
+      "saved": 3149.7290706874783,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 actual_total_cost_yuan",
+      "paper": "48238.38",
+      "saved": 48238.38026196945,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 soc_start_kwh",
+      "paper": "3758.3510",
+      "saved": 3758.350955763575,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-09-23 soc_end_kwh",
+      "paper": "3764.2598",
+      "saved": 3764.2597581351206,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 planned_grid_kwh",
+      "paper": "101834.4406",
+      "saved": 101834.44064737015,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 actual_emergency_kwh",
+      "paper": "243.8171",
+      "saved": 243.817089480196,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 planned_cost_yuan",
+      "paper": "65609.71",
+      "saved": 65609.70634486133,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 emergency_cost_yuan",
+      "paper": "1057.49",
+      "saved": 1057.4915720520564,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 actual_total_cost_yuan",
+      "paper": "66667.20",
+      "saved": 66667.19791691338,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 soc_start_kwh",
+      "paper": "5767.7736",
+      "saved": 5767.773587600908,
+      "pass": true
+    },
+    {
+      "label": "Table 5-7 2025-12-21 soc_end_kwh",
+      "paper": "5764.9829",
+      "saved": 5764.982943663854,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 initial_purchase_kwh",
+      "paper": "72749.1547",
+      "saved": 72749.15473314491,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 final_purchase_kwh",
+      "paper": "75090.4570",
+      "saved": 75090.45704386507,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 emergency_kwh",
+      "paper": "2043.8186",
+      "saved": 2043.818563989709,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 total_cost_yuan",
+      "paper": "56036.45",
+      "saved": 56036.44845255621,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 soc_start_kwh",
+      "paper": "1248.4706",
+      "saved": 1248.4705689094785,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-03-20 soc_end_kwh",
+      "paper": "1505.6824",
+      "saved": 1505.6823868111815,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 initial_purchase_kwh",
+      "paper": "33527.3965",
+      "saved": 33527.396460432676,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 final_purchase_kwh",
+      "paper": "34690.0326",
+      "saved": 34690.03259930439,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 emergency_kwh",
+      "paper": "1234.5377",
+      "saved": 1234.5376683952363,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 total_cost_yuan",
+      "paper": "24534.22",
+      "saved": 24534.21641525924,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 soc_start_kwh",
+      "paper": "1200.0000",
+      "saved": 1200.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-06-21 soc_end_kwh",
+      "paper": "1200.0000",
+      "saved": 1200.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 initial_purchase_kwh",
+      "paper": "77801.2879",
+      "saved": 77801.28790965369,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 final_purchase_kwh",
+      "paper": "77790.2579",
+      "saved": 77790.25789911301,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 emergency_kwh",
+      "paper": "1103.9697",
+      "saved": 1103.9696879219525,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 total_cost_yuan",
+      "paper": "54266.71",
+      "saved": 54266.70777695041,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 soc_start_kwh",
+      "paper": "1200.0000",
+      "saved": 1200.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-09-23 soc_end_kwh",
+      "paper": "1335.2331",
+      "saved": 1335.233131129861,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 initial_purchase_kwh",
+      "paper": "99546.7856",
+      "saved": 99546.78561825454,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 final_purchase_kwh",
+      "paper": "100897.9214",
+      "saved": 100897.92143074622,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 emergency_kwh",
+      "paper": "1258.3049",
+      "saved": 1258.304932446839,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 total_cost_yuan",
+      "paper": "70785.55",
+      "saved": 70785.5466197493,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 soc_start_kwh",
+      "paper": "1200.0000",
+      "saved": 1200.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-11 2025-12-21 soc_end_kwh",
+      "paper": "1287.2669",
+      "saved": 1287.2669392584367,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 plan_cost rolling",
+      "paper": "13746567.49",
+      "saved": 13746567.4864393,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 plan_cost zero_only",
+      "paper": "13782356.20",
+      "saved": 13782356.19782498,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 plan_cost difference",
+      "paper": "-35788.71",
+      "saved": -35788.7113856785,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 adjustment_cost rolling",
+      "paper": "720501.55",
+      "saved": 720501.5508851218,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 adjustment_cost zero_only",
+      "paper": "0.00",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 adjustment_cost difference",
+      "paper": "720501.55",
+      "saved": 720501.5508851218,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_cost rolling",
+      "paper": "1483149.78",
+      "saved": 1483149.7845800985,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_cost zero_only",
+      "paper": "2264357.39",
+      "saved": 2264357.39312687,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_cost difference",
+      "paper": "-781207.61",
+      "saved": -781207.6085467716,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_kwh rolling",
+      "paper": "410351.0161",
+      "saved": 410351.01605016825,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_kwh zero_only",
+      "paper": "604955.4846",
+      "saved": 604955.4845870619,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 emergency_kwh difference",
+      "paper": "-194604.4685",
+      "saved": -194604.46853689366,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 total_cost rolling",
+      "paper": "15950218.82",
+      "saved": 15950218.821904521,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 total_cost zero_only",
+      "paper": "16046713.59",
+      "saved": 16046713.590951849,
+      "pass": true
+    },
+    {
+      "label": "Table 5-10 total_cost difference",
+      "paper": "-96494.77",
+      "saved": -96494.76904732734,
+      "pass": true
+    },
+    {
+      "label": "Q3 independently recomputed settlement",
+      "paper": "15950218.82",
+      "saved": 15950218.821904521,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 initial_purchase_kwh",
+      "paper": "22466127.1174",
+      "saved": 22466127.117357012,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 initial_purchase_kwh",
+      "paper": "22378956.1693",
+      "saved": 22378956.16931892,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 final_purchase_kwh",
+      "paper": "22466127.1174",
+      "saved": 22466127.117357012,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 final_purchase_kwh",
+      "paper": "22867665.6934",
+      "saved": 22867665.693377774,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 plan_cost_yuan",
+      "paper": "14628910.41",
+      "saved": 14628910.406141955,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 plan_cost_yuan",
+      "paper": "14589676.80",
+      "saved": 14589676.795477733,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 adjustment_cost_yuan",
+      "paper": "0.00",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 adjustment_cost_yuan",
+      "paper": "569234.79",
+      "saved": 569234.7913564496,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 emergency_kwh",
+      "paper": "595191.2250",
+      "saved": 595191.2249926992,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 emergency_kwh",
+      "paper": "412049.8198",
+      "saved": 412049.81983431027,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 emergency_cost_yuan",
+      "paper": "2311857.26",
+      "saved": 2311857.2603109186,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 emergency_cost_yuan",
+      "paper": "1543525.68",
+      "saved": 1543525.6767091763,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-2 total_cost_yuan",
+      "paper": "16940767.67",
+      "saved": 16940767.66645287,
+      "pass": true
+    },
+    {
+      "label": "Table 5-14 4-3 total_cost_yuan",
+      "paper": "16702437.26",
+      "saved": 16702437.263543352,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 initial_purchase_kwh",
+      "paper": "74094.9190",
+      "saved": 74094.9190162893,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 final_purchase_kwh",
+      "paper": "74094.9190",
+      "saved": 74094.9190162893,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 emergency_kwh",
+      "paper": "2346.9076",
+      "saved": 2346.9075549350855,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 adjustment_cost_yuan",
+      "paper": "0.0000",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 emergency_cost_yuan",
+      "paper": "9903.7024",
+      "saved": 9903.702398888283,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-03-20 total_cost_yuan",
+      "paper": "57128.9924",
+      "saved": 57128.99239205771,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 initial_purchase_kwh",
+      "paper": "34931.0638",
+      "saved": 34931.063771310524,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 final_purchase_kwh",
+      "paper": "34931.0638",
+      "saved": 34931.063771310524,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 emergency_kwh",
+      "paper": "1849.9188",
+      "saved": 1849.9187586172557,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 adjustment_cost_yuan",
+      "paper": "0.0000",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 emergency_cost_yuan",
+      "paper": "5718.2764",
+      "saved": 5718.276416116784,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-06-21 total_cost_yuan",
+      "paper": "22960.7987",
+      "saved": 22960.798682853467,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 initial_purchase_kwh",
+      "paper": "77598.2832",
+      "saved": 77598.28317063166,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 final_purchase_kwh",
+      "paper": "77598.2832",
+      "saved": 77598.28317063166,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 emergency_kwh",
+      "paper": "1050.9454",
+      "saved": 1050.9453689169754,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 adjustment_cost_yuan",
+      "paper": "0.0000",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 emergency_cost_yuan",
+      "paper": "4692.3504",
+      "saved": 4692.350403505546,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-09-23 total_cost_yuan",
+      "paper": "56408.8885",
+      "saved": 56408.888477241504,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 initial_purchase_kwh",
+      "paper": "90226.0325",
+      "saved": 90226.0325408049,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 final_purchase_kwh",
+      "paper": "90226.0325",
+      "saved": 90226.0325408049,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 emergency_kwh",
+      "paper": "1246.8807",
+      "saved": 1246.8807275489096,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 adjustment_cost_yuan",
+      "paper": "0.0000",
+      "saved": 0.0,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 emergency_cost_yuan",
+      "paper": "5243.4776",
+      "saved": 5243.4775612007315,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-2 2025-12-21 total_cost_yuan",
+      "paper": "77534.9301",
+      "saved": 77534.93009572895,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 initial_purchase_kwh",
+      "paper": "74040.5937",
+      "saved": 74040.59370068736,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 final_purchase_kwh",
+      "paper": "76347.9370",
+      "saved": 76347.93700744801,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 emergency_kwh",
+      "paper": "1510.2485",
+      "saved": 1510.2484589442922,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 adjustment_cost_yuan",
+      "paper": "2749.0708",
+      "saved": 2749.0707768587263,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 emergency_cost_yuan",
+      "paper": "6301.2833",
+      "saved": 6301.283257725777,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-03-20 total_cost_yuan",
+      "paper": "56252.2244",
+      "saved": 56252.22437901615,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 initial_purchase_kwh",
+      "paper": "34931.0638",
+      "saved": 34931.063771310524,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 final_purchase_kwh",
+      "paper": "35756.3032",
+      "saved": 35756.303172243126,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 emergency_kwh",
+      "paper": "1166.6008",
+      "saved": 1166.6007571912103,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 adjustment_cost_yuan",
+      "paper": "1032.7956",
+      "saved": 1032.7955923708942,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 emergency_cost_yuan",
+      "paper": "3227.8347",
+      "saved": 3227.834737138065,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-06-21 total_cost_yuan",
+      "paper": "21503.1526",
+      "saved": 21503.152596245644,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 initial_purchase_kwh",
+      "paper": "77598.2826",
+      "saved": 77598.28261955119,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 final_purchase_kwh",
+      "paper": "77604.8978",
+      "saved": 77604.89782312892,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 emergency_kwh",
+      "paper": "1145.9667",
+      "saved": 1145.9667426843002,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 adjustment_cost_yuan",
+      "paper": "11.1762",
+      "saved": 11.17624119991196,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 emergency_cost_yuan",
+      "paper": "5298.9710",
+      "saved": 5298.970967471789,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-09-23 total_cost_yuan",
+      "paper": "57026.6851",
+      "saved": 57026.685056839844,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 initial_purchase_kwh",
+      "paper": "90298.2144",
+      "saved": 90298.2143584449,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 final_purchase_kwh",
+      "paper": "91648.7016",
+      "saved": 91648.7016351595,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 emergency_kwh",
+      "paper": "1114.5604",
+      "saved": 1114.5604246821779,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 adjustment_cost_yuan",
+      "paper": "1831.0517",
+      "saved": 1831.0517027927544,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 emergency_cost_yuan",
+      "paper": "4610.8366",
+      "saved": 4610.836573922687,
+      "pass": true
+    },
+    {
+      "label": "Table 5-15 4-3 2025-12-21 total_cost_yuan",
+      "paper": "78764.3285",
+      "saved": 78764.3284949364,
+      "pass": true
+    },
+    {
+      "label": "4-2 independently recomputed settlement",
+      "paper": "16940767.67",
+      "saved": 16940767.66645287,
+      "pass": true
+    },
+    {
+      "label": "4-3 independently recomputed settlement",
+      "paper": "16702437.26",
+      "saved": 16702437.263543362,
+      "pass": true
+    }
+  ],
+  "q2_formal_scenario_counts": {
+    "0": 334
+  },
+  "q3_formal_objective_modes": {
+    "primary": 334
+  },
+  "q4_formal_stage_objectives": {
+    "4-2": {
+      "cost_risk,peak,throughput": 334
+    },
+    "4-3": {
+      "cost_risk,peak,throughput": 1328,
+      "cost_risk,fixed_binary_polish,peak,throughput": 8
+    }
+  },
+  "corrected_cross_question_differences_yuan": {
+    "4-2 minus current Q2": 2234780.3216561787,
+    "4-3 minus current Q3": 752218.4416388441
+  },
+  "scope": "Recomputed settlement from saved trajectories; did not rerun full-year optimization."
+}

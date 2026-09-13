@@ -1,0 +1,21 @@
+[
+  {
+    "case": "q075_eta_090",
+    "description": "安全储备取75%分位数，充放电效率均为0.90",
+    "reserve_quantile": 0.75,
+    "reserve_mode": "positive_steps",
+    "eta_charge": 0.9,
+    "eta_discharge": 0.9,
+    "round_trip_efficiency": 0.81,
+    "formal_days": 334,
+    "formal_total_grid_kwh": 22344347.39604523,
+    "formal_plan_cost_yuan": 13626519.875081494,
+    "formal_emergency_cost_yuan": 2033293.2888944792,
+    "formal_total_cost_yuan": 15659813.163975975,
+    "formal_total_emergency_kwh": 528016.2893483425,
+    "formal_average_reserve_kwh": 5527.665616598695,
+    "formal_max_reserve_kwh": 9600.0,
+    "formal_reserve_cap_days": 37,
+    "total_solver_seconds": 1075.379970500071
+  }
+]

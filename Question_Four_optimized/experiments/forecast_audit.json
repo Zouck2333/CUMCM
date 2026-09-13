@@ -1,0 +1,31 @@
+{
+  "evaluation_days": 334,
+  "price_candidates": [
+    "legacy",
+    "calendar",
+    "calendar_decay"
+  ],
+  "selection_window_complete_days": 28,
+  "minimum_scored_days": 7,
+  "selection_metric": "MAE over remaining unknown slots",
+  "choice_counts": {
+    "calendar_decay": 1134,
+    "calendar": 196,
+    "legacy": 6
+  },
+  "load_old_execution_mae_kw": 489.02367636230724,
+  "load_calendar_execution_mae_kw": 150.18219702141266,
+  "price_execution_mae": {
+    "legacy": 0.05910300052155672,
+    "calendar": 0.04429210020243502,
+    "calendar_decay": 0.042028594868501655,
+    "adaptive": 0.04205511354758325
+  },
+  "price_zero_stage_remaining_mae": {
+    "legacy": 0.06442927825130307,
+    "calendar": 0.04978197015594885,
+    "calendar_decay": 0.04332881663318663,
+    "adaptive": 0.04347999423716756
+  },
+  "price_decisions_with_future_training": 0
+}

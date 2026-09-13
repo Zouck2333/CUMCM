@@ -1,0 +1,62 @@
+{
+  "strategies": {
+    "4-2": {
+      "tables": 9,
+      "word_pages": 3,
+      "sheets": 6,
+      "emergency_interval_counts": [
+        18,
+        14,
+        16,
+        19
+      ],
+      "formulas": 731,
+      "all_cached_values_match_source": true,
+      "png_integrity_verified": true,
+      "images": {
+        "_qa\\4-2\\word\\page-1.png": "6ae21f52ca78f6c96b2b137de163109ca67c78f4354848c437274003f7168f64",
+        "_qa\\4-2\\word\\page-2.png": "d85d4c884e58c25f2a872ea0bd2191ebdf279477817c73e0822c64455f42b0f7",
+        "_qa\\4-2\\word\\page-3.png": "e01d2bbb90fe72f6d5ab1d2b55351bc336f5099754811478125b6d342352c603",
+        "_qa\\4-2\\excel\\12月21日.png": "ab565965b1ec4619125b91460e2f36554e0e43eb98131fc1c3047d8b74322187",
+        "_qa\\4-2\\excel\\3月20日.png": "c3a4c7a5414dbc27e9bf1a5325d2dcc2b159654c961245d1116c615ff56c667a",
+        "_qa\\4-2\\excel\\6月21日.png": "eec93962b629bb4c2d52e95bd33e1abf3d18c0dfc30c928419378823ae47eb74",
+        "_qa\\4-2\\excel\\9月23日.png": "3feee68f36af929cc996de7ba2c6d24cea22374d224775cf53f792ae8d864938",
+        "_qa\\4-2\\excel\\数据明细电量.png": "2e623831708fcdabed1701d9ef018de22014139e8c561bfec121fdf3b520328d",
+        "_qa\\4-2\\excel\\数据明细费用.png": "c19545f75932f2dc470bd041110b3b20507082ceb560be4a87e7f0128e90f529",
+        "_qa\\4-2\\excel\\表3.png": "ca68215dd5121ad08b9430f903935dcdcf7e1eaeea851abbfa90ff17ab5c5dba"
+      }
+    },
+    "4-3": {
+      "tables": 9,
+      "word_pages": 3,
+      "sheets": 6,
+      "emergency_interval_counts": [
+        20,
+        11,
+        16,
+        16
+      ],
+      "formulas": 727,
+      "all_cached_values_match_source": true,
+      "png_integrity_verified": true,
+      "images": {
+        "_qa\\4-3\\word\\page-1.png": "81c5ff355bbeab7c7813b2f1247a2b4d10b34ba689a66332978fe7a10c15e52c",
+        "_qa\\4-3\\word\\page-2.png": "7b11555a2d010d774140c87eaffa18fab7a2aeb4505e96b832cdabd762b543f1",
+        "_qa\\4-3\\word\\page-3.png": "4192cf80a34e904ad1724743c3e38e6f34aa49de6723959cb20c6662f68f02ac",
+        "_qa\\4-3\\excel\\12月21日.png": "7359437a4a119209d7cc143bdf0031a0350272a65e7f367097c32c3f0458a775",
+        "_qa\\4-3\\excel\\3月20日.png": "ea0533807076f1ae64ac2e5f529788a0690e854007c067aae21d6fe9aec2b73e",
+        "_qa\\4-3\\excel\\6月21日.png": "a4fcc19a6c5345b156e6ef8da80d845c2be69f675ea9deb55bed1a326d9ad643",
+        "_qa\\4-3\\excel\\9月23日.png": "0d3a9bf13ab9cf0433a8cf1de46a3c485fec1e3b72cf6de29613b9b2d76b48c7",
+        "_qa\\4-3\\excel\\数据明细电量.png": "5a048e4d40e2d1f6c40e2d01ba5f57e2cd23ce9b641a6d9a59d19a5394b2f1e6",
+        "_qa\\4-3\\excel\\数据明细费用.png": "ae88aa586b4c20e41f50daf5a1c76e257cfed4e93af55b449d5c70997f046afe",
+        "_qa\\4-3\\excel\\表3.png": "7d863354e6e6c65f607b10824a9066ecb23f565d78ccda5638309e73967bcbcf"
+      }
+    }
+  },
+  "table1_basis": "final normal purchase; actual total cost including emergency",
+  "rounding": "four decimal places; aggregates calculated before rounding",
+  "checks_passed": 13824,
+  "status": "PASS",
+  "word_render_engine": "Microsoft Word read-only ExportAsFixedFormat plus bundled Poppler; packaged render_docx.py unavailable because soffice.exe is missing",
+  "excel_render_engine": "artifact-tool; completion markers received for 7 images per workbook, all PNGs independently verified; Windows renderer process returned nonzero after completed writes"
+}

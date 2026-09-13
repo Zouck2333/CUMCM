@@ -1,0 +1,20 @@
+[test] C:\Users\31293\Desktop\CUMCM\Question_Three_optimized
+test_all_release_inputs_ignore_unpublished_data (test_calendar_prediction.CalendarTests.test_all_release_inputs_ignore_unpublished_data) ... ok
+test_cold_start_never_reads_the_first_day_actuals (test_calendar_prediction.CalendarTests.test_cold_start_never_reads_the_first_day_actuals) ... ok
+test_continuous_adjustment_has_same_optimum_as_binary_formulation (test_calendar_prediction.CalendarTests.test_continuous_adjustment_has_same_optimum_as_binary_formulation) ... ok
+test_future_and_current_observations_cannot_change_midnight_forecast (test_calendar_prediction.CalendarTests.test_future_and_current_observations_cannot_change_midnight_forecast) ... ok
+test_independent_forecast_and_source_fingerprints_agree (test_calendar_prediction.CalendarTests.test_independent_forecast_and_source_fingerprints_agree) ... ok
+test_learns_distinct_weekdays (test_calendar_prediction.CalendarTests.test_learns_distinct_weekdays) ... ok
+test_official_workbook_allows_variable_daily_soc (test_model.OutputTests.test_official_workbook_allows_variable_daily_soc) ... ok
+test_current_future_actuals_do_not_enter_scenarios (test_model.ScenarioTests.test_current_future_actuals_do_not_enter_scenarios) ... ok
+test_five_scenario_grouping (test_model.ScenarioTests.test_five_scenario_grouping) ... ok
+test_nominal_and_single_history (test_model.ScenarioTests.test_nominal_and_single_history) ... ok
+test_zero_variance_and_extreme_prefix_distance (test_model.ScenarioTests.test_zero_variance_and_extreme_prefix_distance) ... ok
+test_terminal_soc_is_not_fixed_to_initial_soc (test_model.StageTests.test_terminal_soc_is_not_fixed_to_initial_soc) ... ok
+test_time_limited_incumbent_is_not_accepted_as_optimal (test_model.StageTests.test_time_limited_incumbent_is_not_accepted_as_optimal) ... ok
+test_zero_risk_and_reserve_floor (test_model.StageTests.test_zero_risk_and_reserve_floor) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.129s
+
+OK

@@ -1,0 +1,86 @@
+[
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\model_Four.md",
+    "Hash": "E999B185F00724B54AAFB4C5827B36F16D442B3D38DA486BD6C4FD60F670B4EF"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\README.md",
+    "Hash": "339999AB0ECBB4DFAAA986BD81F09205511288270F11752ACC5E7FD72451EB1C"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\requirements.txt",
+    "Hash": "7C23F049FE48424A81B2E1BCF43DAA338C0419536458A6F58D460EE653E62A3E"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\__init__.py",
+    "Hash": "2EF83BF85BCD20374BDEE492586DA797D842EDC3D0F0C74E2A8A564FE562B21C"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\demo.py",
+    "Hash": "385CF01F9C56F14D92B0D62D4C05F5ACA76B7642C1D58199550B56D367FC92F7"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\input_data.py",
+    "Hash": "848DB8068DE49210CFA66764E08BF7E2A9E586F08292032FB4E5F040C0D9A1A2"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\model.py",
+    "Hash": "A2956BE336AF35E032AF04184502BE5D9A6493961D3ADD1FD8EDF40201E5156E"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\output_xlsx.mjs",
+    "Hash": "0D4DF9AB83AB795C19D60FB7B408480CA114BA80BF3EA1D307DA264A03894069"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\price_stress.py",
+    "Hash": "E0E20440F0A6EA5ECCFBCCB11B6A2D92F820B9F7CFAAA8B00405A840116BD8DA"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\run_question_four.py",
+    "Hash": "944DFF1E165EF964229C1D6E8A7131E9C19F6E7C3A847B14905F68F6818FC41C"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\stage_solver.py",
+    "Hash": "C39896C19A0693CEC2201A010A7E195255FFDBFDAA20B27D47123C68671E00FE"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\code\\verify_outputs.py",
+    "Hash": "E74D2541B88287D03C87A91411BBC4956155DB13936BAC9C6768AFEB7671D008"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\checkpoint_4-2.jsonl",
+    "Hash": "25DBEF4C42061156CB575C209156F9227BCD11928ACAB6087B9421E5A4F748B6"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\checkpoint_4-3.jsonl",
+    "Hash": "C61C19025BBCFAE80D1C17A9820F2783A338029D9A8F222BB42105E03D2DA336"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\detail_4-2.csv",
+    "Hash": "936DC135135D0ABF6FDC63E8389A3AA03BAC72587BC633F767BC90D3268B2CBF"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\detail_4-3.csv",
+    "Hash": "7D1211E714579845C91BA5D7D2874E2FE20B2ABDA298C3668B778410D0B17434"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\result4-2.xlsx",
+    "Hash": "69E1AB6729886A00EC56C9104CC205AEF12FF5F1903673B0C9E8A5C8C5AA1D5C"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\result4-3.xlsx",
+    "Hash": "4EAB356C426488957C9668328A8E95F34B5D7FD19E8E55514B74E448DC2D4379"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\summary_4-2.json",
+    "Hash": "22A8D56FA4F3C51E2D726AA4699EA3B36DF2D9EF1F3624DE9E1B2835F88A3511"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\output\\summary_4-3.json",
+    "Hash": "93C25AB8C8EE5A383974544CA1BB9C22297B131006F3A8DF3910643A5B3578AA"
+  },
+  {
+    "Path": "C:\\Users\\31293\\Desktop\\CUMCM\\Question_Four\\tests\\test_model.py",
+    "Hash": "08220DC08FE1C115F34ED06BCD6A9A65C86FB1393273F48965E4AC01746FE51B"
+  }
+]

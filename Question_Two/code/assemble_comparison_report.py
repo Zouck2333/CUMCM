@@ -19,14 +19,20 @@ def read_daily(path: Path) -> list[dict[str, str]]:
 def main_row(main_json: Path, main_daily: Path) -> dict[str, object]:
     solution = json.loads(main_json.read_text(encoding="utf-8"))
     diagnostics = solution["diagnostics"]
+    if diagnostics.get("parameter_mode") == "causal_monthly":
+        raise ValueError("月度历史选参结果不属于固定储备对照，请使用causal_tuning_report.md")
     daily_rows = read_daily(main_daily)
     formal = [row for row in daily_rows if row["warmup"].lower() == "false"]
     reserves = np.asarray([float(row["reserve_kwh"]) for row in formal])
-    config = next(item for item in CONFIGURATIONS if item["case"] == "q090_eta_090")
+    config = next(item for item in CONFIGURATIONS if all(item[key] == diagnostics[key]
+                  for key in ("reserve_quantile", "reserve_mode", "eta_charge", "eta_discharge")))
     return {
         "case": config["case"],
         "description": config["description"],
         "objective_mode": diagnostics.get("objective_mode", "lexicographic"),
+        **{key: diagnostics.get(key) for key in (
+            "purchase_strategy", "purchase_quantile", "risk_window_days", "risk_radius_periods",
+            "forecast_method", "load_window_days", "load_trend_degree", "pv_window_days", "risk_grouping")},
         "reserve_quantile": diagnostics["reserve_quantile"],
         "reserve_mode": diagnostics["reserve_mode"],
         "eta_charge": diagnostics["eta_charge"],
@@ -66,26 +72,22 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
-    by_case: dict[str, dict[str, object]] = {
-        "q090_eta_090": main_row(args.main_json, args.main_daily)
-    }
+    current = main_row(args.main_json, args.main_daily)
+    by_case: dict[str, dict[str, object]] = {str(current["case"]): current}
     for path in args.case_json:
         values = json.loads(path.read_text(encoding="utf-8"))
         for row in values:
             case = str(row["case"])
             if case in by_case:
                 raise ValueError(f"方案重复: {case}")
-            row["objective_mode"] = "lexicographic"
-            if case == "q075_eta_090":
-                row.setdefault("lexicographic_tolerance_relaxed_days", None)
-                row["tolerance_relaxed_occurred"] = True
-                row["tolerance_note"] = (
-                    "严格锁定曾发生数值不可行；自适应数值容差重试成功，"
-                    "分组摘要未保留逐日重试次数。"
-                )
-            else:
-                row.setdefault("lexicographic_tolerance_relaxed_days", 0)
-                row["tolerance_relaxed_occurred"] = False
+            for key in ("objective_mode", "purchase_strategy", "purchase_quantile", "risk_window_days",
+                        "risk_radius_periods", "forecast_method", "load_window_days", "load_trend_degree",
+                        "pv_window_days", "risk_grouping"):
+                if row.get(key) != current.get(key):
+                    raise ValueError(f"方案{case}的{key}与主结果不一致，不能混合旧版本结果")
+            row.setdefault("lexicographic_tolerance_relaxed_days", None)
+            count = row["lexicographic_tolerance_relaxed_days"]
+            row["tolerance_relaxed_occurred"] = bool(count) if count is not None else None
             by_case[case] = row
 
     expected = [str(item["case"]) for item in CONFIGURATIONS]

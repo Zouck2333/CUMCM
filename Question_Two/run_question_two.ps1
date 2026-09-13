@@ -1,10 +1,26 @@
-param(
+﻿param(
+    [ValidateSet("causal_monthly", "fixed")]
+    [string]$ParameterMode = "causal_monthly",
+    [double]$EmergencyBudgetYuan = 1000000.0,
     [double]$MipGap = 1e-6,
     [double]$TimeLimit = 30.0,
     [Nullable[int]]$MaxDays = $null,
     [double]$EtaCharge = 0.9,
     [double]$EtaDischarge = 0.9,
-    [double]$ReserveQuantile = 0.9,
+    [double]$ReserveQuantile = 0.75,
+    [ValidateSet("legacy_scenarios", "calibrated_quantile")]
+    [string]$PurchaseStrategy = "calibrated_quantile",
+    [int]$RiskWindowDays = 28,
+    [int]$RiskRadiusPeriods = 3,
+    [double]$PurchaseQuantile = 0.85,
+    [ValidateSet("similar_day", "calendar_trend")]
+    [string]$ForecastMethod = "calendar_trend",
+    [int]$LoadWindowDays = 28,
+    [ValidateSet(1, 2)]
+    [int]$LoadTrendDegree = 2,
+    [int]$PvWindowDays = 14,
+    [ValidateSet("all", "legacy")]
+    [string]$RiskGrouping = "all",
     [ValidateSet("positive_steps", "cumulative_net")]
     [string]$ReserveMode = "positive_steps",
     [ValidateSet("linear", "higher", "lower", "nearest", "midpoint")]
@@ -18,10 +34,14 @@ param(
 
 $ErrorActionPreference = "Stop"
 $env:PYTHONDONTWRITEBYTECODE = "1"
+$env:PYTHONIOENCODING = "utf-8"
 $QuestionDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RootDir = Split-Path -Parent $QuestionDir
 $CodeDir = Join-Path $QuestionDir "code"
 $OutputDir = Join-Path $QuestionDir "output"
+if ($null -ne $MaxDays -and [int]$MaxDays -lt 365) {
+    $OutputDir = Join-Path $OutputDir ("debug_" + [string][int]$MaxDays)
+}
 $PreviewDir = Join-Path $OutputDir "previews"
 $ComparisonDir = Join-Path $OutputDir "comparisons"
 $BenchmarkDir = Join-Path $OutputDir "benchmarks"
@@ -75,15 +95,25 @@ $SolverArgs = @(
     "--reserve-quantile", $ReserveQuantile,
     "--reserve-mode", $ReserveMode,
     "--quantile-method", $QuantileMethod,
-    "--objective-mode", $ObjectiveMode
+    "--objective-mode", $ObjectiveMode,
+    "--purchase-strategy", $PurchaseStrategy,
+    "--risk-window-days", $RiskWindowDays,
+    "--risk-radius-periods", $RiskRadiusPeriods,
+    "--purchase-quantile", $PurchaseQuantile,
+    "--forecast-method", $ForecastMethod,
+    "--load-window-days", $LoadWindowDays,
+    "--load-trend-degree", $LoadTrendDegree,
+    "--pv-window-days", $PvWindowDays,
+    "--risk-grouping", $RiskGrouping
 )
+$SolverArgs += @("--parameter-mode", $ParameterMode, "--emergency-budget-yuan", $EmergencyBudgetYuan)
 if ($null -ne $MaxDays) {
-    $SolverArgs += @("--max-days", $MaxDays.Value)
+    $SolverArgs += @("--max-days", [int]$MaxDays)
 }
 & $SolverPython @SolverArgs
 if ($LASTEXITCODE -ne 0) { throw "滚动MILP求解失败，退出码: $LASTEXITCODE" }
 
-if ($null -ne $MaxDays -and $MaxDays.Value -lt 365) {
+if ($null -ne $MaxDays -and [int]$MaxDays -lt 365) {
     Write-Host "已完成小样本求解；正式工作簿和离线分析需要完整365天，故本次不生成。"
     exit 0
 }
@@ -122,19 +152,37 @@ if ($LASTEXITCODE -ne 0) { throw "指定日期论文表生成失败，退出码:
 if (-not $SkipBoundaryTest) {
     & $SolverPython (Join-Path $CodeDir "test_information_boundary.py") `
         --input $InputJson `
+        --solution $SolutionJson `
+        --target-index 31 `
         --report (Join-Path $OutputDir "information_boundary_test.json") `
         --mip-gap $MipGap `
         --time-limit $TimeLimit
     if ($LASTEXITCODE -ne 0) { throw "信息边界扰动测试失败，退出码: $LASTEXITCODE" }
+    if ($ParameterMode -eq "causal_monthly") {
+        & $SolverPython (Join-Path $CodeDir "test_information_boundary.py") `
+            --input $InputJson --solution $SolutionJson --target-index 151 `
+            --report (Join-Path $OutputDir "information_boundary_test_later.json") `
+            --mip-gap $MipGap --time-limit $TimeLimit
+        if ($LASTEXITCODE -ne 0) { throw "后续月份调参信息边界测试失败，退出码: $LASTEXITCODE" }
+    }
 }
 
-if (-not $SkipComparisons) {
+if (-not $SkipComparisons -and $ParameterMode -eq "fixed") {
     & $SolverPython (Join-Path $CodeDir "run_model_comparisons.py") `
         --input $InputJson `
         --output-dir $ComparisonDir `
         --mip-gap $MipGap `
         --time-limit $TimeLimit `
-        --objective-mode lexicographic
+        --objective-mode lexicographic `
+        --purchase-strategy $PurchaseStrategy `
+        --risk-window-days $RiskWindowDays `
+        --risk-radius-periods $RiskRadiusPeriods `
+        --purchase-quantile $PurchaseQuantile `
+        --forecast-method $ForecastMethod `
+        --load-window-days $LoadWindowDays `
+        --load-trend-degree $LoadTrendDegree `
+        --pv-window-days $PvWindowDays `
+        --risk-grouping $RiskGrouping
     if ($LASTEXITCODE -ne 0) { throw "安全储备与效率对照失败，退出码: $LASTEXITCODE" }
 }
 
@@ -149,7 +197,7 @@ if (-not $SkipBenchmarks) {
     if ($LASTEXITCODE -ne 0) { throw "完美信息基准求解失败，退出码: $LASTEXITCODE" }
 }
 
-if (-not $SkipComparisons -and -not $SkipBenchmarks) {
+if (-not $SkipBenchmarks -and -not $SkipBoundaryTest -and ($ParameterMode -eq "causal_monthly" -or -not $SkipComparisons)) {
     & $SolverPython (Join-Path $CodeDir "build_result_summary.py")
     if ($LASTEXITCODE -ne 0) { throw "最终摘要生成失败，退出码: $LASTEXITCODE" }
     & $SolverPython (Join-Path $CodeDir "verify_analysis_outputs.py") `

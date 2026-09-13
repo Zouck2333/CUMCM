@@ -1,0 +1,19 @@
+test_compatible_checkpoint_cannot_ignore_data_or_configuration_changes (test_forecasting.ForecastingTests.test_compatible_checkpoint_cannot_ignore_data_or_configuration_changes) ... ok
+test_future_actuals_and_later_releases_cannot_change_earlier_plans (test_forecasting.ForecastingTests.test_future_actuals_and_later_releases_cannot_change_earlier_plans) ... ok
+test_historical_residuals_match_original_time_forecasts (test_forecasting.ForecastingTests.test_historical_residuals_match_original_time_forecasts) ... ok
+test_price_selector_uses_past_score_and_decay (test_forecasting.ForecastingTests.test_price_selector_uses_past_score_and_decay) ... ok
+test_weekly_trend_prediction_and_no_future_training (test_forecasting.ForecastingTests.test_weekly_trend_prediction_and_no_future_training) ... ok
+test_continuous_adjustments_match_binary_reference (test_forecasting.SolverEquivalenceTests.test_continuous_adjustments_match_binary_reference) ... ok
+test_real_july_stage_negative_flow_is_repaired_without_clipping_soc (test_forecasting.SolverEquivalenceTests.test_real_july_stage_negative_flow_is_repaired_without_clipping_soc) ... ok
+test_risk_weight_cannot_fix_night_nominal_balance (test_forecasting.SolverEquivalenceTests.test_risk_weight_cannot_fix_night_nominal_balance) ... ok
+test_hourly_pv_mapping_and_first_day_price (test_model.ForecastTests.test_hourly_pv_mapping_and_first_day_price) ... ok
+test_stage_zero_does_not_see_future_actuals (test_model.ForecastTests.test_stage_zero_does_not_see_future_actuals) ... ok
+test_terminal_reserve_and_last_day_value (test_model.ForecastTests.test_terminal_reserve_and_last_day_value) ... ok
+test_three_group_prior_and_positive_posterior (test_model.ForecastTests.test_three_group_prior_and_positive_posterior) ... ok
+test_rolling_settlement_and_price_stress (test_model.SolverTests.test_rolling_settlement_and_price_stress) ... ok
+test_terminal_credit_changes_battery_decision (test_model.SolverTests.test_terminal_credit_changes_battery_decision) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.895s
+
+OK

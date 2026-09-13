@@ -30,7 +30,7 @@ CONFIGURATIONS = (
     },
     {
         "case": "q090_eta_090",
-        "description": "主模型：安全储备取90%分位数，充放电效率均为0.90",
+        "description": "参照方案：安全储备取90%分位数，充放电效率均为0.90",
         "reserve_quantile": 0.90,
         "reserve_mode": "positive_steps",
         "eta_charge": 0.90,
@@ -71,10 +71,10 @@ def write_markdown(
     lines = [
         "# 第二问安全储备与储能效率对照结果",
         "",
-        "所有方案使用相同的滚动预测、历史残差情景、实际结算规则和目标层级。",
+        "所有方案使用相同的滚动预测、购电风险策略、实际结算规则和目标层级。费用差额以本表90%储备方案为参照。",
         f"本次批处理目标模式为 `{objective_mode}`；正式对照默认采用与主模型相同的三级词典序求解。",
         "",
-        "| 方案 | 储备分位数 | 储备算法 | 充电效率 | 放电效率 | 正式期总费用/元 | 相对主方案费用/元 | 紧急购电量/kWh | 平均储备/kWh | 储备封顶天数 |",
+        "| 方案 | 储备分位数 | 储备算法 | 充电效率 | 放电效率 | 正式期总费用/元 | 相对90%储备费用/元 | 紧急购电量/kWh | 平均储备/kWh | 储备封顶天数 |",
         "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in rows:
@@ -89,7 +89,7 @@ def write_markdown(
         lines.extend(
             [
                 "",
-                "数值说明：75%储备方案至少有一个日期在严格词典序锁定下被HiGHS误判为不可行，程序按预设规则仅对该日放宽到仍可忽略的数值容差后重试成功。",
+                "数值说明：至少一个方案触发了预设的词典序数值容差重试，具体次数已记录在JSON中。",
             ]
         )
     lines.extend(["", "## 方案说明", ""])
@@ -106,6 +106,15 @@ def main() -> None:
     parser.add_argument("--mip-gap", type=float, default=1e-6)
     parser.add_argument("--time-limit", type=float, default=30.0)
     parser.add_argument("--max-days", type=int, default=None)
+    parser.add_argument("--purchase-strategy", choices=("legacy_scenarios", "calibrated_quantile"), default="calibrated_quantile")
+    parser.add_argument("--risk-window-days", type=int, default=28)
+    parser.add_argument("--risk-radius-periods", type=int, default=3)
+    parser.add_argument("--purchase-quantile", type=float, default=.85)
+    parser.add_argument("--forecast-method", choices=("similar_day", "calendar_trend"), default="calendar_trend")
+    parser.add_argument("--load-window-days", type=int, default=28)
+    parser.add_argument("--load-trend-degree", type=int, choices=(1,2), default=2)
+    parser.add_argument("--pv-window-days", type=int, default=14)
+    parser.add_argument("--risk-grouping", choices=("all", "legacy"), default="all")
     parser.add_argument(
         "--objective-mode",
         choices=("cost", "lexicographic"),
@@ -143,6 +152,16 @@ def main() -> None:
             reserve_mode=str(config["reserve_mode"]),
             quantile_method="linear",
             objective_mode=args.objective_mode,
+            purchase_strategy=args.purchase_strategy,
+            risk_window_days=args.risk_window_days,
+            risk_radius_periods=args.risk_radius_periods,
+            purchase_quantile=args.purchase_quantile,
+            forecast_method=args.forecast_method,
+            load_window_days=args.load_window_days,
+            load_trend_degree=args.load_trend_degree,
+            pv_window_days=args.pv_window_days,
+            risk_grouping=args.risk_grouping,
+            parameter_mode="fixed",
             collect_detail=False,
             collect_formal_days=False,
         )
@@ -154,6 +173,15 @@ def main() -> None:
                 "case": config["case"],
                 "description": config["description"],
                 "objective_mode": args.objective_mode,
+                "purchase_strategy": args.purchase_strategy,
+                "risk_window_days": args.risk_window_days,
+                "risk_radius_periods": args.risk_radius_periods,
+                "purchase_quantile": args.purchase_quantile,
+                "forecast_method": args.forecast_method,
+                "load_window_days": args.load_window_days,
+                "load_trend_degree": args.load_trend_degree,
+                "pv_window_days": args.pv_window_days,
+                "risk_grouping": args.risk_grouping,
                 "reserve_quantile": config["reserve_quantile"],
                 "reserve_mode": config["reserve_mode"],
                 "eta_charge": config["eta_charge"],

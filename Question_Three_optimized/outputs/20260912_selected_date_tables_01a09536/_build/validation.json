@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "source_detail_rows": 576,
+  "excel_result_cells_checked": 149,
+  "excel_formula_error_count": 0,
+  "word_tables": 9,
+  "word_pages": 5,
+  "emergency_intervals": [
+    18,
+    9,
+    15,
+    19
+  ],
+  "render_engine": "Microsoft Word + render_docx.py / bundled Poppler",
+  "source_hashes": {
+    "question_three_detail.csv": "941845bb24cff1ff515bf49658f3963512cc54523d83382417816cade8758f65",
+    "checkpoint_rolling.jsonl": "001ea5ea1c0282cce2be1e6de307c25b0f5ba95f0c042cf2854d4e23f5a045a3",
+    "result3.xlsx": "d0c78a9c395222b298a812a5671ffaa56f1dd0dddd90156805c524e0f0415c2f"
+  },
+  "output_hashes": {
+    "第三问优化结果_表1表2表3.xlsx": "ab7a5f9044a92c7e68933d3b6af7cca48a3dddd5c5ca35055c4baae21eb695af",
+    "第三问优化结果_表1表2表3.docx": "4b09c871a504fe5b52c3fd6a6b936484e5c6b8190257b08df8dffc2fd463c3c4"
+  }
+}

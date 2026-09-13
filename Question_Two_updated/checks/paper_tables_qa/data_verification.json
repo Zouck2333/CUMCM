@@ -1,0 +1,371 @@
+{
+  "status": "PASS",
+  "table_1_count": 4,
+  "table_2_count": 4,
+  "table_3_count": 1,
+  "table_3_interval_counts": {
+    "2025-03-20": 17,
+    "2025-06-21": 4,
+    "2025-09-23": 14,
+    "2025-12-21": 6
+  },
+  "checks": [
+    {
+      "check": "formal causal-monthly solution",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 144 ordered periods",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 all planned values equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 charge and discharge equal JSON",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 daily planned totals",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 daily actual cost",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 10:00-10:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 12:00-12:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 14:00-14:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 16:00-16:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 18:00-18:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 selected interval 20:00-20:10",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 six workbook battery blocks",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 0",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 1",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 2",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 3",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 4",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 battery block 5",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 initial and terminal SOC",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 all emergency intervals equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-03-20 interval sums equal daily emergency",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 144 ordered periods",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 all planned values equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 charge and discharge equal JSON",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 daily planned totals",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 daily actual cost",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 10:00-10:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 12:00-12:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 14:00-14:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 16:00-16:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 18:00-18:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 selected interval 20:00-20:10",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 six workbook battery blocks",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 0",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 1",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 2",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 3",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 4",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 battery block 5",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 initial and terminal SOC",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 all emergency intervals equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-06-21 interval sums equal daily emergency",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 144 ordered periods",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 all planned values equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 charge and discharge equal JSON",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 daily planned totals",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 daily actual cost",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 10:00-10:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 12:00-12:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 14:00-14:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 16:00-16:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 18:00-18:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 selected interval 20:00-20:10",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 six workbook battery blocks",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 0",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 1",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 2",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 3",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 4",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 battery block 5",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 initial and terminal SOC",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 all emergency intervals equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-09-23 interval sums equal daily emergency",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 144 ordered periods",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 all planned values equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 charge and discharge equal JSON",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 daily planned totals",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 daily actual cost",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 10:00-10:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 12:00-12:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 14:00-14:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 16:00-16:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 18:00-18:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 selected interval 20:00-20:10",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 six workbook battery blocks",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 0",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 1",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 2",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 3",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 4",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 battery block 5",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 initial and terminal SOC",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 all emergency intervals equal JSON and workbook",
+      "passed": true
+    },
+    {
+      "check": "2025-12-21 interval sums equal daily emergency",
+      "passed": true
+    },
+    {
+      "check": "nine editable Word tables",
+      "passed": true
+    },
+    {
+      "check": "table three complete row count",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "question_two_solution.json": "22bce3403459533fdcee0caa556c485fa5803081dc3dbd08519da0e6f656cc6e",
+    "question_two_daily.csv": "70c3b29f82480f8a22c13c5899a4764688a312c94a7bfd54df6c18f02a38f4a3",
+    "question_two_detail.csv": "6df19ac6b9126385b3d28f4d384dcbd3937e47f57b23fc5e7d44b9f46e4e2edf",
+    "result2.xlsx": "f86a5e1da1fe694d6fe665382d660a42a8036c6e46fce3a509d16e14b7976363"
+  },
+  "document_sha256": "d3ed3efd73464269aa6365cf356dced8f22317ba03455f83c7351b7c110fde8a",
+  "rounding": "4 decimals for kWh; 2 decimals for yuan; totals calculated before rounding",
+  "table_1_cost_basis": "planned normal grid purchase cost; emergency and actual total cost separately stated in notes"
+}

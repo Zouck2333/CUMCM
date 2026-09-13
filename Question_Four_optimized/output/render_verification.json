@@ -1,0 +1,25 @@
+{
+  "4-2": {
+    "images": {
+      "充放电量.png": 60219,
+      "紧急购电量.png": 30091,
+      "计划购电量.png": 45956
+    },
+    "render_complete_marker": true,
+    "process_exit_code": 3221226505,
+    "png_crc_and_decompression_verified": true,
+    "note": "Native process exit after completed writes; PNGs verified independently."
+  },
+  "4-3": {
+    "images": {
+      "充放电量.png": 62550,
+      "紧急购电量.png": 29612,
+      "计划购电量.png": 44041,
+      "调整购电量.png": 44041
+    },
+    "render_complete_marker": true,
+    "process_exit_code": 3221226505,
+    "png_crc_and_decompression_verified": true,
+    "note": "Native process exit after completed writes; PNGs verified independently."
+  }
+}

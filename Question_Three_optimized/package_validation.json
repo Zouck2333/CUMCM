@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "checked_at": "2026-09-12T20:00:02.625848+08:00",
+  "byte_identical_source_checks": {
+    "model_Three.md": true,
+    "code/input_data.py": true,
+    "code/load_prediction.py": true,
+    "code/milp_stage.py": true,
+    "code/run_question_three.py": true,
+    "code/verify_question_three.py": true,
+    "code/output_data.py": true,
+    "code/output_xlsx.mjs": true,
+    "output_optimized/result3.xlsx": true,
+    "output_optimized/question_three_detail.csv": true,
+    "output_optimized/checkpoint_rolling.jsonl": true,
+    "output_optimized/checkpoint_zero_only.jsonl": true,
+    "comparison_four_day/checkpoint_rolling.jsonl": true,
+    "inputs/附件1.xlsx": true,
+    "inputs/附件2.xlsx": true,
+    "inputs/附件3.xlsx": true,
+    "inputs/附件5/result3.xlsx": true,
+    "inputs/C题.pdf": true
+  },
+  "tests_passed": 14,
+  "independent_verification": {
+    "status": "passed",
+    "evaluation_start": "2025-02-01",
+    "evaluation_end": "2025-12-31",
+    "evaluation_days": 334,
+    "detail_rows": 48096,
+    "forecast_replay": "passed: independently reconstructed all 1825 issued forecasts",
+    "decision_fingerprint_sha256": "6273fd7b7390ed151138645c84fcd53d6f912bb4d33f2a61627a2c9e1e872862",
+    "purchase_days": 334,
+    "storage_rows": 2004,
+    "emergency_rows": 5157,
+    "rolling_total_cost_yuan": 15950218.821904521,
+    "zero_only_total_cost_yuan": 16046713.590951849,
+    "rolling_emergency_kwh": 410351.01605016825
+  },
+  "packaging_changes": [
+    "Added package-local run.py entry point and README/requirements.",
+    "Report input path changed to local inputs/.",
+    "Equivalence-test reference solver moved into local tests/fixtures/."
+  ],
+  "original_folders_preserved": true
+}

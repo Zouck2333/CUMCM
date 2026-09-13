@@ -1,0 +1,33 @@
+[report] C:\Users\31293\Desktop\CUMCM\Question_Three_optimized
+{
+  "saving_yuan": 5601735.889821336,
+  "formal": {
+    "four_day": {
+      "plan_cost": 14405968.410141395,
+      "adjustment_cost": 2914950.5297678267,
+      "emergency_cost": 4231035.771816635,
+      "total_cost": 21551954.711725857,
+      "emergency_kwh": 1206316.9415780453,
+      "initial_soc": 10800.0,
+      "final_soc": 1200.0
+    },
+    "calendar_rolling": {
+      "plan_cost": 13746567.4864393,
+      "adjustment_cost": 720501.5508851218,
+      "emergency_cost": 1483149.7845800985,
+      "total_cost": 15950218.821904521,
+      "emergency_kwh": 410351.01605016825,
+      "initial_soc": 1200.0,
+      "final_soc": 1351.4264211833736
+    },
+    "calendar_zero_only": {
+      "plan_cost": 13782356.19782498,
+      "adjustment_cost": 0.0,
+      "emergency_cost": 2264357.39312687,
+      "total_cost": 16046713.590951849,
+      "emergency_kwh": 604955.4845870619,
+      "initial_soc": 1200.0,
+      "final_soc": 1200.0
+    }
+  }
+}

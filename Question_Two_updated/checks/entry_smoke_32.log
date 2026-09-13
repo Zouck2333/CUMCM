@@ -1,0 +1,9 @@
+已提取输入数据: C:\Users\31293\Desktop\CUMCM\Question_Two_updated\output\debug_32\input_data.json
+[  1/32] 2025-01-01 场景= 1 SOC= 1200.000 费用=  179496.77 求解=0.240s
+[ 10/32] 2025-01-10 场景= 7 SOC=10800.000 费用=   73204.98 求解=0.341s
+[ 20/32] 2025-01-20 场景=13 SOC=10800.000 费用=   80012.32 求解=0.581s
+[ 30/32] 2025-01-30 场景=14 SOC=10800.000 费用=   64971.84 求解=0.313s
+历史调参 2025-02-01，截止2025-01-31：{'load_window_days': 42, 'load_trend_degree': 1, 'pv_window_days': 21, 'risk_window_days': 56, 'risk_radius_periods': 6, 'purchase_quantile': 0.85, 'risk_grouping': 'all', 'reserve_quantile': 0.9}
+[ 32/32] 2025-02-01 场景= 0 SOC= 4656.921 费用=   22022.33 求解=0.156s
+求解结果已保存: C:\Users\31293\Desktop\CUMCM\Question_Two_updated\output\debug_32\question_two_solution.json
+Debug run complete: C:\Users\31293\Desktop\CUMCM\Question_Two_updated\output\debug_32
